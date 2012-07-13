@@ -3,16 +3,13 @@
 People
 ------
 
-This tutorial is brought to you by the `INRIA Parietal Project Team
-<https://parietal.saclay.inria.fr/>`_ and `scikit-learn
+This tutorial is brought to you by the `scikit-learn
 <http://scikit-learn.org/>`_ folks, in particular:
 
 .. hlist::
 
   * Jake Vanderplas
   * `Gael Varoquaux <http://gael-varoquaux.info/blog/>`_
-
-Thanks to M. Hanke and Y. Halchenko for data and packaging.
 
 .. _citing:
 
