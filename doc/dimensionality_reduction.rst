@@ -15,7 +15,7 @@ Because of the large dimensionality of this data, visualization of the dataset
 becomes very challenging.  This is where unsupervised dimensionality
 reduction methods can be useful.  One of the most commonly used dimensionality
 reduction methods in astronomy is
-`Principal Component Analysis (PCA) http://scikit-learn.org/0.6/modules/decompositions.html#principal-component-analysis-pca>`_.  We won't
+`Principal Component Analysis (PCA) <http://scikit-learn.org/stable/modules/decompositions.html#principal-component-analysis-pca>`_.  We won't
 go through the mathematical details here, but PCA essentially seeks dimensions
 of the input data which contain the bulk of the variability present in the
 data.  The model has this form:
@@ -91,8 +91,8 @@ to choose a representative of each of the interesting classes::
 
 calling ``plot_spectral_types(data)`` gives the following figure:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_specPCA_1.png
-   :target: ../../auto_examples/tutorial/plot_sdss_specPCA.html
+.. figure:: auto_examples/images/plot_sdss_specPCA_1.png
+   :target: auto_examples/plot_sdss_specPCA.html
    :align: center
    :scale: 80%
 
@@ -130,8 +130,8 @@ deviation to give us an idea of the data we're working with::
 
 Calling ``plot_mean_std(data)`` gives the following figure:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_specPCA_2.png
-   :target: ../../auto_examples/tutorial/plot_sdss_specPCA.html
+.. figure:: auto_examples/images/plot_sdss_specPCA_2.png
+   :target: auto_examples/plot_sdss_specPCA.html
    :align: center
    :scale: 80%
 
@@ -170,8 +170,8 @@ We'll create a function to visualize this::
 
 Calling ``plot_random_projection(data)`` gives the following plot:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_specPCA_3.png
-   :target: ../../auto_examples/tutorial/plot_sdss_specPCA.html
+.. figure:: auto_examples/images/plot_sdss_specPCA_3.png
+   :target: auto_examples/plot_sdss_specPCA.html
    :align: center
    :scale: 80%
 
@@ -243,8 +243,8 @@ the spectra now using the first two columns::
 Calling this function as ``plot_PCA_projection(data, rpca)`` gives the
 following plot:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_specPCA_4.png
-   :target: ../../auto_examples/tutorial/plot_sdss_specPCA.html
+.. figure:: auto_examples/images/plot_sdss_specPCA_4.png
+   :target: auto_examples/plot_sdss_specPCA.html
    :align: center
    :scale: 80%
 
@@ -281,8 +281,8 @@ these components mean::
 Calling this function as ``plot_eivenvectors(data, rpca)`` gives the
 following plot:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_specPCA_5.png
-   :target: ../../auto_examples/tutorial/plot_sdss_specPCA.html
+.. figure:: auto_examples/images/plot_sdss_specPCA_5.png
+   :target: auto_examples/plot_sdss_specPCA.html
    :align: center
    :scale: 80%
 

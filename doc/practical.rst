@@ -57,8 +57,8 @@ which we tried.  We can visualize the fit with the following function::
 Calling ``plot_fit`` with the ``x``, ``y``, and ``p`` values from above
 produces the following figure:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_bias_variance_examples_1.png
-   :target: ../../auto_examples/tutorial/plot_bias_variance_examples.html
+.. figure:: auto_examples/images/plot_bias_variance_examples_1.png
+   :target: auto_examples/plot_bias_variance_examples.html
    :align: center
    :scale: 80%
 
@@ -97,8 +97,8 @@ problem with the polynomial regression discussed above.  We can tune the
 degree `d` to try to get the best fit.
 
 
-.. figure:: ../../auto_examples/tutorial/images/plot_bias_variance_examples_2.png
-   :target: ../../auto_examples/tutorial/plot_bias_variance_examples.html
+.. figure:: auto_examples/images/plot_bias_variance_examples_2.png
+   :target: auto_examples/plot_bias_variance_examples.html
    :align: center
    :scale: 80%
 
@@ -156,8 +156,8 @@ The cross-validation error of our polynomial classifier can be visualized by
 plotting the error as a function of the polynomial degree `d`.
 This plot is shown in the following figure:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_bias_variance_examples_3.png
-   :target: ../../auto_examples/tutorial/plot_bias_variance_examples.html
+.. figure:: auto_examples/images/plot_bias_variance_examples_3.png
+   :target: auto_examples/plot_bias_variance_examples.html
    :align: center
    :scale: 80%
 
@@ -193,8 +193,8 @@ small subset of the training data, the training error is computed using this
 subset, not the full training set.  These plots can give a quantitative view
 into how beneficial it will be to add training samples.
 
-.. figure:: ../../auto_examples/tutorial/images/plot_bias_variance_examples_4.png
-   :target: ../../auto_examples/tutorial/plot_bias_variance_examples.html
+.. figure:: auto_examples/images/plot_bias_variance_examples_4.png
+   :target: auto_examples/plot_bias_variance_examples.html
    :align: center
    :scale: 80%
 

@@ -14,8 +14,8 @@ of their optical `spectrum <http://en.wikipedia.org/wiki/Spectrum>`_.
 A spectrum is a measure of the photon flux (that is, the number of photons
 per second) as a function of photon frequency or wavelength.
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_filters_1.png
-   :target: ../../auto_examples/tutorial/plot_sdss_filters.html
+.. figure:: auto_examples/images/plot_sdss_filters_1.png
+   :target: auto_examples/plot_sdss_filters.html
    :align: center
    :scale: 80%
 
@@ -84,8 +84,8 @@ entire galaxy.
 Here we show three different objects, chosen from among the millions of
 sources catalogued by the `Sloan Digital Sky Survey <http://www.sdss.org>`_:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_images_1.png
-   :target: ../../auto_examples/tutorial/plot_sdss_images.html
+.. figure:: auto_examples/images/plot_sdss_images_1.png
+   :target: auto_examples/plot_sdss_images.html
    :align: center
    :scale: 80%
 

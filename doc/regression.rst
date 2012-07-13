@@ -43,8 +43,8 @@ Because of the spectrum shift, an identical source at different redshifts
 will have a different color through each pair of filters.  See the following
 figure:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_filters_2.png
-   :target: ../../auto_examples/tutorial/plot_sdss_filters.html
+.. figure:: auto_examples/images/plot_sdss_filters_2.png
+   :target: auto_examples/plot_sdss_filters.html
    :align: center
    :scale: 80%
 
@@ -144,8 +144,8 @@ About 1.5% of objects have redshift estimates which are off by greater than
 high-precision cosmological studies.  This can be seen in a scatter plot of
 the predicted redshift versus the true redshift for the test data:
 
-.. figure:: ../../auto_examples/tutorial/images/plot_sdss_photoz_1.png
-   :target: ../../auto_examples/tutorial/plot_sdss_photoz.html
+.. figure:: auto_examples/images/plot_sdss_photoz_1.png
+   :target: auto_examples/plot_sdss_photoz.html
    :align: center
    :scale: 80%
 

@@ -24,26 +24,13 @@
 
 .. only:: html
 
-    .. |banner1| image:: auto_examples/images/plot_haxby_decoding_1.png
+    .. |banner1| image:: auto_examples/images/plot_sdss_filters_1.png
        :height: 140
-       :target: auto_examples/plot_haxby_decoding.html
+       :target: auto_examples/plot_sdss_filters.html
 
-    .. |banner2| image:: auto_examples/images/plot_simulated_data_3.png
+    .. |banner2| image:: auto_examples/images/plot_sdss_filters_2.png
        :height: 90
-       :target: auto_examples/plot_simulated_data.html
-
-    .. |banner3| image:: auto_examples/images/plot_rest_clustering_1.png
-       :height: 140
-       :target: auto_examples/plot_rest_clustering.html
-
-    .. |banner4| image:: auto_examples/images/plot_ica_resting_state_1.png
-       :height: 140
-       :target: auto_examples/plot_ica_resting_state.html
-
-    .. |banner5| image:: auto_examples/images/plot_haxby_searchlight_1.png
-       :height: 140
-       :target: auto_examples/plot_haxby_searchlight.html
-
+       :target: auto_examples/plot_sdss_filters.html
 
     .. |center-div| raw:: html
 
@@ -74,7 +61,7 @@
         shuffle ($('#banner a.external'));
         </SCRIPT>
 
-    |center-div| |banner1| |banner2| |banner3| |banner4| |banner5| |end-div|
+    |center-div| |banner1| |banner2| |end-div|
 
 .. only:: html
 

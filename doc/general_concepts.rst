@@ -39,8 +39,8 @@ figure: it shows a collection of two-dimensional data, colored according
 to two different class labels.  A classification algorithm is used to draw
 a dividing boundary between the two clusters of points:
 
-.. figure:: ../../auto_examples/linear_model/images/plot_sgd_separating_hyperplane_1.png
-   :target: ../../auto_examples/linear_model/plot_sgd_separating_hyperplane.html
+.. figure:: auto_examples/images/plot_sgd_separating_hyperplane_1.png
+   :target: auto_examples/plot_sgd_separating_hyperplane.html
    :align: center
    :scale: 80%
 
@@ -326,14 +326,14 @@ object named ``model``, the following methods are available:
 Supervised Learning
 -------------------
 
-.. figure:: ../../auto_examples/tutorial/images/plot_ML_flow_chart_1.png
-   :target: ../../auto_examples/tutorial/plot_ML_flow_chart.html
+.. figure:: auto_examples/images/plot_ML_flow_chart_1.png
+   :target: auto_examples/plot_ML_flow_chart.html
    :scale: 75 %
    :align: center
    :alt: Flow diagram for supervised learning
 
-.. figure:: ../../auto_examples/tutorial/images/plot_ML_flow_chart_2.png
-   :target: ../../auto_examples/tutorial/plot_ML_flow_chart.html
+.. figure:: auto_examples/images/plot_ML_flow_chart_2.png
+   :target: auto_examples/plot_ML_flow_chart.html
    :scale: 75 %
    :align: center
    :alt: Flow diagram for supervised learning with scikit-learn
@@ -569,8 +569,8 @@ Some notable implementations of regression models in ``scikit-learn`` include:
 Unsupervised Learning: ``model.fit(X)``
 ---------------------------------------
 
-.. figure:: ../../auto_examples/tutorial/images/plot_ML_flow_chart_3.png
-   :target: ../../auto_examples/tutorial/plot_ML_flow_chart.html
+.. figure:: auto_examples/images/plot_ML_flow_chart_3.png
+   :target: auto_examples/plot_ML_flow_chart.html
    :scale: 75 %
    :align: center
    :alt: Flow diagram for supervised learning with scikit-learn
@@ -674,8 +674,8 @@ Calling ``plot_2D(X_pca, iris.target, iris.target_names)`` will
 display the following:
 
 
-.. figure:: ../../auto_examples/tutorial/images/plot_iris_projections_1.png
-   :target: ../../auto_examples/tutorial/plot_iris_projections.html
+.. figure:: auto_examples/images/plot_iris_projections_1.png
+   :target: auto_examples/plot_iris_projections.html
    :scale: 65 %
    :align: center
    :alt: 2D PCA projection of the iris dataset
@@ -752,8 +752,8 @@ with::
 
 
 
-.. figure:: ../../auto_examples/tutorial/images/plot_iris_projections_2.png
-   :target: ../../auto_examples/tutorial/plot_iris_projections.html
+.. figure:: auto_examples/images/plot_iris_projections_2.png
+   :target: auto_examples/plot_iris_projections.html
    :scale: 65 %
    :align: center
    :alt: KMeans cluster assignements on 2D PCA iris data
@@ -853,7 +853,7 @@ Others simply don't.
 To grasp the difference between the two cases, run the interactive
 example from the ``examples`` folder of the ``scikit-learn`` source
 distribution.  (if you don't have the scikit-learn source code locally
-installed, you can find the script `here <../../auto_examples/applications/svm_gui.html>`_)::
+installed, you can find the script `here <auto_examples/applications/svm_gui.html>`_)::
 
     % python $SKL_HOME/examples/applications/svm_gui.py
 
@@ -872,8 +872,8 @@ perfectly separate the two classes while the other is not linearly
 separable (a model with a gaussian kernel is required in that case).
 
 
-.. figure:: ../../auto_examples/tutorial/images/plot_gui_example_1.png
-   :target: ../../auto_examples/tutorial/plot_gui_example.html
+.. figure:: auto_examples/images/plot_gui_example_1.png
+   :target: auto_examples/plot_gui_example.html
    :scale: 65 %
    :align: center
    :alt: Example of a linear SVM fit
@@ -882,8 +882,8 @@ separable (a model with a gaussian kernel is required in that case).
    data points labeled as white and black in a 2D space.
 
 
-.. figure:: ../../auto_examples/tutorial/images/plot_gui_example_2.png
-   :target: ../../auto_examples/tutorial/plot_gui_example.html
+.. figure:: auto_examples/images/plot_gui_example_2.png
+   :target: auto_examples/plot_gui_example.html
    :scale: 65 %
    :align: center
    :alt: Example of a gaussian SVM fit
@@ -941,8 +941,8 @@ lead to *overfitting*.  Consider the following dataset, and three fits to
 the data (we'll explore this example in more detail in the
 :ref:`next section <astro_biasvariance>`).
 
-.. figure:: ../../auto_examples/tutorial/images/plot_bias_variance_examples_2.png
-   :target: ../../auto_examples/tutorial/plot_bias_variance_examples.html
+.. figure:: auto_examples/images/plot_bias_variance_examples_2.png
+   :target: auto_examples/plot_bias_variance_examples.html
    :align: center
    :scale: 80%
 

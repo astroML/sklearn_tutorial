@@ -18,7 +18,7 @@ Machine Learning for Astronomical Data Analysis
     engineering**.
 
 
-.. include:: ../../includes/big_toc_css.rst
+.. include:: includes/big_toc_css.rst
 
 .. note:: This document is meant to be used with **scikit-learn version
    0.11+** (i.e. the current state of the master branch at the time of
