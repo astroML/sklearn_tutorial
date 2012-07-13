@@ -213,8 +213,6 @@ def generate_dir_rst(dir, fhindex, example_dir, root_dir, plot_gallery):
             return 'zz' + a
         return a
     for fname in sorted(os.listdir(src_dir), key=sort_key):
-        if fname == 'setup.py':
-            continue
         if fname.endswith('py'):
             generate_file_rst(fname, target_dir, src_dir, plot_gallery)
             thumb = os.path.join(dir, 'images', 'thumb', fname[:-3] + '.png')
@@ -227,7 +225,7 @@ def generate_dir_rst(dir, fhindex, example_dir, root_dir, plot_gallery):
                                                                fname[:-3]))
             else:
                 fhindex.write('   :target: ./%s.html\n\n' % link_name[:-3])
-            fhindex.write("""   :ref:`example_tutorial_%s`
+            fhindex.write("""   :ref:`example_%s`
 
 .. toctree::
    :hidden:
