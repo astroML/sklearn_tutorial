@@ -81,6 +81,7 @@ A simple example: the iris dataset
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`01_datasets.ipynb <notebooks/01_datasets.ipynb>`,
    which can be viewed using `iPython notebook`_.
@@ -372,6 +373,7 @@ A first classifier example with ``scikit-learn``
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`02_iris_classification.ipynb <notebooks/02_iris_classification.ipynb>`,
    which can be viewed using `iPython notebook`_.
@@ -600,6 +602,7 @@ Normalization and visualization with PCA
 ++++++++++++++++++++++++++++++++++++++++
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`03_iris_dimensionality.ipynb <notebooks/03_iris_dimensionality.ipynb>`,
    which can be viewed using `iPython notebook`_.
@@ -999,6 +1002,7 @@ Measuring classification performance on a test set
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`05_iris_crossval.ipynb <notebooks/05_iris_crossval.ipynb>`,
    which can be viewed using `iPython notebook`_.

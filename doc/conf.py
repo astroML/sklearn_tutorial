@@ -40,8 +40,8 @@ except:
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom ones.
 extensions = ['gen_rst',
-              'sphinx.ext.autodoc', 'sphinx.ext.autosummary',
-              'sphinx.ext.pngmath',
+              'sphinx.ext.autodoc', #'sphinx.ext.autosummary',
+              'sphinx.ext.pngmath', 'sphinx.ext.intersphinx',
               ]
 try:
     import numpy_ext.numpydoc
@@ -253,3 +253,6 @@ latex_show_pagerefs = True
 latex_show_urls = 'footnote'
 
 trim_doctests_flags = True
+
+# Intersphinx mapping to the scikit-learn docs
+intersphinx_mapping = {'sklearn': ('http://scikit-learn.org/stable', None)}
