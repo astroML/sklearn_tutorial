@@ -73,8 +73,8 @@ plot_gallery = True
 master_doc = 'index'
 
 # General information about the project.
-project = u'NISL'
-copyright = u'INRIA Parietal 2010'
+project = u'AtroML'
+copyright = u'scikit-learn developers'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -141,10 +141,10 @@ html_theme_path = ['themes']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-html_title = "NeuroImaging with the scikit-learn"
+html_title = "Machine Learning for Astronomical Data Analysis"
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
-html_short_title = 'Nisl'
+html_short_title = 'AstroML'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
@@ -211,8 +211,8 @@ htmlhelp_basename = 'PythonScientic'
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-  ('index', 'nisl.tex', u'NeuroImaging with scikit-learn',
-   ur"""Gaël Varoquaux and Alexandre Abraham"""
+  ('index', 'astroML.tex', u'NeuroImaging with scikit-learn',
+   ur"""Jacob VanderPlas"""
    + r"\\\relax ~\\\relax http://nisl.github.com",
    'manual'),
 
