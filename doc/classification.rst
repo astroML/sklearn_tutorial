@@ -107,6 +107,7 @@ Star-Quasar Classification: Naive Bayes
 ---------------------------------------
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`07_classification_example.ipynb <notebooks/07_classification_example.ipynb>`,
    which can be viewed using `iPython notebook`_.
