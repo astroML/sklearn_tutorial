@@ -5,7 +5,7 @@
     
 .. raw:: html
 
-    <h1>Machine learning for NeuroImaging in Python</h1>
+    <h1>Machine Learning for Astronomical Data Analysis</h1>
     <style type="text/css">
     p {
         margin: 7px 0 7px 0 ;
@@ -89,39 +89,40 @@
     * `Source code (github) <https://github.com/nisl/tutorial>`_
 
 
- .. topic:: Learn machine learning for fMRI
+.. sectionauthor:: Jake Vanderplas <vanderplas@astro.washington.edu>
 
-   This document compiles examples and tutorials to learn to apply
-   machine learning to fMRI using Python and the `scikit-learn
-   <http://scikit-learn.org>`__. It requires `nibabel
-   <htpp://nipy.org/nibabel>`__ and the `scikit-learn
-   <http://scikit-learn.org>`__.
+.. topic:: Machine Learning for Astronomy with scikit-learn
+
+    ``scikit-learn`` is a Python module integrating classic machine
+    learning algorithms in the tightly-knit world of scientific Python
+    packages (`numpy <http://numpy.scipy.org>`_, `scipy
+    <http://www.scipy.org>`_, `matplotlib
+    <http://matplotlib.sourceforge.net/>`_).
+
+    It aims to provide simple and efficient solutions to learning
+    problems that are accessible to everybody and reusable in various
+    contexts: **machine-learning as a versatile tool for science and
+    engineering**.
 
 
 .. include:: includes/big_toc_css.rst
 
-.. only:: html
+.. note:: This document is meant to be used with **scikit-learn version
+   0.11+** (i.e. the current state of the master branch at the time of
+   writing: 2012-03-01).
 
-  .. toctree::
-    :maxdepth: 2
-    :numbered:
+.. toctree::
+   :numbered:
+   :maxdepth: 2
 
-    introduction.rst
-    visualization.rst
-    supervised_learning.rst
-    unsupervised_learning.rst
-    auto_examples/index
-
-.. in the pdf, we don't include the examples
-
-.. only:: latex
-
-  .. toctree::
-    :maxdepth: 2
-    :numbered:
-
-    introduction.rst
-    
+   setup
+   general_concepts
+   practical
+   classification
+   regression
+   dimensionality_reduction
+   exercises
+   auto_examples/index
 
 ..  
  FIXME: I need the link below to make sure the banner gets copied to the
