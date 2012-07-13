@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.1. Tutorial Diagrams &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="../index.html" />
+    <link rel="up" title="8. Code examples" href="index.html" />
+    <link rel="next" title="8.2. Bias and Variance" href="plot_bias_variance_examples.html" />
+    <link rel="prev" title="8. Code examples" href="index.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="../general_concepts.html">Machine learning 101</a></li>
+            <li><a href="../classification.html">Classification</a></li>
+            <li><a href="../regression.html">Regression</a></li>
+            <li><a href="../exercises.html">Exercises</a></li>
+            <li><a href="index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	  <div class="rel">
+	   
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="index.html" title="8. Code examples"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    8. Code examples
+	    </span>
+	    <span class="hiddenrellink">
+	    8. Code examples
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="plot_bias_variance_examples.html" title="8.2. Bias and Variance"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    8.2. Bias and Va...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.2. Bias and Variance
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+	<div class="spacer">
+	&nbsp;
+	</div>
+	<div class="rellink">
+	<a href="index.html" title="8. Code examples" >
+	Up
+	<br>
+	<span class="smallrellink">
+	8. Code examples
+	</span>
+	<span class="hiddenrellink">
+	8. Code examples
+	</span>
+	
+	</a>
+	</div>
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">8.1. Tutorial Diagrams</a></li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="../AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial-diagrams">
+<span id="example-plot-ml-flow-chart-py"></span><h1>8.1. Tutorial Diagrams<a class="headerlink" href="#tutorial-diagrams" title="Permalink to this headline">¶</a></h1>
+<p>This script plots the flow-charts used in the scikit-learn tutorials.</p>
+<ul class="horizontal">
+<li><a class="first reference internal image-reference" href="../_images/plot_ML_flow_chart_1.png"><img alt="../_images/plot_ML_flow_chart_1.png" src="../_images/plot_ML_flow_chart_1.png" style="width: 423.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_ML_flow_chart_2.png"><img alt="../_images/plot_ML_flow_chart_2.png" src="../_images/plot_ML_flow_chart_2.png" style="width: 423.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_ML_flow_chart_3.png"><img alt="../_images/plot_ML_flow_chart_3.png" src="../_images/plot_ML_flow_chart_3.png" style="width: 423.0px; height: 282.0px;" /></a>
+</li>
+</ul>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_ML_flow_chart.py"><tt class="xref download docutils literal"><span class="pre">plot_ML_flow_chart.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Circle</span><span class="p">,</span> <span class="n">Rectangle</span><span class="p">,</span> <span class="n">Polygon</span><span class="p">,</span> <span class="n">Arrow</span><span class="p">,</span> <span class="n">FancyArrow</span>
+
+<span class="k">def</span> <span class="nf">create_base</span><span class="p">(</span><span class="n">box_bg</span> <span class="o">=</span> <span class="s">&#39;#CCCCCC&#39;</span><span class="p">,</span>
+                <span class="n">arrow1</span> <span class="o">=</span> <span class="s">&#39;#88CCFF&#39;</span><span class="p">,</span>
+                <span class="n">arrow2</span> <span class="o">=</span> <span class="s">&#39;#88FF88&#39;</span><span class="p">,</span>
+                <span class="n">supervised</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">facecolor</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">)</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">axes</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                 <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">frameon</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+    <span class="n">patches</span> <span class="o">=</span> <span class="p">[</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               <span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               <span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               
+               <span class="n">Rectangle</span><span class="p">((</span><span class="mf">2.9</span><span class="p">,</span> <span class="mf">3.6</span><span class="p">),</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               <span class="n">Rectangle</span><span class="p">((</span><span class="mf">3.1</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">),</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               <span class="n">Rectangle</span><span class="p">((</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">),</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               
+               <span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               
+               <span class="n">Rectangle</span><span class="p">((</span><span class="mf">2.9</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               
+               <span class="n">Circle</span><span class="p">((</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">),</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               
+               <span class="n">Polygon</span><span class="p">([[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">6.1</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+                        <span class="p">[</span><span class="mf">4.9</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">]],</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+               
+               <span class="n">FancyArrow</span><span class="p">(</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">,</span> <span class="mf">0.35</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">arrow1</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+               
+               <span class="n">FancyArrow</span><span class="p">(</span><span class="mf">3.75</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">arrow1</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+               
+               <span class="n">FancyArrow</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">arrow1</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+               
+               <span class="n">FancyArrow</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">arrow2</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+               
+               <span class="n">FancyArrow</span><span class="p">(</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">arrow2</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+               
+               <span class="n">FancyArrow</span><span class="p">(</span><span class="mf">6.2</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">arrow2</span><span class="p">,</span>
+                          <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)]</span>
+
+    <span class="k">if</span> <span class="n">supervised</span><span class="p">:</span>
+        <span class="n">patches</span> <span class="o">+=</span> <span class="p">[</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">2.4</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+                    <span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.6</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+                    <span class="n">Rectangle</span><span class="p">((</span><span class="mf">0.7</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">),</span>
+                    <span class="n">FancyArrow</span><span class="p">(</span><span class="mf">2.3</span><span class="p">,</span> <span class="mf">2.9</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">arrow1</span><span class="p">,</span>
+                               <span class="n">width</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.2</span><span class="p">),</span>
+                    <span class="n">Rectangle</span><span class="p">((</span><span class="mf">7.3</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">)]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">patches</span> <span class="o">+=</span> <span class="p">[</span><span class="n">Rectangle</span><span class="p">((</span><span class="mf">7.3</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">),</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.8</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="n">box_bg</span><span class="p">)]</span>
+    
+    <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">patches</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        
+    <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.45</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="s">&quot;Training</span><span class="se">\n</span><span class="s">Text,</span><span class="se">\n</span><span class="s">Documents,</span><span class="se">\n</span><span class="s">Images,</span><span class="se">\n</span><span class="s">etc.&quot;</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    
+    <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.6</span><span class="p">,</span> <span class="mf">4.9</span><span class="p">,</span> <span class="s">&quot;Feature</span><span class="se">\n</span><span class="s">Vectors&quot;</span><span class="p">,</span> 
+            <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    
+    <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">,</span> <span class="s">&quot;Machine</span><span class="se">\n</span><span class="s">Learning</span><span class="se">\n</span><span class="s">Algorithm&quot;</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    
+    <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="s">&quot;New Text,</span><span class="se">\n</span><span class="s">Document,</span><span class="se">\n</span><span class="s">Image,</span><span class="se">\n</span><span class="s">etc.&quot;</span><span class="p">,</span>
+            <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    
+    <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.3</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">,</span> <span class="s">&quot;Feature</span><span class="se">\n</span><span class="s">Vector&quot;</span><span class="p">,</span> 
+            <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    
+    <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.5</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="s">&quot;Predictive</span><span class="se">\n</span><span class="s">Model&quot;</span><span class="p">,</span> 
+            <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">supervised</span><span class="p">:</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.45</span><span class="p">,</span> <span class="mf">3.05</span><span class="p">,</span> <span class="s">&quot;Labels&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+    
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="s">&quot;Expected</span><span class="se">\n</span><span class="s">Label&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.8</span><span class="p">,</span> <span class="mf">5.8</span><span class="p">,</span> <span class="s">&quot;Supervised Learning Model&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.05</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span>
+                <span class="s">&quot;Likelihood</span><span class="se">\n</span><span class="s">or Cluster ID</span><span class="se">\n</span><span class="s">or Better</span><span class="se">\n</span><span class="s">Representation&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">8.8</span><span class="p">,</span> <span class="mf">5.8</span><span class="p">,</span> <span class="s">&quot;Unsupervised Learning Model&quot;</span><span class="p">,</span>
+                <span class="n">ha</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+        
+        
+
+<span class="k">def</span> <span class="nf">plot_supervised</span><span class="p">(</span><span class="n">annotate</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+    <span class="n">create_base</span><span class="p">(</span><span class="n">supervised</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">annotate</span><span class="p">:</span>
+        <span class="n">fontdict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;r&#39;</span><span class="p">,</span> <span class="n">weight</span><span class="o">=</span><span class="s">&#39;bold&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.9</span><span class="p">,</span> <span class="mf">4.55</span><span class="p">,</span> <span class="s">&#39;X = vec.fit_transform(input)&#39;</span><span class="p">,</span>
+                <span class="n">fontdict</span><span class="o">=</span><span class="n">fontdict</span><span class="p">,</span>
+                <span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">3.7</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s">&#39;clf.fit(X, y)&#39;</span><span class="p">,</span>
+                <span class="n">fontdict</span><span class="o">=</span><span class="n">fontdict</span><span class="p">,</span>
+                <span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.7</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s">&#39;X_new = vec.transform(input)&#39;</span><span class="p">,</span>
+                <span class="n">fontdict</span><span class="o">=</span><span class="n">fontdict</span><span class="p">,</span>
+                <span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">6.1</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="s">&#39;y_new = clf.predict(X_new)&#39;</span><span class="p">,</span>
+                <span class="n">fontdict</span><span class="o">=</span><span class="n">fontdict</span><span class="p">,</span>
+                <span class="n">rotation</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;left&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">plot_unsupervised</span><span class="p">():</span>
+    <span class="n">create_base</span><span class="p">(</span><span class="n">supervised</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+
+
+<span class="n">plot_supervised</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plot_supervised</span><span class="p">(</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">plot_unsupervised</span><span class="p">()</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>    0 seconds</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="../_sources/auto_examples/plot_ML_flow_chart.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="index.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="plot_bias_variance_examples.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

@@ -1,0 +1,26 @@
+
+
+.. _example_plot_sdss_images.py:
+
+
+SDSS Images
+-----------
+
+This script plots an example quasar, star, and galaxy image for use in
+the tutorial.
+
+
+
+.. image:: images/plot_sdss_images_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_sdss_images.py <plot_sdss_images.py>`
+
+.. literalinclude:: plot_sdss_images.py
+    :lines: 8-
+
+
+
+**Total running time of the example:**    0 seconds
+    

@@ -1,0 +1,284 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8. Code examples &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="../index.html" />
+    <link rel="next" title="8.1. Tutorial Diagrams" href="plot_ML_flow_chart.html" />
+    <link rel="prev" title="7. Exercises: Taking it a step further" href="../exercises.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="../general_concepts.html">Machine learning 101</a></li>
+            <li><a href="../classification.html">Classification</a></li>
+            <li><a href="../regression.html">Regression</a></li>
+            <li><a href="../exercises.html">Exercises</a></li>
+            <li><a href="#">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	   <div class="rel rellarge">
+	     
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="../exercises.html" title="7. Exercises: Taking it a step further"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    7. Exercises: Ta...
+	    </span>
+	    <span class="hiddenrellink">
+	    7. Exercises: Taking it a step further
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="plot_ML_flow_chart.html" title="8.1. Tutorial Diagrams"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    8.1. Tutorial Di...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.1. Tutorial Diagrams
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">8. Code examples</a><ul>
+</ul>
+</li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="../AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <style type="text/css">
+
+div#sidebarbutton {
+    display: none;
+}
+
+.figure {
+    float: left;
+    margin: 10px;
+    width: auto;
+    height: 200px;
+    width: 180px;
+}
+
+.figure img {
+    display: inline;
+    }
+
+.figure .caption {
+    width: 170px;
+    text-align: center !important;
+}
+</style><div class="section" id="code-examples">
+<h1>8. Code examples<a class="headerlink" href="#code-examples" title="Permalink to this headline">¶</a></h1>
+<p id="examples-index">General-purpose and introductory examples for Machine Learning for
+Astronomy with scikit-learn</p>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_ML_flow_chart.html"><img alt="../_images/plot_ML_flow_chart.png" src="../_images/plot_ML_flow_chart.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_ML_flow_chart.html#example-plot-ml-flow-chart-py"><em>Tutorial Diagrams</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_bias_variance_examples.html"><img alt="../_images/plot_bias_variance_examples.png" src="../_images/plot_bias_variance_examples.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_bias_variance_examples.html#example-plot-bias-variance-examples-py"><em>Bias and Variance</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_gui_example.html"><img alt="../_images/plot_gui_example.png" src="../_images/plot_gui_example.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_gui_example.html#example-plot-gui-example-py"><em>Linear Model Example</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_iris_projections.html"><img alt="../_images/plot_iris_projections.png" src="../_images/plot_iris_projections.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_iris_projections.html#example-plot-iris-projections-py"><em>Iris Projections</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_python_101.html"><img alt="../_images/plot_python_101.png" src="../_images/plot_python_101.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_python_101.html#example-plot-python-101-py"><em>Basic numerics and plotting with Python</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_sdss_filters.html"><img alt="../_images/plot_sdss_filters.png" src="../_images/plot_sdss_filters.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_sdss_filters.html#example-plot-sdss-filters-py"><em>SDSS Filters</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_sdss_images.html"><img alt="../_images/plot_sdss_images.png" src="../_images/plot_sdss_images.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_sdss_images.html#example-plot-sdss-images-py"><em>SDSS Images</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_sdss_photoz.html"><img alt="../_images/plot_sdss_photoz.png" src="../_images/plot_sdss_photoz.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_sdss_photoz.html#example-plot-sdss-photoz-py"><em>SDSS Photometric Redshifts</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_sdss_specPCA.html"><img alt="../_images/plot_sdss_specPCA.png" src="../_images/plot_sdss_specPCA.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_sdss_specPCA.html#example-plot-sdss-specpca-py"><em>SDSS Spectra Plots</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div class="figure">
+<a class="reference external image-reference" href="./plot_sgd_separating_hyperplane.html"><img alt="../_images/plot_sgd_separating_hyperplane.png" src="../_images/plot_sgd_separating_hyperplane.png" /></a>
+<p class="caption"><a class="reference internal" href="plot_sgd_separating_hyperplane.html#example-plot-sgd-separating-hyperplane-py"><em>SGD: Maximum margin separating hyperplane</em></a></p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+<div style="clear: both"></div></div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="../_sources/auto_examples/index.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel rellarge">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="../exercises.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="plot_ML_flow_chart.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

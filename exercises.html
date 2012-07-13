@@ -1,0 +1,428 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>7. Exercises: Taking it a step further &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="index.html" />
+    <link rel="next" title="8. Code examples" href="auto_examples/index.html" />
+    <link rel="prev" title="6. Dimensionality Reduction of Astronomical Spectra" href="dimensionality_reduction.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="index.html">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="general_concepts.html">Machine learning 101</a></li>
+            <li><a href="classification.html">Classification</a></li>
+            <li><a href="regression.html">Regression</a></li>
+            <li><a href="#">Exercises</a></li>
+            <li><a href="auto_examples/index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	   <div class="rel rellarge">
+	     
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="dimensionality_reduction.html" title="6. Dimensionality Reduction of Astronomical Spectra"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    6. Dimensionalit...
+	    </span>
+	    <span class="hiddenrellink">
+	    6. Dimensionality Reduction of Astronomical Spectra
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="auto_examples/index.html" title="8. Code examples"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    8. Code examples
+	    </span>
+	    <span class="hiddenrellink">
+	    8. Code examples
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">7. Exercises: Taking it a step further</a><ul>
+<li><a class="reference internal" href="#exercise-1-photometric-classification-with-gmm">7.1. Exercise 1: Photometric Classification with GMM</a></li>
+<li><a class="reference internal" href="#exercise-2-photometric-redshifts-with-decision-trees">7.2. Exercise 2: Photometric redshifts with Decision Trees</a></li>
+<li><a class="reference internal" href="#exercise-3-dimensionality-reduction-of-spectra">7.3. Exercise 3: Dimensionality Reduction of Spectra</a><ul>
+<li><a class="reference internal" href="#programming">7.3.1. Programming</a></li>
+<li><a class="reference internal" href="#experimentation">7.3.2. Experimentation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exercises-taking-it-a-step-further">
+<span id="astro-exercises"></span><h1>7. Exercises: Taking it a step further<a class="headerlink" href="#exercises-taking-it-a-step-further" title="Permalink to this headline">¶</a></h1>
+<p>Here we describe three exercises that will walk you through more advanced
+approaches to the classification, regression, and dimensionality reduction
+tasks outlined in the previous sections.</p>
+<p>Before beginning the exercises, be sure you have downloaded the tutorial
+source as described in the <a class="reference external" href="setup.html">setup</a> section.
+For each exercise, there are three files.  In <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME/skeletons</span></tt>,
+there is a skeleton script which can be filled-in to complete the exercise.
+In <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME/solutions</span></tt> you can find a completed version of the
+exercise files.  <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME/notebooks</span></tt> has <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>
+files which can be used to interactively complete the tutorials.</p>
+<p>Using the notebook files is the preferred way to complete the tutorial.
+If ipython notebook is unavailable, the files in the <tt class="docutils literal"><span class="pre">skeletons</span></tt> and
+<tt class="docutils literal"><span class="pre">solutions</span></tt> directory can be used.  Begin by copying the
+content of the <tt class="docutils literal"><span class="pre">skeletons</span></tt> folder to your own workspace:</p>
+<div class="highlight-python"><pre>% cp -r skeletons workspace</pre>
+</div>
+<p>You can then edit the contents of <tt class="docutils literal"><span class="pre">workspace</span></tt> without losing the original
+files.  You must also make sure you have run the <tt class="docutils literal"><span class="pre">fetch_data.py</span></tt> scripts
+in the appropriate subdirectory of <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME/data</span></tt>.
+Next start the ipython interpreter and run the script with:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise*.py datadir</pre>
+</div>
+<p>If an exception is triggered, you can type <tt class="docutils literal"><span class="pre">%debug</span></tt> to fire-up an ipdb
+session.</p>
+<p>Each exercise contains the necessary import statements, data loading, and code
+to evaluate the predictive accuracy of the model being used.  The remaining
+code must be filled-in by the user.  These places are marked by the comment
+<tt class="docutils literal"><span class="pre">#TODO</span></tt>.  Each exercise also has in-line descriptions which go over the
+details of each sub-task.</p>
+<div class="section" id="exercise-1-photometric-classification-with-gmm">
+<span id="astro-exercise-1"></span><h2>7.1. Exercise 1: Photometric Classification with GMM<a class="headerlink" href="#exercise-1-photometric-classification-with-gmm" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/10_exercise01.ipynb"><tt class="xref download docutils literal"><span class="pre">10_exercise01.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.  This requires the
+sdss colors data, which can be downloaded as described in
+<a class="reference internal" href="setup.html#astro-tutorial-setup"><em>Tutorial Setup and Installation</em></a>.</p>
+</div>
+<p>In this exercise, you will improve on the results of the classification
+example described in the <a class="reference external" href="classification.html">classification</a> section.
+We previously used a simple Gaussian Naive Bayes classifier to distinguish
+between stars and quasars.  Here we will use
+<a class="reference external" href="http://scikit-learn.org/0.6/modules/mixture.html">Gaussian Mixture Models</a>
+to recreate the Gaussian Naive Bayes classifier, and then tweak the
+parameters of these mixture models, evaluating them using a cross-validation
+set, and attempt to arrive at a better classifier.</p>
+<p>The overall goal of the task is to improve the quasar classifier, measuring
+its performance using the precision, recall, and F1-score.</p>
+<p>This task is broken into several parts:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Re-implement Gaussian Naive Bayes using Gaussian Mixture models.
+This involves training two single-component GMMs, calculating the
+priors for each class, and using these to compute likelihoods.
+This can be compared directly with the Gaussian Naive Bayes results
+to check that the implementation is correct.</li>
+<li>Experiment with various covariance types and numbers of components
+to optimize the classifier using the cross-validation set.</li>
+<li>Once you&#8217;ve converged on a good set of GMM parameters, predict the
+labels for the test set, and compare this with the labels from the
+literature.</li>
+</ol>
+</div></blockquote>
+<p>the ipython command is:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_01.py data/sdss_colors</pre>
+</div>
+<p>Althernatively, the ipython notebook file is found in</p>
+<blockquote>
+<div><a class="reference download internal" href="_downloads/10_exercise01.ipynb"><tt class="xref download docutils literal"><span class="pre">notebooks/10_exercise01.ipynb</span></tt></a></div></blockquote>
+</div>
+<div class="section" id="exercise-2-photometric-redshifts-with-decision-trees">
+<span id="astro-exercise-2"></span><h2>7.2. Exercise 2: Photometric redshifts with Decision Trees<a class="headerlink" href="#exercise-2-photometric-redshifts-with-decision-trees" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/11_exercise02.ipynb"><tt class="xref download docutils literal"><span class="pre">11_exercise02.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.  This requires the
+sdss photoz data, which can be downloaded as described in
+<a class="reference internal" href="setup.html#astro-tutorial-setup"><em>Tutorial Setup and Installation</em></a>.</p>
+</div>
+<p>In this exercise, you will seek to improve the results of the photometric
+redshift regression problem described in the <a class="reference external" href="regression.html">regression</a>
+section.  This exercise will draw heavily on the concepts of bias and
+variance, using the learning curve plots introduced in
+<a class="reference external" href="practical.html">section 3</a> of this tutorial.</p>
+<p>There are two goals of this exercise:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Find the best possible decision tree classifier for the data</li>
+<li>Decide what the best use of future resources is.  Should the
+astronomers seek to observe more objects (i.e. increase the number of
+training samples), or record more observations for each object
+(i.e. increase the number of features)?</li>
+</ol>
+</div></blockquote>
+<p>The exercise is broken into the following tasks:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Compute the training error and cross-validation error as a function
+of the <tt class="docutils literal"><span class="pre">max_depth</span></tt> parameter used in the Decision Tree Classifier.</li>
+<li>Compute the training error and cross-validation error as a function
+of the number of training samples.</li>
+<li>Repeat these two tasks, recording the outlier rate rather than the
+rms error.</li>
+<li>Analyze these results: should future observations focus on increasing
+the number of samples, or increasing the number of features?  Does
+this answer change depending on whether the rms error or outlier
+rate is the metric used?</li>
+</ol>
+</div></blockquote>
+<p>the ipython command is:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_02.py data/sdss_photoz/</pre>
+</div>
+<p>Althernatively, the ipython notebook file is found in</p>
+<blockquote>
+<div><a class="reference download internal" href="_downloads/11_exercise02.ipynb"><tt class="xref download docutils literal"><span class="pre">notebooks/11_exercise02.ipynb</span></tt></a></div></blockquote>
+</div>
+<div class="section" id="exercise-3-dimensionality-reduction-of-spectra">
+<span id="astro-exercise-3"></span><h2>7.3. Exercise 3: Dimensionality Reduction of Spectra<a class="headerlink" href="#exercise-3-dimensionality-reduction-of-spectra" title="Permalink to this headline">¶</a></h2>
+<p>In this exercise, you will use several dimensionality reduction techniques
+to view low-dimensional projections of galaxy &amp; quasar spectra from the
+Sloan Digital Sky Survey.  This exercise is much less quantitative than the
+previous ones: it mainly will help you to get a qualitative sense of the
+characteristics of these learning methods.</p>
+<p>There is a programming section, followed by an experimentation section.  The
+skeleton is set up to use command-line options to compare different sets of
+parameters</p>
+<div class="section" id="programming">
+<h3>7.3.1. Programming<a class="headerlink" href="#programming" title="Permalink to this headline">¶</a></h3>
+<p>The file has several places with &#8220;TODO&#8221; marked.  In these, you will use the
+specified unsupervised method to project the data <tt class="docutils literal"><span class="pre">X</span></tt> into the
+lower-dimensional <tt class="docutils literal"><span class="pre">X_proj</span></tt>.</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.RandomizedPCA</span></tt></a> to project the data</p>
+<p>the ipython command is:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra/ -m pca</pre>
+</div>
+<p>Note the argument <tt class="docutils literal"><span class="pre">-m</span></tt> which specifies the method  to use.</p>
+</li>
+<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a> with
+<tt class="docutils literal"><span class="pre">method='standard'</span></tt> to project the data.</p>
+<p>the ipython command is:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra/ -m lle</pre>
+</div>
+</li>
+<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a> with
+<tt class="docutils literal"><span class="pre">method='standard'</span></tt> to project the data.</p>
+<p>the ipython command is:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra/ -m mlle</pre>
+</div>
+</li>
+<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.Isomap.html#sklearn.manifold.Isomap" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.Isomap</span></tt></a> to project the data.</p>
+<p>the ipython command is:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra/ -m isomap</pre>
+</div>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="experimentation">
+<h3>7.3.2. Experimentation<a class="headerlink" href="#experimentation" title="Permalink to this headline">¶</a></h3>
+<p>Your goal is to find a projection that does a good job of separating the
+various classes of spectra, and lays them out in a way that might allow
+intuitive evaluation of the relationships between points.  The script is
+set-up as a command-line interface.  You should address the following
+questions:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p class="first">How sensitive is PCA to the set of data used?  To the number of
+training points?  You can test this out as follows:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra -m pca -n 1000 -s</pre>
+</div>
+<p>This will perform PCA on a subset of 1000 points.  <tt class="docutils literal"><span class="pre">-s</span></tt> indicates that
+the data should be shuffled, so that the set of points is different every
+time.  How stable is the projection between different subsets of the
+data?  How does the projection change as the number of points is
+increased?</p>
+</li>
+<li><p class="first">Address the same questions with LLE, MLLE, and Isomap.  Which of these
+manifold methods appears to give the most stable results?</p>
+</li>
+<li><p class="first">Now we can vary the number of neighbors used with LLE, MLLE, and Isomap.
+This is accomplished as follows:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra -m lle -k 20</pre>
+</div>
+<p>This call will execute LLE with 20 neighbors.  Try this for several
+values of <cite>k</cite>.  How does the number of
+neighbors change the projection?  Among LLE, MLLE, and Isomap, which
+produces the most stable results as the number of neighbors are changed?</p>
+</li>
+<li><p class="first">Finally, we&#8217;ll test the effects of normalization.  This can be done
+as follows:</p>
+<div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra -N l2</pre>
+</div>
+<p>this will perform PCA with L2-normalization.  The other options are
+<tt class="docutils literal"><span class="pre">-N</span> <span class="pre">l1</span></tt> for L1-normalization, and <tt class="docutils literal"><span class="pre">-N</span> <span class="pre">none</span></tt> for no normalization.
+Normalization has the effect of bringing all the spectra closer
+together: unnormalized spectra may be very bright (for nearby objects)
+or very dim (for far away objects).  Normalization corrects for this
+source of variance in the data.  How do the projected results change
+as you vary the normalization?</p>
+</li>
+<li><p class="first">By now, you should have an idea of which method and which combination of
+parameters give the best qualitative separation between the points.
+Re-run this method using the full <a href="#id1"><span class="problematic" id="id2">`</span></a>n`=4000 dataset now:</p>
+<div class="highlight-python"><pre>In [1]: %run python workspace/exercise_03.py data/sdss_spectra -n 4000 -m [method] [other options]</pre>
+</div>
+<p>This should give you a projection of the data that gives a good
+visualization of the relationship between points.  An astronomer may
+go further and try to develop rough cut-offs that would give a broad
+classification to an unlabeled test point.  This sort of procedure could
+be used as the first step of a physically-motivated classification
+pipeline, or to flag potentially interesting objects for quick
+followup.</p>
+</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="_sources/exercises.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel rellarge">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="dimensionality_reduction.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="auto_examples/index.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

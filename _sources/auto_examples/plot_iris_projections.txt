@@ -1,0 +1,35 @@
+
+
+.. _example_plot_iris_projections.py:
+
+
+Iris Projections
+----------------
+
+This code generates the Iris projection example plots found in the tutorial
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_iris_projections_1.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_iris_projections_2.png
+            :scale: 47
+
+
+**Python source code:** :download:`plot_iris_projections.py <plot_iris_projections.py>`
+
+.. literalinclude:: plot_iris_projections.py
+    :lines: 7-
+
+
+
+**Total running time of the example:**    0 seconds
+    

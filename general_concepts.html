@@ -1,0 +1,1233 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>2. Machine Learning 101: General Concepts &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="index.html" />
+    <link rel="next" title="3. Machine Learning 102: Practical Advice" href="practical.html" />
+    <link rel="prev" title="1. Tutorial Setup and Installation" href="setup.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="index.html">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="#">Machine learning 101</a></li>
+            <li><a href="classification.html">Classification</a></li>
+            <li><a href="regression.html">Regression</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="auto_examples/index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	   <div class="rel rellarge">
+	     
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="setup.html" title="1. Tutorial Setup and Installation"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    1. Tutorial Setu...
+	    </span>
+	    <span class="hiddenrellink">
+	    1. Tutorial Setup and Installation
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="practical.html" title="3. Machine Learning 102: Practical Advice"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    3. Machine Learn...
+	    </span>
+	    <span class="hiddenrellink">
+	    3. Machine Learning 102: Practical Advice
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">2. Machine Learning 101: General Concepts</a><ul>
+<li><a class="reference internal" href="#features-and-feature-extraction">2.1. Features and feature extraction</a><ul>
+<li><a class="reference internal" href="#a-simple-example-the-iris-dataset">2.1.1. A simple example: the iris dataset</a></li>
+<li><a class="reference internal" href="#handling-categorical-features">2.1.2. Handling categorical features</a></li>
+<li><a class="reference internal" href="#extracting-features-from-unstructured-data">2.1.3. Extracting features from unstructured data</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#supervised-learning-unsupervised-learning-and-scikit-learn-syntax">2.2. Supervised Learning, Unsupervised Learning, and <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> syntax</a></li>
+<li><a class="reference internal" href="#supervised-learning">2.3. Supervised Learning</a><ul>
+<li><a class="reference internal" href="#classification">2.3.1. Classification</a><ul>
+<li><a class="reference internal" href="#a-first-classifier-example-with-scikit-learn">2.3.1.1. A first classifier example with <tt class="docutils literal"><span class="pre">scikit-learn</span></tt></a></li>
+<li><a class="reference internal" href="#notable-implementations-of-classifiers">2.3.1.2. Notable implementations of classifiers</a></li>
+<li><a class="reference internal" href="#sample-application-of-classifiers">2.3.1.3. Sample application of classifiers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#regression">2.3.2. Regression</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#unsupervised-learning-model-fit-x">2.4. Unsupervised Learning: <tt class="docutils literal"><span class="pre">model.fit(X)</span></tt></a><ul>
+<li><a class="reference internal" href="#dimensionality-reduction-and-visualization">2.4.1. Dimensionality Reduction and visualization</a><ul>
+<li><a class="reference internal" href="#normalization-and-visualization-with-pca">2.4.1.1. Normalization and visualization with PCA</a></li>
+<li><a class="reference internal" href="#other-applications-of-dimensionality-reduction">2.4.1.2. Other applications of dimensionality reduction</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#clustering">2.4.2. Clustering</a><ul>
+<li><a class="reference internal" href="#notable-implementations-of-clustering-models">2.4.2.1. Notable implementations of clustering models</a></li>
+<li><a class="reference internal" href="#applications-of-clustering">2.4.2.2. Applications of clustering</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#linearly-separable-data">2.5. Linearly separable data</a></li>
+<li><a class="reference internal" href="#hyperparameters-training-set-test-set-and-overfitting">2.6. Hyperparameters, training set, test set and overfitting</a><ul>
+<li><a class="reference internal" href="#the-overfitting-issue">2.6.1. The overfitting issue</a></li>
+<li><a class="reference internal" href="#solutions-to-overfitting">2.6.2. Solutions to overfitting</a></li>
+<li><a class="reference internal" href="#measuring-classification-performance-on-a-test-set">2.6.3. Measuring classification performance on a test set</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#key-takeaway-points">2.7. Key takeaway points</a></li>
+</ul>
+</li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="machine-learning-101-general-concepts">
+<span id="astronomy-general-concepts"></span><h1>2. Machine Learning 101: General Concepts<a class="headerlink" href="#machine-learning-101-general-concepts" title="Permalink to this headline">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">Objectives</p>
+<p>By the end of this section you will</p>
+<ol class="arabic simple">
+<li>Know how to extract features from real-world data in order to perform
+machine learning tasks.</li>
+<li>Know the basic categories of <cite>supervised learning</cite>,
+including <cite>classification</cite> and <cite>regression</cite> problems.</li>
+<li>Know the basic categories of <cite>unsupervised learning</cite>,
+including dimensionality reduction and clustering.</li>
+<li>Understand the distinction between linearly separable and
+non-linearly separable data.</li>
+</ol>
+<p>In addition, you will know several tools within scikit-learn which can
+be used to accomplish the above tasks.</p>
+</div>
+<p>In this section we will begin to explore the basic principles of
+machine learning.
+Machine Learning is about building <strong>programs with tunable parameters</strong>
+(typically an array of floating point values) that are adjusted
+automatically so as to improve their behavior by <strong>adapting to
+previously seen data</strong>.</p>
+<p>Machine Learning can be considered a <strong>subfield of Artificial
+Intelligence</strong> since those algorithms can be seen as building blocks
+to make computers learn to behave more intelligently by somehow
+<strong>generalizing</strong> rather that just storing and retrieving data items
+like a database system would do.</p>
+<p>A very simple example of a machine learning task can be seen in the following
+figure: it shows a collection of two-dimensional data, colored according
+to two different class labels.  A classification algorithm is used to draw
+a dividing boundary between the two clusters of points:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_sgd_separating_hyperplane.html"><img alt="_images/plot_sgd_separating_hyperplane_1.png" src="_images/plot_sgd_separating_hyperplane_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+<p class="caption">Example Linear Decision Boundary</p>
+</div>
+<p>As with all figures in this tutorial, the above image has a hyper-link to the
+python source code which is used to generate it.</p>
+<div class="section" id="features-and-feature-extraction">
+<h2>2.1. Features and feature extraction<a class="headerlink" href="#features-and-feature-extraction" title="Permalink to this headline">¶</a></h2>
+<p>Most machine learning algorithms implemented in <tt class="docutils literal"><span class="pre">scikit-learn</span></tt>
+expect a numpy array as input <tt class="docutils literal"><span class="pre">X</span></tt>.  The expected shape of <tt class="docutils literal"><span class="pre">X</span></tt> is
+<tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name"><tt class="docutils literal"><span class="pre">n_samples</span></tt>:</th><td class="field-body">The number of samples: each sample is an item to process (e.g.
+classify). A sample can be a document, a picture, a sound, a
+video, a row in database or CSV file, or whatever you can
+describe with a fixed set of quantitative traits.</td>
+</tr>
+<tr class="field-even field"><th class="field-name"><tt class="docutils literal"><span class="pre">n_features</span></tt>:</th><td class="field-body">The number of features or distinct traits that can be used to
+describe each item in a quantitative manner.</td>
+</tr>
+</tbody>
+</table>
+<p>The number of features must be fixed in advance. However it can be
+very high dimensional (e.g. millions of features) with most of them
+being zeros for a given sample. In this case we may use <tt class="docutils literal"><span class="pre">scipy.sparse</span></tt>
+matrices instead of <tt class="docutils literal"><span class="pre">numpy</span></tt> arrays so as to make the data fit
+in memory.</p>
+<div class="section" id="a-simple-example-the-iris-dataset">
+<h3>2.1.1. A simple example: the iris dataset<a class="headerlink" href="#a-simple-example-the-iris-dataset" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/01_datasets.ipynb"><tt class="xref download docutils literal"><span class="pre">01_datasets.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.</p>
+</div>
+<p>The machine learning community often uses a simple flowers database
+where each row in the database (or CSV file) is a set of measurements
+of an individual iris flower.
+Each sample in this dataset is described by 4 features and can
+belong to one of the target classes:</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name" colspan="2">Features in the Iris dataset:</th></tr>
+<tr class="field-odd field"><td>&nbsp;</td><td class="field-body"><ol class="first arabic simple" start="0">
+<li>sepal length in cm</li>
+<li>sepal width in cm</li>
+<li>petal length in cm</li>
+<li>petal width in cm</li>
+</ol>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name" colspan="2">Target classes to predict:</th></tr>
+<tr class="field-even field"><td>&nbsp;</td><td class="field-body"><ol class="first last arabic simple" start="0">
+<li>Iris Setosa</li>
+<li>Iris Versicolour</li>
+<li>Iris Virginica</li>
+</ol>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">scikit-learn</span></tt> embeds a copy of the iris CSV file along with a
+helper function to load it into numpy arrays:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The features of each sample flower are stored in the <tt class="docutils literal"><span class="pre">data</span></tt> attribute
+of the dataset:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span><span class="p">,</span> <span class="n">n_features</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_samples</span>
+<span class="go">150</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n_features</span>
+<span class="go">4</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="go">array([ 5.1,  3.5,  1.4,  0.2])</span>
+</pre></div>
+</div>
+<p>The information about the class of each sample is stored in the
+<tt class="docutils literal"><span class="pre">target</span></tt> attribute of the dataset:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">len</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">)</span> <span class="o">==</span> <span class="n">n_samples</span>
+<span class="go">True</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+<span class="go">array([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span>
+<span class="go">       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,</span>
+<span class="go">       0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="go">       1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,</span>
+<span class="go">       1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,</span>
+<span class="go">       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2,</span>
+<span class="go">       2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2])</span>
+</pre></div>
+</div>
+<p>The names of the classes are stored in the last attribute, namely
+<tt class="docutils literal"><span class="pre">target_names</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="nb">list</span><span class="p">(</span><span class="n">iris</span><span class="o">.</span><span class="n">target_names</span><span class="p">)</span>
+<span class="go">[&#39;setosa&#39;, &#39;versicolor&#39;, &#39;virginica&#39;]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="handling-categorical-features">
+<h3>2.1.2. Handling categorical features<a class="headerlink" href="#handling-categorical-features" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes people describe samples with categorical descriptors that
+have no obvious numerical representation. For instance assume that
+each flower is further described by a color name among a fixed list
+of color names:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">color</span> <span class="ow">in</span> <span class="p">[</span><span class="s">&#39;purple&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The simple way to turn this categorical feature into numerical
+features suitable for machine learning is to create new features
+for each distinct color name that can be valued to <tt class="docutils literal"><span class="pre">1.0</span></tt> if the
+category is matching or <tt class="docutils literal"><span class="pre">0.0</span></tt> if not.</p>
+<p>The enriched iris feature set would hence be in this case:</p>
+<blockquote>
+<div><ol class="arabic simple" start="0">
+<li>sepal length in cm</li>
+<li>sepal width in cm</li>
+<li>petal length in cm</li>
+<li>petal width in cm</li>
+<li>color#purple (1.0 or 0.0)</li>
+<li>color#blue (1.0 or 0.0)</li>
+<li>color#red (1.0 or 0.0)</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="extracting-features-from-unstructured-data">
+<h3>2.1.3. Extracting features from unstructured data<a class="headerlink" href="#extracting-features-from-unstructured-data" title="Permalink to this headline">¶</a></h3>
+<p>The previous example deals with features that are readily available
+in a structured dataset with rows and columns of numerical or
+categorical values.</p>
+<p>However, <strong>most of the produced data is not readily available in a
+structured representation</strong> such as SQL, CSV, XML, JSON or RDF.</p>
+<p>Here is an overview of strategies to turn unstructed data items
+into arrays of numerical features.</p>
+<blockquote>
+<div><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Text documents:</th><td class="field-body"><p class="first">Count the frequency of each word or pair of consecutive words
+in each document. This approach is called
+<a class="reference external" href="http://scikit-learn.org/dev/modules/feature_extraction.html#text-feature-extraction">Bag of Words</a></p>
+<p>Note: we include other file formats such as HTML and PDF in
+this category: an ad-hoc preprocessing step is required to
+extract the plain text in UTF-8 encoding for instance.</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Images:</th><td class="field-body"><ul class="first">
+<li><p class="first">Rescale the picture to a fixed size and <strong>take all the raw
+pixels values</strong> (with or without luminosity normalization)</p>
+</li>
+<li><p class="first">Take some transformation of the signal (gradients in each
+pixel, wavelets transforms...)</p>
+</li>
+<li><p class="first">Compute the Euclidean, Manhattan or cosine <strong>similarities of
+the sample to a set reference prototype images</strong> aranged in a
+code book.  The code book may have been previously extracted
+from the same dataset using an unsupervised learning algorithm
+on the raw pixel signal.</p>
+<p>Each feature value is the distance to one element of the code
+book.</p>
+</li>
+<li><p class="first">Perform <strong>local feature extraction</strong>: split the picture into
+small regions and perform feature extraction locally in each
+area.</p>
+<p>Then combine all the features of the individual areas into a
+single array.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Sounds:</th><td class="field-body"><p class="first last">Same strategy as for images within a 1D space instead of 2D</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>Practical implementations of such feature extraction strategies
+will be presented in the last sections of this tutorial.</p>
+</div>
+</div>
+<div class="section" id="supervised-learning-unsupervised-learning-and-scikit-learn-syntax">
+<h2>2.2. Supervised Learning, Unsupervised Learning, and <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> syntax<a class="headerlink" href="#supervised-learning-unsupervised-learning-and-scikit-learn-syntax" title="Permalink to this headline">¶</a></h2>
+<p>Machine learning can be broken into two broad regimes: supervised learning
+and unsupervised learning.  We&#8217;ll introduce these concepts here, and discuss
+them in more detail below.</p>
+<p>In <strong>Supervised Learning</strong>, we have a dataset consisting of both
+<em>features</em> and <em>labels</em>.  The task is to construct an estimator which is
+able to predict the label of an object given the set of features.
+A relatively simple example is predicting the species of iris given a set
+of measurements of its flower.  This is a relatively simple task.
+Some more complicated examples are:</p>
+<ul class="simple">
+<li>given a multicolor image of an object through a telescope, determine
+whether that object is a star, a quasar, or a galaxy.</li>
+<li>given a photograph of a person, identify the person in the photo.</li>
+<li>given a list of movies a person has watched and their personal rating
+of the movie, recommend a list of movies they would like (A famous example
+is the <a class="reference external" href="http://en.wikipedia.org/wiki/Netflix_prize">Netflix Prize</a>).</li>
+</ul>
+<p>What these tasks have in common is that there is one or more unknown
+quantities associated with the object which needs to be determined
+from other observed quantities.  Supervised learning is further broken
+down into two categories, <em>classification</em> and <em>regression</em>.  In
+classification, the label is discrete, while in regression, the label
+is continuous.  For example, in astronomy, the task of determining
+whether an object is a star, a galaxy, or a quasar is a classification
+problem: the label is from three distinct categories.  On the other
+hand, we might wish to determine the age of an object based on
+such observations: this would be a regression problem: the label (age)
+is a continuous quantity.</p>
+<p><strong>Unsupervised Learning</strong> addresses a different sort of problem.  Here
+the data has no labels, and we are interested in finding similarities
+between the objects in question.  In a sense, you can think of unsupervised
+learning as a means of discovering labels from the data itself.
+Unsupervised learning comprises
+tasks such as dimensionality reduction, clustering, and density estimation.
+For example, in the iris data discussed above, we can used unsupervised
+methods to determine combinations of the measurements which best
+display the structure of the data.  As we&#8217;ll see below, such a projection
+of the data can be used to visualize the four-dimensional dataset in
+two dimensions.
+Some more involved unsupervised learning problems are:</p>
+<ul class="simple">
+<li>given detailed observations of distant galaxies, determine which features
+or combinations of features are most important in distinguishing between
+galaxies.</li>
+<li>given a mixture of two sound sources (for example, a person talking over
+some music), separate the two (this is called the
+<a class="reference external" href="http://en.wikipedia.org/wiki/Blind_signal_separation">blind source separation</a> problem).</li>
+<li>given a video, isolate a moving object and categorize in relation to
+other moving objects which have been seen.</li>
+</ul>
+<p><tt class="docutils literal"><span class="pre">scikit-learn</span></tt> strives to have a uniform interface across all methods,
+and we&#8217;ll see examples of these below.  Given a <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> estimator
+object named <tt class="docutils literal"><span class="pre">model</span></tt>, the following methods are available:</p>
+<ul class="simple">
+<li><strong>Available in all Estimators</strong><ul>
+<li><tt class="docutils literal"><span class="pre">model.fit()</span></tt> : fit training data.  For supervised learning applications,
+this accepts two arguments: the data <tt class="docutils literal"><span class="pre">X</span></tt> and the labels <tt class="docutils literal"><span class="pre">y</span></tt>
+(e.g. <tt class="docutils literal"><span class="pre">model.fit(X,</span> <span class="pre">y)</span></tt>).  For unsupervised learning applications,
+this accepts only a single argument, the data <tt class="docutils literal"><span class="pre">X</span></tt>
+(e.g. <tt class="docutils literal"><span class="pre">model.fit(X)</span></tt>).</li>
+</ul>
+</li>
+<li><strong>Available in supervised estimators</strong><ul>
+<li><tt class="docutils literal"><span class="pre">model.predict()</span></tt> : given a trained model, predict the label of
+a new set of data.  This method accepts one argument, the new
+data <tt class="docutils literal"><span class="pre">X_new</span></tt> (e.g. <tt class="docutils literal"><span class="pre">model.predict(X_new)</span></tt>), and returns the
+learned label for each object in the array.</li>
+<li><tt class="docutils literal"><span class="pre">model.predict_proba()</span></tt> : For classification problems,
+some estimators also provide this method, which returns the probability
+that a new observation has each categorical label.  In this case, the
+label with the highest probability is returned by <tt class="docutils literal"><span class="pre">model.predict()</span></tt>.</li>
+</ul>
+</li>
+<li><strong>Available in unsupervised estimators</strong><ul>
+<li><tt class="docutils literal"><span class="pre">model.transform()</span></tt> : given an unsupervised model, transform new data
+into the new basis.  This also accepts one argument <tt class="docutils literal"><span class="pre">X_new</span></tt>, and
+returns the new representation of the data based on the unsupervised
+model.</li>
+<li><tt class="docutils literal"><span class="pre">model.fit_transform()</span></tt> : some estimators implement this method,
+which performs a <tt class="docutils literal"><span class="pre">fit</span></tt> and a <tt class="docutils literal"><span class="pre">transform</span></tt> on the same input data.</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="supervised-learning">
+<span id="astro-supervised-learning"></span><h2>2.3. Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_ML_flow_chart.html"><img alt="Flow diagram for supervised learning" src="_images/plot_ML_flow_chart_1.png" style="width: 675.0px; height: 450.0px;" /></a>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_ML_flow_chart.html"><img alt="Flow diagram for supervised learning with scikit-learn" src="_images/plot_ML_flow_chart_2.png" style="width: 675.0px; height: 450.0px;" /></a>
+<p class="caption">Overview of supervised Learning with scikit-learn</p>
+</div>
+<p>As mentioned above, a supervised learning algorithm makes the distinction
+between the raw observed data <tt class="docutils literal"><span class="pre">X</span></tt> with shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt>
+and some label given to the model during training. In <tt class="docutils literal"><span class="pre">scikit-learn</span></tt>
+this array is often noted <tt class="docutils literal"><span class="pre">y</span></tt> and has generally the shape <tt class="docutils literal"><span class="pre">(n_samples,)</span></tt>.
+After training, the fitted model will try to predict the most likely labels
+<tt class="docutils literal"><span class="pre">y_new</span></tt> for new a set of samples <tt class="docutils literal"><span class="pre">X_new</span></tt>.</p>
+<p>Depending on the nature of the target <tt class="docutils literal"><span class="pre">y</span></tt>, supervised learning
+can be given different names:</p>
+<blockquote>
+<div><ul class="simple">
+<li>If <tt class="docutils literal"><span class="pre">y</span></tt> has values in a fixed set of <strong>categorical outcomes</strong>
+(represented by <strong>integers</strong>) the task to predict <tt class="docutils literal"><span class="pre">y</span></tt> is called
+<strong>classification</strong>.</li>
+<li>If <tt class="docutils literal"><span class="pre">y</span></tt> has <strong>floating point values</strong> (e.g. to represent a price,
+a temperature, a size...), the task to predict <tt class="docutils literal"><span class="pre">y</span></tt> is called
+<strong>regression</strong>.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="classification">
+<h3>2.3.1. Classification<a class="headerlink" href="#classification" title="Permalink to this headline">¶</a></h3>
+<p>Classification is the task of predicting the value of a categorical
+variable given some input variables (a.k.a. the features or &#8220;predictors&#8221;).
+This section includes a first exploration of classification with
+scikit-learn. We&#8217;ll explore a detailed example of classification with
+astronomical data in <a class="reference internal" href="classification.html#astronomy-classification"><em>Classification: Learning Labels of Astronomical Sources</em></a>.</p>
+<div class="section" id="a-first-classifier-example-with-scikit-learn">
+<h4>2.3.1.1. A first classifier example with <tt class="docutils literal"><span class="pre">scikit-learn</span></tt><a class="headerlink" href="#a-first-classifier-example-with-scikit-learn" title="Permalink to this headline">¶</a></h4>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/02_iris_classification.ipynb"><tt class="xref download docutils literal"><span class="pre">02_iris_classification.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.</p>
+</div>
+<p>In the iris dataset example, suppose we are assigned the task to
+guess the class of an individual flower given the measurements of
+petals and sepals. This is a classification task, hence we have:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span>
+</pre></div>
+</div>
+<p>Once the data has this format it is trivial to train a classifier,
+for instance a support vector machine with a linear kernel:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">LinearSVC</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Whenever you import a scikit-learn class or function for the first time,
+you are advised to read the docstring by using the <tt class="docutils literal"><span class="pre">?</span></tt> magic suffix
+of ipython, for instance type: <tt class="docutils literal"><span class="pre">LinearSVC?</span></tt>.</p>
+</div>
+<p><tt class="docutils literal"><span class="pre">clf</span></tt> is a statistical model that has parameters that control the
+learning algorithm (those parameters are sometimes called the
+hyperparameters). Those hyperparameters can be supplied by the
+user in the constructor of the model. We will explain later how to choose
+a good combination using either simple empirical rules or data
+driven selection:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span>
+<span class="go">LinearSVC(C=1.0, dual=True, fit_intercept=True, intercept_scaling=1,</span>
+<span class="go">     loss=&#39;l2&#39;, multi_class=False, penalty=&#39;l2&#39;, tol=0.0001)</span>
+</pre></div>
+</div>
+<p>By default the real model parameters are not initialized. They will be
+tuned automatically from the data by calling the <tt class="docutils literal"><span class="pre">fit</span></tt> method:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">coef_</span>                         
+<span class="go">array([[ 0.18...,  0.45..., -0.80..., -0.45...],</span>
+<span class="go">       [ 0.05..., -0.89...,  0.40..., -0.93...],</span>
+<span class="go">       [-0.85..., -0.98...,  1.38...,  1.86...]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">intercept_</span>                    
+<span class="go">array([ 0.10...,  1.67..., -1.70...])</span>
+</pre></div>
+</div>
+<p>Once the model is trained, it can be used to predict the most likely outcome on
+unseen data. For instance let us define a list of simple sample that looks
+like the first sample of the iris dataset:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">X_new</span> <span class="o">=</span> <span class="p">[[</span> <span class="mf">5.0</span><span class="p">,</span>  <span class="mf">3.6</span><span class="p">,</span>  <span class="mf">1.3</span><span class="p">,</span>  <span class="mf">0.25</span><span class="p">]]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+<span class="go">array([0], dtype=int32)</span>
+</pre></div>
+</div>
+<p>The outcome is <tt class="docutils literal"><span class="pre">0</span></tt> which is the id of the first iris class, namely
+&#8216;setosa&#8217;.</p>
+<p>The following figure places the location of the <tt class="docutils literal"><span class="pre">fit</span></tt> and <tt class="docutils literal"><span class="pre">predict</span></tt>
+calls on the previous flow diagram. The <tt class="docutils literal"><span class="pre">vec</span></tt> object is a vectorizer
+used for feature extraction that is not used in the case of the iris
+data (it already comes as vectors of features):</p>
+<p>Some <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> classifiers can further predict probabilities
+of the outcome.  This is the case of logistic regression models:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf2</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf2</span>
+<span class="go">LogisticRegression(C=1.0, dual=False, fit_intercept=True, intercept_scaling=1,</span>
+<span class="go">          penalty=&#39;l2&#39;, tol=0.0001)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf2</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+<span class="go">array([[  9.07512928e-01,   9.24770379e-02,   1.00343962e-05]])</span>
+</pre></div>
+</div>
+<p>This means that the model estimates that the sample in <tt class="docutils literal"><span class="pre">X_new</span></tt> has:</p>
+<blockquote>
+<div><ul class="simple">
+<li>90% likelyhood to belong to the &#8216;setosa&#8217; class</li>
+<li>9% likelyhood to belong to the &#8216;versicolor&#8217; class</li>
+<li>1% likelyhood to belong to the &#8216;virginica&#8217; class</li>
+</ul>
+</div></blockquote>
+<p>Of course, the <tt class="docutils literal"><span class="pre">predict</span></tt> method that outputs the label id of the
+most likely outcome is also available:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+<span class="go">array([0], dtype=int32)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="notable-implementations-of-classifiers">
+<h4>2.3.1.2. Notable implementations of classifiers<a class="headerlink" href="#notable-implementations-of-classifiers" title="Permalink to this headline">¶</a></h4>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegression</span></tt></a></p>
+<blockquote>
+<div>Regularized Logistic Regression based on <tt class="docutils literal"><span class="pre">liblinear</span></tt></div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.LinearSVC</span></tt></a></p>
+<blockquote>
+<div>Support Vector Machines without kernels based on <tt class="docutils literal"><span class="pre">liblinear</span></tt></div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVC</span></tt></a></p>
+<blockquote>
+<div>Support Vector Machines with kernels based on <tt class="docutils literal"><span class="pre">libsvm</span></tt></div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDClassifier</span></tt></a></p>
+<blockquote>
+<div>Regularized linear models (SVM or logistic regression) using a Stochastic
+Gradient Descent algorithm written in <tt class="docutils literal"><span class="pre">Cython</span></tt></div></blockquote>
+<p><tt class="xref py py-class docutils literal"><span class="pre">sklearn.neighbors.NeighborsClassifier</span></tt></p>
+<blockquote>
+<div>k-Nearest Neighbors classifier based on the ball tree datastructure for low
+dimensional data and brute force search for high dimensional data</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.GaussianNB</span></tt></a></p>
+<blockquote>
+<div>Gaussian Naive Bayes model.  This is an unsophisticated model which can
+be trained very quickly.  It is often used to obtain baseline results
+before moving to a more sophisticated classifier.</div></blockquote>
+</div>
+<div class="section" id="sample-application-of-classifiers">
+<h4>2.3.1.3. Sample application of classifiers<a class="headerlink" href="#sample-application-of-classifiers" title="Permalink to this headline">¶</a></h4>
+<p>The following table gives examples of applications of classifiers
+for some common engineering tasks:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="57%" />
+<col width="43%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Task</th>
+<th class="head">Predicted outcomes</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>E-mail classification</td>
+<td>Spam, normal, priority mail</td>
+</tr>
+<tr class="row-odd"><td>Language identification in text documents</td>
+<td>en, es, de, fr, ja, zh, ar, ru...</td>
+</tr>
+<tr class="row-even"><td>News articles categorization</td>
+<td>Business, technology, sports...</td>
+</tr>
+<tr class="row-odd"><td>Sentiment analysis in customer feedback</td>
+<td>Negative, neutral, positive</td>
+</tr>
+<tr class="row-even"><td>Face verification in pictures</td>
+<td>Same / different person</td>
+</tr>
+<tr class="row-odd"><td>Speaker verification in voice recordings</td>
+<td>Same / different person</td>
+</tr>
+<tr class="row-even"><td>Astronomical Sources</td>
+<td>Object type or class</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="regression">
+<h3>2.3.2. Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h3>
+<p>Regression is the task of predicting the value of a continuously varying
+variable (e.g. a price, a temperature, a conversion rate...) given
+some input variables (a.k.a. the features, &#8220;predictors&#8221; or
+&#8220;regressors&#8221;).  We&#8217;ll explore a detailed example of regression with
+astronomical data in <a class="reference internal" href="regression.html#astronomy-regression"><em>Regression: Photometric Redshifts of Galaxies</em></a>.</p>
+<p>Some notable implementations of regression models in <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> include:</p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Ridge</span></tt></a></p>
+<blockquote>
+<div>L2-regularized least squares linear model</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.ElasticNet</span></tt></a></p>
+<blockquote>
+<div>L1+L2-regularized least squares linear model trained using
+Coordinate Descent</div></blockquote>
+<p><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LassoLARS</span></tt></p>
+<blockquote>
+<div>L1-regularized least squares linear model trained with Least Angle
+Regression</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDRegressor</span></tt></a></p>
+<blockquote>
+<div>L1+L2-regularized least squares linear model trained using
+Stochastic Gradient Descent</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.ARDRegression</span></tt></a></p>
+<blockquote>
+<div>Bayesian Automated Relevance Determination regression</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVR</span></tt></a></p>
+<blockquote>
+<div>Non-linear regression using Support Vector Machines (wrapper for
+<tt class="docutils literal"><span class="pre">libsvm</span></tt>)</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.RandomForestRegressor</span></tt></a></p>
+<blockquote>
+<div>An ensemble method which constructs multiple decision trees from subsets
+of the data.</div></blockquote>
+</div>
+</div>
+<div class="section" id="unsupervised-learning-model-fit-x">
+<span id="astro-unsupervised-learning"></span><h2>2.4. Unsupervised Learning: <tt class="docutils literal"><span class="pre">model.fit(X)</span></tt><a class="headerlink" href="#unsupervised-learning-model-fit-x" title="Permalink to this headline">¶</a></h2>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_ML_flow_chart.html"><img alt="Flow diagram for supervised learning with scikit-learn" src="_images/plot_ML_flow_chart_3.png" style="width: 675.0px; height: 450.0px;" /></a>
+<p class="caption">Unsupervised Learning overview</p>
+</div>
+<p>An unsupervised learning algorithm only uses a single set of
+observations <tt class="docutils literal"><span class="pre">X</span></tt> with shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt> and does
+not use any kind of labels.</p>
+<p>An unsupervised learning model will try to fit its parameters so
+as to best summarize regularities found in the data.</p>
+<p>The following introduces the main variants of unsupervised learning
+algorithms, namely dimensionality reduction and clustering.</p>
+<div class="section" id="dimensionality-reduction-and-visualization">
+<h3>2.4.1. Dimensionality Reduction and visualization<a class="headerlink" href="#dimensionality-reduction-and-visualization" title="Permalink to this headline">¶</a></h3>
+<p>Dimensionality reduction is the task of deriving a set of <strong>new artificial
+features</strong> that is <strong>smaller</strong> than the original feature set while
+retaining <strong>most of the variance</strong> of the original data.</p>
+<div class="section" id="normalization-and-visualization-with-pca">
+<h4>2.4.1.1. Normalization and visualization with PCA<a class="headerlink" href="#normalization-and-visualization-with-pca" title="Permalink to this headline">¶</a></h4>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/03_iris_dimensionality.ipynb"><tt class="xref download docutils literal"><span class="pre">03_iris_dimensionality.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.</p>
+</div>
+<p>The most common technique for dimensionality reduction is called
+<strong>Principal Component Analysis</strong>.</p>
+<p>PCA can be done using linear combinations of the original features
+using a truncated <a class="reference external" href="http://en.wikipedia.org/wiki/Singular_value_decomposition#Truncated_SVD">Singular Value Decomposition</a>
+of the matrix <tt class="docutils literal"><span class="pre">X</span></tt>
+so as to project the data onto a base of the top singular vectors.</p>
+<p>If the number of retained components is 2 or 3, PCA can be used to
+visualize the dataset:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.decomposition</span> <span class="kn">import</span> <span class="n">PCA</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">whiten</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once fitted, the <tt class="docutils literal"><span class="pre">pca</span></tt> model exposes the singular vectors in the
+<tt class="docutils literal"><span class="pre">components_</span></tt> attribute:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">components_</span>                                      
+<span class="go">array([[ 0.17..., -0.04...,  0.41...,  0.17...],</span>
+<span class="go">       [-1.33..., -1.48...,  0.35...,  0.15...]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span>                        
+<span class="go">array([ 0.92...,  0.05...])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pca</span><span class="o">.</span><span class="n">explained_variance_ratio_</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>                  
+<span class="go">0.97...</span>
+</pre></div>
+</div>
+<p>Let us project the iris dataset along those first 2 dimensions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">X_pca</span> <span class="o">=</span> <span class="n">pca</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The dataset has been &#8220;normalized&#8221;, which means that the data is now centered on
+both components with unit variance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">X_pca</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">array([-0.,  0.])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">X_pca</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">array([ 1.,  1.])</span>
+</pre></div>
+</div>
+<p>Furthermore the samples components do no longer carry any linear
+correlation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">X_pca</span><span class="o">.</span><span class="n">T</span><span class="p">),</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="go">array([[ 1., -0.],</span>
+<span class="go">       [-0.,  1.]])</span>
+</pre></div>
+</div>
+<p>We can visualize the dataset using <tt class="docutils literal"><span class="pre">pylab</span></tt>, for instance by defining the
+following utility function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">cycle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">plot_2D</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">target_names</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">colors</span> <span class="o">=</span> <span class="n">cycle</span><span class="p">(</span><span class="s">&#39;rgbcmykw&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">target_ids</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">target_names</span><span class="p">))</span>
+<span class="gp">... </span>    <span class="n">pl</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">target_ids</span><span class="p">,</span> <span class="n">colors</span><span class="p">,</span> <span class="n">target_names</span><span class="p">):</span>
+<span class="gp">... </span>        <span class="n">pl</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">target</span> <span class="o">==</span> <span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+<span class="gp">... </span>                   <span class="n">c</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">label</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">pl</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="gp">... </span>    <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="gp">...</span>
+</pre></div>
+</div>
+<p>Calling <tt class="docutils literal"><span class="pre">plot_2D(X_pca,</span> <span class="pre">iris.target,</span> <span class="pre">iris.target_names)</span></tt> will
+display the following:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_iris_projections.html"><img alt="2D PCA projection of the iris dataset" src="_images/plot_iris_projections_1.png" style="width: 520.0px; height: 390.0px;" /></a>
+<p class="caption">2D PCA projection of the iris dataset</p>
+</div>
+<p>Note that this projection was determined <em>without</em> any information about the
+labels (represented by the colors): this is the sense in which the learning
+is unsupervised.  Nevertheless, we see that the projection gives us insight
+into the distribution of the different flowers in parameter space: notably,
+<em>iris setosa</em> is much more distinct than the other two species.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>The default implementation of PCA computes the SVD of the full
+data matrix, which is not scalable when both <tt class="docutils literal"><span class="pre">n_samples</span></tt> and
+<tt class="docutils literal"><span class="pre">n_features</span></tt> are big (more that a few thousands).</p>
+<p class="last">If you are interested in a number of components that is much
+smaller than both <tt class="docutils literal"><span class="pre">n_samples</span></tt> and <tt class="docutils literal"><span class="pre">n_features</span></tt>, consider using
+<a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.RandomizedPCA</span></tt></a> instead.</p>
+</div>
+</div>
+<div class="section" id="other-applications-of-dimensionality-reduction">
+<h4>2.4.1.2. Other applications of dimensionality reduction<a class="headerlink" href="#other-applications-of-dimensionality-reduction" title="Permalink to this headline">¶</a></h4>
+<p>Dimensionality Reduction is not just useful for visualization of
+high dimensional datasets. It can also be used as a preprocessing
+step (often called data normalization) to help speed up supervised
+machine learning methods that are not computationally efficient with high
+<tt class="docutils literal"><span class="pre">n_features</span></tt> such as SVM classifiers with gaussian kernels for
+instance or that do not work well with linearly correlated features.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><tt class="docutils literal"><span class="pre">scikit-learn</span></tt> also features an implementation of Independant
+Component Analysis (ICA) and several manifold learning methods
+(See <a class="reference internal" href="exercises.html#astro-exercise-3"><em>Exercise 3: Dimensionality Reduction of Spectra</em></a>)</p>
+</div>
+</div>
+</div>
+<div class="section" id="clustering">
+<h3>2.4.2. Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h3>
+<p>Clustering is the task of gathering samples into groups of similar
+samples according to some predefined similarity or dissimilarity
+measure (such as the Euclidean distance).</p>
+<p>For example, let us reuse the output of the 2D PCA of the iris
+dataset and try to find 3 groups of samples using the simplest
+clustering algorithm (KMeans):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">RandomState</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rng</span> <span class="o">=</span> <span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_pca</span><span class="p">)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">kmeans</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">,</span> <span class="n">decimals</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">array([[ 1.02, -0.71],</span>
+<span class="go">       [ 0.33,  0.89],</span>
+<span class="go">       [-1.29, -0.44]])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="go">array([2, 2, 2, 2, 2, 2, 2, 2, 2, 2])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span>
+<span class="go">array([0, 0, 1, 0, 0, 0, 1, 0, 0, 1])</span>
+</pre></div>
+</div>
+<p>We can plot the assigned cluster labels instead of the target names
+with:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">plot_2D</span><span class="p">(</span><span class="n">X_pca</span><span class="p">,</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">labels_</span><span class="p">,</span> <span class="p">[</span><span class="s">&quot;c0&quot;</span><span class="p">,</span> <span class="s">&quot;c1&quot;</span><span class="p">,</span> <span class="s">&quot;c2&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_iris_projections.html"><img alt="KMeans cluster assignements on 2D PCA iris data" src="_images/plot_iris_projections_2.png" style="width: 520.0px; height: 390.0px;" /></a>
+<p class="caption">KMeans cluster assignements on 2D PCA iris data</p>
+</div>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercise</strong></p>
+<p>Repeat the clustering algorithm from above, but fit the clusters to
+the full dataset <tt class="docutils literal"><span class="pre">X</span></tt> rather than the projection <tt class="docutils literal"><span class="pre">X_pca</span></tt>.  Do the
+labels computed this way better match the true labels?</p>
+</div>
+<div class="section" id="notable-implementations-of-clustering-models">
+<h4>2.4.2.1. Notable implementations of clustering models<a class="headerlink" href="#notable-implementations-of-clustering-models" title="Permalink to this headline">¶</a></h4>
+<p>The following are two well-known clustering algorithms. Like most
+unsupervised learning models in the scikit, they expect the data
+to be clustered to have the shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt>:</p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.KMeans</span></tt></a></p>
+<blockquote>
+<div>The simplest, yet effective clustering algorithm. Needs to be
+provided with the number of clusters in advance, and assumes that the
+data is normalized as input (but use a PCA model as preprocessor).</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.MeanShift.html#sklearn.cluster.MeanShift" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.MeanShift</span></tt></a></p>
+<blockquote>
+<div>Can find better looking clusters than KMeans but is not scalable
+to high number of samples.</div></blockquote>
+<dl class="docutils">
+<dt><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.DBSCAN</span></tt></a></dt>
+<dd>Can detect irregularly shaped clusters based on density, i.e. sparse regions
+in the input space are likely to become inter-cluster boundaries. Can also
+detect outliers (samples that are not part of a cluster).</dd>
+</dl>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a></p>
+<blockquote>
+<div>Locally Linear Embedding is a nonlinear neighbors-based
+manifold learning technique.
+The scikit-learn implementation makes available several variants to
+the basic algorithm.</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.Isomap.html#sklearn.manifold.Isomap" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.Isomap</span></tt></a></p>
+<blockquote>
+<div>Isomap is another neighbors-based manifold learning method that can find
+nonlinear projections of data.</div></blockquote>
+<p>Other clustering algorithms do not work with a data array of shape
+<tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt> but directly with a precomputed affinity matrix
+of shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_samples)</span></tt>:</p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.AffinityPropagation.html#sklearn.cluster.AffinityPropagation" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.AffinityPropagation</span></tt></a></p>
+<blockquote>
+<div>Clustering algorithm based on message passing between data points.</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html#sklearn.cluster.SpectralClustering" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.SpectralClustering</span></tt></a></p>
+<blockquote>
+<div>KMeans applied to a projection of the normalized graph Laplacian:
+finds normalized graph cuts if the affinity matrix is interpreted
+as an adjacency matrix of a graph.</div></blockquote>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Ward.html#sklearn.cluster.Ward" title="(in scikit-learn v0.11)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.Ward</span></tt></a></p>
+<blockquote>
+<div><dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">Ward</span></tt> implements hierarchical clustering based on the Ward algorithm,</dt>
+<dd>a variance-minimizing approach. At each step, it minimizes the sum of
+squared differences within all clusters (inertia criterion).</dd>
+</dl>
+</div></blockquote>
+<p><tt class="docutils literal"><span class="pre">DBSCAN</span></tt> can work with either an array of samples or an affinity matrix.</p>
+</div>
+<div class="section" id="applications-of-clustering">
+<h4>2.4.2.2. Applications of clustering<a class="headerlink" href="#applications-of-clustering" title="Permalink to this headline">¶</a></h4>
+<p>Here are some common applications of clustering algorithms:</p>
+<ul class="simple">
+<li>Building customer profiles for market analysis</li>
+<li>Grouping related web news (e.g. Google News) and websearch results</li>
+<li>Grouping related stock quotes for investment portfolio management</li>
+<li>Can be used as a preprocessing step for recommender systems</li>
+<li>Can be used to build a code book of prototype samples for unsupervised
+feature extraction for supervised learning algorithms</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="linearly-separable-data">
+<h2>2.5. Linearly separable data<a class="headerlink" href="#linearly-separable-data" title="Permalink to this headline">¶</a></h2>
+<p>Some supervised learning problems can be solved by very simple
+models (called generalized linear models) depending on the data.
+Others simply don&#8217;t.</p>
+<p>To grasp the difference between the two cases, run the interactive
+example from the <tt class="docutils literal"><span class="pre">examples</span></tt> folder of the <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> source
+distribution.  (if you don&#8217;t have the scikit-learn source code locally
+installed, you can find the script <a class="reference external" href="auto_examples/applications/svm_gui.html">here</a>):</p>
+<div class="highlight-python"><pre>% python $SKL_HOME/examples/applications/svm_gui.py</pre>
+</div>
+<ol class="arabic simple">
+<li>Put some data points belonging to one of the two target classes
+(&#8216;white&#8217; or &#8216;black&#8217;) using left click and right click.</li>
+<li>Choose some parameters of a Support Vector Machine to be trained on
+this toy dataset (<tt class="docutils literal"><span class="pre">n_samples</span></tt> is the number of clicks, <tt class="docutils literal"><span class="pre">n_features</span></tt>
+is 2).</li>
+<li>Click the Fit but to train the model and see the decision boundary.
+The accurracy of the model is displayed on stdout.</li>
+</ol>
+<p>The following figures demonstrate one case where a linear model can
+perfectly separate the two classes while the other is not linearly
+separable (a model with a gaussian kernel is required in that case).</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_gui_example.html"><img alt="Example of a linear SVM fit" src="_images/plot_gui_example_1.png" style="width: 520.0px; height: 390.0px;" /></a>
+<p class="caption">Linear Support Vector Machine trained to perfectly separate 2 sets of
+data points labeled as white and black in a 2D space.</p>
+</div>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_gui_example.html"><img alt="Example of a gaussian SVM fit" src="_images/plot_gui_example_2.png" style="width: 520.0px; height: 390.0px;" /></a>
+<p class="caption">Support Vector Machine with gaussian kernel trained to separate 2 sets of
+data points labeled as white and black in a 2D space. This dataset would
+not have been seperated by a simple linear model.</p>
+</div>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercise</strong></p>
+<p>Fit a model that is able to solve the XOR problem using the GUI:
+the XOR problem is composed of 4 samples:</p>
+<blockquote>
+<div><ul class="simple">
+<li>2 white samples in the top-left and bottom-right corners</li>
+<li>2 black samples in the bottom-left and top-right corners</li>
+</ul>
+</div></blockquote>
+<p><strong>Question</strong>: is the XOR problem linearly separable?</p>
+</div>
+<div class="green topic">
+<p class="topic-title first"><strong>Exercise</strong></p>
+<p>Construct a problem with less than 10 points where the predictive
+accuracy of the best linear model is 50%.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">the higher the dimension of the feature space, the more likely
+the data is linearly separable: for instance this is often the
+case for text classification tasks.</p>
+</div>
+</div>
+<div class="section" id="hyperparameters-training-set-test-set-and-overfitting">
+<h2>2.6. Hyperparameters, training set, test set and overfitting<a class="headerlink" href="#hyperparameters-training-set-test-set-and-overfitting" title="Permalink to this headline">¶</a></h2>
+<p>The above SVM example displays an example of <em>hyperparameters</em>, which are
+model parameters set before the training process.  For example, when using
+an RBF model, we choose the kernel coefficient <tt class="docutils literal"><span class="pre">gamma</span></tt> before fitting the
+data. We must be able to then evaluate the goodness-of-fit of our model
+given this choice of hyperparameter.</p>
+<p>The most common mistake beginners make when training statistical
+models is to evaluate the quality of the model on the same data
+used for fitting the model:</p>
+<blockquote>
+<div>If you do this, <strong>you are doing it wrong!</strong></div></blockquote>
+<div class="section" id="the-overfitting-issue">
+<h3>2.6.1. The overfitting issue<a class="headerlink" href="#the-overfitting-issue" title="Permalink to this headline">¶</a></h3>
+<p>Evaluating the quality of the model on the data used to fit the model can
+lead to <em>overfitting</em>.  Consider the following dataset, and three fits to
+the data (we&#8217;ll explore this example in more detail in the
+<a class="reference internal" href="practical.html#astro-biasvariance"><em>next section</em></a>).</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_bias_variance_examples.html"><img alt="_images/plot_bias_variance_examples_2.png" src="_images/plot_bias_variance_examples_2.png" style="width: 720.0px; height: 280.0px;" /></a>
+<p class="caption">Examples of over-fitting and under-fitting a two-dimensional dataset.</p>
+</div>
+<p>Evaluating the <img class="math" src="_images/math/e608445fc9292541fffc8edb50c81748ebeca1b9.png" alt="d=6"/> model using the training data might lead you to
+believe the model is very good, when in fact it does not do a good job of
+representing the data.
+The problem lies in the fact that some models can be subject to the
+<strong>overfitting</strong> issue: they can <strong>learn the training data by heart</strong>
+without generalizing. The symptoms are:</p>
+<blockquote>
+<div><ul class="simple">
+<li>the predictive accurracy on the data used for training can be excellent
+(sometimes 100%)</li>
+<li>however, the models do little better than random prediction when facing
+new data that was not part of the training set</li>
+</ul>
+</div></blockquote>
+<p>If you evaluate your model on your training data you won&#8217;t be able to tell
+whether your model is overfitting or not.</p>
+</div>
+<div class="section" id="solutions-to-overfitting">
+<h3>2.6.2. Solutions to overfitting<a class="headerlink" href="#solutions-to-overfitting" title="Permalink to this headline">¶</a></h3>
+<p>The solution to this issue is twofold:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Split your data into two sets to detect overfitting situations:</li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li>one for training and model selection: the <strong>training set</strong></li>
+<li>one for evaluation: the <strong>test set</strong></li>
+</ul>
+</div></blockquote>
+<ol class="arabic simple" start="2">
+<li>Avoid overfitting by using simpler models (e.g. linear classifiers
+instead of gaussian kernel SVM) or by increasing the regularization
+parameter of the model if available (see the docstring of the
+model for details)</li>
+</ol>
+</div></blockquote>
+<p>An even better option when experimenting with classifiers is to divide
+the data into three sets: training, testing and holdout. You can then
+optimize your features, settings and algorithms for the testing set until
+they seem good enough, and finally test on the holdout set (perhaps after
+adding the test set to the training set).</p>
+<p>When the amount of labeled data available is small, it may not be feasible
+to construct training and test sets. In that case, you can choose to
+use <strong>k-fold cross validation</strong>:
+divide the dataset into <cite>k</cite> = 10 parts of (roughly) equal size, then for
+each of these ten parts, train the classifier on the other nine and test
+on the held-out part.</p>
+</div>
+<div class="section" id="measuring-classification-performance-on-a-test-set">
+<h3>2.6.3. Measuring classification performance on a test set<a class="headerlink" href="#measuring-classification-performance-on-a-test-set" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/05_iris_crossval.ipynb"><tt class="xref download docutils literal"><span class="pre">05_iris_crossval.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.</p>
+</div>
+<p>Here is an example on you to split the data on the iris dataset.</p>
+<p>First we need to shuffle the order of the samples and the target
+to ensure that all classes are well represented on both sides of
+the split:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_samples</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="go">array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">RandomState</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">indices</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indices</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+<span class="go">array([ 73,  18, 118,  78,  76,  31,  64, 141,  68,  82])</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">iris</span><span class="o">.</span><span class="n">target</span><span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We can now split the data using a 2/3 - 1/3 ratio:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">split</span> <span class="o">=</span> <span class="p">(</span><span class="n">n_samples</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">split</span><span class="p">],</span> <span class="n">X</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">split</span><span class="p">],</span> <span class="n">y</span><span class="p">[</span><span class="n">split</span><span class="p">:]</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100, 4)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(50, 4)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_train</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(100,)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span>
+<span class="go">(50,)</span>
+</pre></div>
+</div>
+<p>We can now re-train a new linear classifier on the training set only:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">LinearSVC</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To evaluate its quality we can compute the average number of correct
+classifications on the test set:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span> <span class="o">==</span> <span class="n">y_test</span><span class="p">)</span>
+<span class="go">1.0</span>
+</pre></div>
+</div>
+<p>This shows that the model has a predictive accurracy of 100% which
+means that the classification model was perfectly capable of
+generalizing what was learned from the training set to the test
+set: this is rarely so easy on real life datasets as we will see
+in the following chapter.</p>
+<p>In the <a class="reference internal" href="practical.html#astro-biasvariance"><em>next section</em></a>, we will explore in more
+detail the bias-variance tradeoff and the practical use of machine learning
+techniques.</p>
+</div>
+</div>
+<div class="section" id="key-takeaway-points">
+<h2>2.7. Key takeaway points<a class="headerlink" href="#key-takeaway-points" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Build <tt class="docutils literal"><span class="pre">X</span></tt> (features vectors) with shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt></li>
+<li>Supervised learning: <tt class="docutils literal"><span class="pre">clf.fit(X,</span> <span class="pre">y)</span></tt> and then <tt class="docutils literal"><span class="pre">clf.predict(X_new)</span></tt><ul>
+<li>Classification: <tt class="docutils literal"><span class="pre">y</span></tt> is an array of integers</li>
+<li>Regression: <tt class="docutils literal"><span class="pre">y</span></tt> is an array of floats</li>
+</ul>
+</li>
+<li>Unsupervised learning: <tt class="docutils literal"><span class="pre">clf.fit(X)</span></tt><ul>
+<li>Dimensionality Reduction with <tt class="docutils literal"><span class="pre">clf.transform(X_new)</span></tt><ul>
+<li>for visualization</li>
+<li>for scalability</li>
+</ul>
+</li>
+<li>Clustering finds group id for each sample</li>
+</ul>
+</li>
+<li>Some models work much better with data normalized with PCA</li>
+<li>Simple linear models can fail completely (non linearly separable data)</li>
+<li>Simple linear models often very useful in practice (esp. with
+large <tt class="docutils literal"><span class="pre">n_features</span></tt>)</li>
+<li>Before starting to train a model: split train / test data:<ul>
+<li>use training set for model selection and fitting</li>
+<li>use test set for model evaluation</li>
+<li>use cross-validation when your dataset is small</li>
+</ul>
+</li>
+<li>Complex models can overfit (learn by heart) the training data and
+fail to generalize correctly on test data:<ul>
+<li>try simpler models first</li>
+<li>tune the regularization parameter on a validation set</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="_sources/general_concepts.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel rellarge">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="setup.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="practical.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

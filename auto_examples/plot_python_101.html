@@ -1,0 +1,227 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.5. Basic numerics and plotting with Python &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="../index.html" />
+    <link rel="up" title="8. Code examples" href="index.html" />
+    <link rel="next" title="8.6. SDSS Filters" href="plot_sdss_filters.html" />
+    <link rel="prev" title="8.4. Iris Projections" href="plot_iris_projections.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="../general_concepts.html">Machine learning 101</a></li>
+            <li><a href="../classification.html">Classification</a></li>
+            <li><a href="../regression.html">Regression</a></li>
+            <li><a href="../exercises.html">Exercises</a></li>
+            <li><a href="index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	  <div class="rel">
+	   
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="plot_iris_projections.html" title="8.4. Iris Projections"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    8.4. Iris Projec...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.4. Iris Projections
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="plot_sdss_filters.html" title="8.6. SDSS Filters"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    8.6. SDSS Filter...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.6. SDSS Filters
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+	<div class="spacer">
+	&nbsp;
+	</div>
+	<div class="rellink">
+	<a href="index.html" title="8. Code examples" >
+	Up
+	<br>
+	<span class="smallrellink">
+	8. Code examples
+	</span>
+	<span class="hiddenrellink">
+	8. Code examples
+	</span>
+	
+	</a>
+	</div>
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">8.5. Basic numerics and plotting with Python</a></li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="../AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="basic-numerics-and-plotting-with-python">
+<span id="example-plot-python-101-py"></span><h1>8.5. Basic numerics and plotting with Python<a class="headerlink" href="#basic-numerics-and-plotting-with-python" title="Permalink to this headline">¶</a></h1>
+<img alt="../_images/plot_python_101_1.png" class="align-center" src="../_images/plot_python_101_1.png" />
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_python_101.py"><tt class="xref download docutils literal"><span class="pre">plot_python_101.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># import numpy: the module providing numerical arrays</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+
+<span class="c"># import pylab: the module for scientific plotting</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">t</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>    0 seconds</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="../_sources/auto_examples/plot_python_101.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="plot_iris_projections.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="plot_sdss_filters.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

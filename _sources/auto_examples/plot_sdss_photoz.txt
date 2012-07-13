@@ -1,0 +1,32 @@
+
+
+.. _example_plot_sdss_photoz.py:
+
+
+SDSS Photometric Redshifts
+--------------------------
+
+This example shows how a Decision tree can be used to learn redshifts
+of galaxies in the Sloan Digital Sky Survey.
+
+
+
+.. image:: images/plot_sdss_photoz_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_sdss_photoz.py <plot_sdss_photoz.py>`
+
+.. literalinclude:: plot_sdss_photoz.py
+    :lines: 8-
+
+**Script output**::
+
+  0.221389888032
+  102798
+  1538
+
+
+
+**Total running time of the example:**    4 seconds
+    

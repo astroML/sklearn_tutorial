@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>1. Tutorial Setup and Installation &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="index.html" />
+    <link rel="next" title="2. Machine Learning 101: General Concepts" href="general_concepts.html" />
+    <link rel="prev" title="&lt;no title&gt;" href="index.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="index.html">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="general_concepts.html">Machine learning 101</a></li>
+            <li><a href="classification.html">Classification</a></li>
+            <li><a href="regression.html">Regression</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="auto_examples/index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	   <div class="rel rellarge">
+	     
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="index.html" title="&lt;no title&gt;"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    <no title>
+	    </span>
+	    <span class="hiddenrellink">
+	    <no title>
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="general_concepts.html" title="2. Machine Learning 101: General Concepts"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    2. Machine Learn...
+	    </span>
+	    <span class="hiddenrellink">
+	    2. Machine Learning 101: General Concepts
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">1. Tutorial Setup and Installation</a><ul>
+<li><a class="reference internal" href="#python-prerequisites">1.1. Python Prerequisites</a><ul>
+<li><a class="reference internal" href="#installing-scikit-learn-and-dependencies">1.1.1. Installing scikit-learn and Dependencies</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#tutorial-files">1.2. Tutorial Files</a></li>
+<li><a class="reference internal" href="#download-the-datasets">1.3. Download the datasets</a></li>
+</ul>
+</li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="tutorial-setup-and-installation">
+<span id="astro-tutorial-setup"></span><h1>1. Tutorial Setup and Installation<a class="headerlink" href="#tutorial-setup-and-installation" title="Permalink to this headline">¶</a></h1>
+<div class="topic">
+<p class="topic-title first">Objectives</p>
+<p>At the end of this section, you will</p>
+<ol class="arabic simple">
+<li>Have scikit-learn and all the prerequisites and dependencies for
+this tutorial installed on your machine.</li>
+<li>Download the source files and data required for this tutorial</li>
+</ol>
+</div>
+<div class="section" id="python-prerequisites">
+<h2>1.1. Python Prerequisites<a class="headerlink" href="#python-prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial is based on scikit-learn, which has the following dependencies:</p>
+<ul class="simple">
+<li><a class="reference external" href="http://numpy.scipy.org">numpy</a> : this is a python module which has powerful
+tools for the creation and manipulation of arrays.  It is the foundation of
+most scientific computing packages in python</li>
+<li><a class="reference external" href="http://www.scipy.org">scipy</a> : this is a python module which builds on
+numpy and provides fast implementations of many basic scientific algorithms.</li>
+<li><a class="reference external" href="http://matplotlib.sourceforge.net/">matplotlib</a> : this is a powerful
+package for generating plots, figures, and diagrams.  Our main form of
+visual interaction with data and results depends on matplotlib.</li>
+</ul>
+<p>We will also make extensive use of <a class="reference external" href="http://ipython.org">iPython</a>, an
+interactive python interpreter.  In particular, much of the interactive
+material will make use of the
+<a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">ipython notebook</a> functionality, which was introduced in ipython version 0.12.</p>
+<div class="section" id="installing-scikit-learn-and-dependencies">
+<h3>1.1.1. Installing scikit-learn and Dependencies<a class="headerlink" href="#installing-scikit-learn-and-dependencies" title="Permalink to this headline">¶</a></h3>
+<p>Please refer to the <a class="reference external" href="http://www.scikit-learn.org/stable/install.html#installing-an-official-release">install page</a> for
+per-system instructions on installing scikit-learn.  In addition to
+<tt class="docutils literal"><span class="pre">numpy</span></tt>, <tt class="docutils literal"><span class="pre">scipy</span></tt>, and <tt class="docutils literal"><span class="pre">scikit-learn</span></tt>, this tutorial will assume that
+you have <tt class="docutils literal"><span class="pre">matplotlib</span></tt> and <tt class="docutils literal"><span class="pre">ipython</span></tt> installed as well.</p>
+<blockquote>
+<div><ul>
+<li><p class="first">Under <strong>Debian or Ubuntu Linux</strong> you should use:</p>
+<div class="highlight-python"><pre>% sudo apt-get install build-essential python-dev python-numpy \
+  python-numpy-dev python-scipy libatlas-dev g++ python-matplotlib \
+  ipython</pre>
+</div>
+</li>
+<li><p class="first">Under <strong>MacOSX</strong> you should probably use a scientific python distribution
+such as <a class="reference external" href="http://fonnesbeck.github.com/ScipySuperpack/">Scipy Superpack</a></p>
+</li>
+<li><p class="first">Under <strong>Windows</strong> the <a class="reference external" href="http://www.pythonxy.com/">Python(x,y)</a> is probably your best bet to get a
+working numpy / scipy environment up and running.</p>
+</li>
+<li><p class="first">Power-users may wish to install bleeding edge versions of these
+packages from the source.  The source can be downloaded using
+<tt class="docutils literal"><span class="pre">git</span></tt> from their respective <a class="reference external" href="http://www.github.com">GitHub</a> repositories.</p>
+</li>
+</ul>
+</div></blockquote>
+<p>Alternatively under Windows and MaxOSX you can use the <a class="reference external" href="https://www.enthought.com/products/epd.php">EPD</a> (Enthought
+Python Distribution) which is a (non-open source) packaging of the
+scientific python stack.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">that to use <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">ipython notebook</a>, you must install <tt class="docutils literal"><span class="pre">ipython</span></tt> version
+0.12 and several other dependencies.  Refer to the ipython documentation
+for details.</p>
+</div>
+</div>
+</div>
+<div class="section" id="tutorial-files">
+<h2>1.2. Tutorial Files<a class="headerlink" href="#tutorial-files" title="Permalink to this headline">¶</a></h2>
+<p>The source code for the example files in the following pages is best
+accessed through cloning the scikit-learn repository using
+<a class="reference external" href="http://git-scm.com/">git</a>.  Once <tt class="docutils literal"><span class="pre">git</span></tt> is installed the
+command to accomplish this is:</p>
+<div class="highlight-python"><pre>% git clone https://github.com/jakevdp/scikit-learn/
+% cd scikit-learn
+% git checkout -b sklearn-tutorial origin/sklearn-tutorial</pre>
+</div>
+<p>The last line switches to the branch of the repository which contains
+the source of this tutorial.  In what follows, the path to the
+<tt class="docutils literal"><span class="pre">scikit-learn</span></tt> source folder will be named <tt class="docutils literal"><span class="pre">$SKL_HOME</span></tt>.
+Within this directory can be found the tutorial source:</p>
+<div class="highlight-python"><pre>% cd doc/tutorial/astronomy</pre>
+</div>
+<p>In what follows, this directory will be named <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME</span></tt>. It
+should contain the following folders:</p>
+<blockquote>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">data</span></tt> - folder to put the datasets used during the tutorial</li>
+<li><tt class="docutils literal"><span class="pre">skeletons</span></tt> - sample incomplete scripts for the exercices</li>
+<li><tt class="docutils literal"><span class="pre">solutions</span></tt> - solutions of the exercices</li>
+<li><tt class="docutils literal"><span class="pre">notebooks</span></tt> - ipython notebooks which provide an interactive interface
+to parts of this tutorial.</li>
+</ul>
+</div></blockquote>
+<p>You can aleardy copy the skeletons into a new folder named <tt class="docutils literal"><span class="pre">workspace</span></tt>
+where you will edit your own files for the exercices while keeping
+the original skeletons intact:</p>
+<div class="highlight-python"><pre>% cp -r skeletons workspace</pre>
+</div>
+</div>
+<div class="section" id="download-the-datasets">
+<h2>1.3. Download the datasets<a class="headerlink" href="#download-the-datasets" title="Permalink to this headline">¶</a></h2>
+<p>Machine Learning algorithms need data. Go to each <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME/data/</span></tt>
+sub-folder and run the <tt class="docutils literal"><span class="pre">fetch_data.py</span></tt> script from there (after
+having read them first).  This will download a dataset to the current
+directory.  This tutorial has three such datasets; they will be used
+in the examples and exercises later on.</p>
+<p>For example:</p>
+<div class="highlight-python"><pre>% cd $TUTORIAL_HOME/data/sdss_colors
+% less fetch_data.py
+% python fetch_data.py</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="_sources/setup.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel rellarge">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="index.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="general_concepts.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

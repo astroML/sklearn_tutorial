@@ -1,0 +1,50 @@
+
+
+.. _example_plot_sdss_specPCA.py:
+
+
+SDSS Spectra Plots
+------------------
+
+This plots some of the SDSS spectra examples for the astronomy tutorial
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_sdss_specPCA_1.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_sdss_specPCA_2.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_sdss_specPCA_3.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_sdss_specPCA_4.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_sdss_specPCA_5.png
+            :scale: 47
+
+
+**Python source code:** :download:`plot_sdss_specPCA.py <plot_sdss_specPCA.py>`
+
+.. literalinclude:: plot_sdss_specPCA.py
+    :lines: 7-
+
+
+
+**Total running time of the example:**    1 seconds
+    

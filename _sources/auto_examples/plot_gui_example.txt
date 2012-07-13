@@ -1,0 +1,36 @@
+
+
+.. _example_plot_gui_example.py:
+
+
+Linear Model Example
+--------------------
+
+This is an example plot from the tutorial which accompanies an explanation
+of the support vector machine GUI.
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_gui_example_1.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_gui_example_2.png
+            :scale: 47
+
+
+**Python source code:** :download:`plot_gui_example.py <plot_gui_example.py>`
+
+.. literalinclude:: plot_gui_example.py
+    :lines: 8-
+
+
+
+**Total running time of the example:**    0 seconds
+    

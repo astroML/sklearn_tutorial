@@ -1,0 +1,40 @@
+
+
+.. _example_plot_ML_flow_chart.py:
+
+
+Tutorial Diagrams
+-----------------
+
+This script plots the flow-charts used in the scikit-learn tutorials.
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_ML_flow_chart_1.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_ML_flow_chart_2.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_ML_flow_chart_3.png
+            :scale: 47
+
+
+**Python source code:** :download:`plot_ML_flow_chart.py <plot_ML_flow_chart.py>`
+
+.. literalinclude:: plot_ML_flow_chart.py
+    :lines: 7-
+
+
+
+**Total running time of the example:**    0 seconds
+    

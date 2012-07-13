@@ -1,0 +1,24 @@
+
+
+.. _example_plot_python_101.py:
+
+
+Basic numerics and plotting with Python
+========================================
+
+
+
+
+.. image:: images/plot_python_101_1.png
+    :align: center
+
+
+**Python source code:** :download:`plot_python_101.py <plot_python_101.py>`
+
+.. literalinclude:: plot_python_101.py
+    :lines: 6-
+
+
+
+**Total running time of the example:**    0 seconds
+    

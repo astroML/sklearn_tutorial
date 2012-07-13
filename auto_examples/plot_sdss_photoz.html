@@ -1,0 +1,304 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.8. SDSS Photometric Redshifts &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="../index.html" />
+    <link rel="up" title="8. Code examples" href="index.html" />
+    <link rel="next" title="8.9. SDSS Spectra Plots" href="plot_sdss_specPCA.html" />
+    <link rel="prev" title="8.7. SDSS Images" href="plot_sdss_images.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="../general_concepts.html">Machine learning 101</a></li>
+            <li><a href="../classification.html">Classification</a></li>
+            <li><a href="../regression.html">Regression</a></li>
+            <li><a href="../exercises.html">Exercises</a></li>
+            <li><a href="index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	  <div class="rel">
+	   
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="plot_sdss_images.html" title="8.7. SDSS Images"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    8.7. SDSS Images
+	    </span>
+	    <span class="hiddenrellink">
+	    8.7. SDSS Images
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="plot_sdss_specPCA.html" title="8.9. SDSS Spectra Plots"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    8.9. SDSS Spectr...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.9. SDSS Spectra Plots
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+	<div class="spacer">
+	&nbsp;
+	</div>
+	<div class="rellink">
+	<a href="index.html" title="8. Code examples" >
+	Up
+	<br>
+	<span class="smallrellink">
+	8. Code examples
+	</span>
+	<span class="hiddenrellink">
+	8. Code examples
+	</span>
+	
+	</a>
+	</div>
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">8.8. SDSS Photometric Redshifts</a></li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="../AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sdss-photometric-redshifts">
+<span id="example-plot-sdss-photoz-py"></span><h1>8.8. SDSS Photometric Redshifts<a class="headerlink" href="#sdss-photometric-redshifts" title="Permalink to this headline">¶</a></h1>
+<p>This example shows how a Decision tree can be used to learn redshifts
+of galaxies in the Sloan Digital Sky Survey.</p>
+<img alt="../_images/plot_sdss_photoz_1.png" class="align-center" src="../_images/plot_sdss_photoz_1.png" />
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_sdss_photoz.py"><tt class="xref download docutils literal"><span class="pre">plot_sdss_photoz.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">get_data_home</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+
+<span class="n">DATA_URL</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;http://www.astro.washington.edu/users/&#39;</span>
+            <span class="s">&#39;vanderplas/pydata/sdss_photoz.npy&#39;</span><span class="p">)</span>
+<span class="n">LOCAL_FILE</span> <span class="o">=</span> <span class="s">&#39;sdss_photoz.npy&#39;</span>
+
+<span class="k">def</span> <span class="nf">fetch_photoz_data</span><span class="p">(</span><span class="n">data_home</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="n">data_home</span> <span class="o">=</span> <span class="n">get_data_home</span><span class="p">(</span><span class="n">data_home</span><span class="p">)</span>
+
+    <span class="n">local_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_home</span><span class="p">,</span> <span class="n">LOCAL_FILE</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">local_file</span><span class="p">):</span>
+        <span class="c"># data directory is password protected so the public can&#39;t access it    </span>
+        <span class="n">password_mgr</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPPasswordMgrWithDefaultRealm</span><span class="p">()</span>
+        <span class="n">password_mgr</span><span class="o">.</span><span class="n">add_password</span><span class="p">(</span><span class="bp">None</span><span class="p">,</span> <span class="n">DATA_URL</span><span class="p">,</span> <span class="s">&#39;pydata&#39;</span><span class="p">,</span> <span class="s">&#39;astroML&#39;</span><span class="p">)</span>
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">HTTPBasicAuthHandler</span><span class="p">(</span><span class="n">password_mgr</span><span class="p">)</span>
+        <span class="n">opener</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+        <span class="n">fhandle</span> <span class="o">=</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">DATA_URL</span><span class="p">)</span>
+        <span class="nb">open</span><span class="p">(</span><span class="n">local_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fhandle</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+    
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">local_file</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">fetch_photoz_data</span><span class="p">()</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c"># put colors in a matrix</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;u&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;g&#39;</span><span class="p">]</span>
+<span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;g&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;r&#39;</span><span class="p">]</span>
+<span class="n">X</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;r&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">]</span>
+<span class="n">X</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">]</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;redshift&#39;</span><span class="p">]</span>
+
+<span class="c"># divide into training and testing data</span>
+<span class="n">Ntrain</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">4</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">Ntrain</span><span class="p">]</span>
+<span class="n">ztrain</span> <span class="o">=</span> <span class="n">z</span><span class="p">[:</span><span class="n">Ntrain</span><span class="p">]</span>
+
+<span class="n">Xtest</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">Ntrain</span><span class="p">:]</span>
+<span class="n">ztest</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">Ntrain</span><span class="p">:]</span>
+
+
+<span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">max_depth</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span> <span class="n">ztrain</span><span class="p">)</span>
+<span class="n">zpred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xtest</span><span class="p">)</span>
+
+<span class="n">axis_lim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">])</span>
+
+<span class="n">rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">ztest</span> <span class="o">-</span> <span class="n">zpred</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="k">print</span> <span class="n">rms</span>
+<span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">ztest</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ztest</span> <span class="o">-</span> <span class="n">zpred</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">axes</span><span class="p">()</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ztest</span><span class="p">,</span> <span class="n">zpred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis_lim</span><span class="p">,</span> <span class="n">axis_lim</span><span class="p">,</span> <span class="s">&#39;--k&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis_lim</span><span class="p">,</span> <span class="n">axis_lim</span> <span class="o">+</span> <span class="n">rms</span><span class="p">,</span> <span class="s">&#39;:k&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axis_lim</span><span class="p">,</span> <span class="n">axis_lim</span> <span class="o">-</span> <span class="n">rms</span><span class="p">,</span> <span class="s">&#39;:k&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="n">axis_lim</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="n">axis_lim</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="s">&quot;RMS error = </span><span class="si">%.2g</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">rms</span><span class="p">,</span>
+        <span class="n">ha</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span>
+        <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">ec</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">fc</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Photo-z: Decision Tree Regression&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">r&#39;$\mathrm{z_{true}}$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">r&#39;$\mathrm{z_{phot}}$&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Script output</strong>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="mf">0.221389888032</span>
+<span class="mi">102798</span>
+<span class="mi">1538</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>    4 seconds</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="../_sources/auto_examples/plot_sdss_photoz.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="plot_sdss_images.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="plot_sdss_specPCA.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>3. Machine Learning 102: Practical Advice &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="index.html" />
+    <link rel="next" title="4. Classification: Learning Labels of Astronomical Sources" href="classification.html" />
+    <link rel="prev" title="2. Machine Learning 101: General Concepts" href="general_concepts.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="index.html">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="general_concepts.html">Machine learning 101</a></li>
+            <li><a href="classification.html">Classification</a></li>
+            <li><a href="regression.html">Regression</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="auto_examples/index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	   <div class="rel rellarge">
+	     
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="general_concepts.html" title="2. Machine Learning 101: General Concepts"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    2. Machine Learn...
+	    </span>
+	    <span class="hiddenrellink">
+	    2. Machine Learning 101: General Concepts
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="classification.html" title="4. Classification: Learning Labels of Astronomical Sources"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    4. Classificatio...
+	    </span>
+	    <span class="hiddenrellink">
+	    4. Classification: Learning Labels of Astronomical Sources
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">3. Machine Learning 102: Practical Advice</a><ul>
+<li><a class="reference internal" href="#bias-variance-over-fitting-and-under-fitting">3.1. Bias, Variance, Over-fitting, and Under-fitting</a></li>
+<li><a class="reference internal" href="#cross-validation-and-testing">3.2. Cross-Validation and Testing</a></li>
+<li><a class="reference internal" href="#learning-curves">3.3. Learning Curves</a></li>
+<li><a class="reference internal" href="#summary">3.4. Summary</a><ul>
+<li><a class="reference internal" href="#high-bias">3.4.1. High Bias</a></li>
+<li><a class="reference internal" href="#high-variance">3.4.2. High Variance</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="machine-learning-102-practical-advice">
+<span id="astro-biasvariance"></span><h1>3. Machine Learning 102: Practical Advice<a class="headerlink" href="#machine-learning-102-practical-advice" title="Permalink to this headline">¶</a></h1>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/06_learning_curves.ipynb"><tt class="xref download docutils literal"><span class="pre">06_learning_curves.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.</p>
+</div>
+<p>In practice, much of the task of machine learning involves selecting algorithms,
+parameters, and sets of data to optimize the results of the method.  All of
+these things can affect the quality of the results, but it&#8217;s not always
+clear which is best.  For example, if your results have an error that&#8217;s larger
+than you hoped, you might imagine that increasing the training set size will
+always lead to better results.  But this is not the case!  Below, we&#8217;ll
+explore the reasons for this.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">much of the material in this section was adapted from Andrew Ng&#8217;s
+excellent set of machine learning video lectures.
+See <a class="reference external" href="http://www.ml-class.org">http://www.ml-class.org</a>.</p>
+</div>
+<p>In this section we&#8217;ll work with an extremely simple learning model:
+polynomial regression.  This simply fits a polynomial of degree <cite>d</cite> to
+the data: if <cite>d</cite> = 1, then it is simple linear regression.
+Polynomial regression can be done with the functions <tt class="docutils literal"><span class="pre">polyfit</span></tt>
+and <tt class="docutils literal"><span class="pre">polyval</span></tt>, available in <tt class="docutils literal"><span class="pre">numpy</span></tt>.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c"># fit a 1st-degree polynomial (i.e. a line) to the data</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">p</span>
+<span class="go">[ 0.97896174  0.20367395]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">x_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_new</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x_new</span><span class="p">)</span>  <span class="c"># evaluate the polynomial at x_new</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x_new</span><span class="p">)</span> <span class="o">-</span> <span class="n">y_new</span><span class="p">)</span>
+<span class="go">[ 0.22826933  0.20119119  0.20166572]</span>
+</pre></div>
+</div>
+<p>Using a 1st-degree polynomial fit (that is, fitting a straight line
+to <tt class="docutils literal"><span class="pre">x</span></tt> and <tt class="docutils literal"><span class="pre">y</span></tt>), we predicted the value of <tt class="docutils literal"><span class="pre">y</span></tt> for a new input.
+This prediction has an absolute error of about 0.2 for the few test points
+which we tried.  We can visualize the fit with the following function:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">def</span> <span class="nf">plot_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+<span class="gp">... </span>    <span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">yfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">xfit</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">pl</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">pl</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+<span class="gp">... </span>    <span class="n">pl</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Calling <tt class="docutils literal"><span class="pre">plot_fit</span></tt> with the <tt class="docutils literal"><span class="pre">x</span></tt>, <tt class="docutils literal"><span class="pre">y</span></tt>, and <tt class="docutils literal"><span class="pre">p</span></tt> values from above
+produces the following figure:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_bias_variance_examples.html"><img alt="_images/plot_bias_variance_examples_1.png" src="_images/plot_bias_variance_examples_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+<p class="caption">Best-fit linear regression to sinusoidal data.</p>
+</div>
+<p>When the error of predicted results is larger than desired, there are a few
+courses of action that can be taken:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Increase the number of training points <cite>N</cite>.  This might give us a training
+set with more coverage, and lead to greater accuracy.</li>
+<li>Increase the degree <cite>d</cite> of the polynomial.  This might allow us to more
+closely fit the training data, and lead to a better result</li>
+<li>Add more features.  If we were to, for example, perform
+a linear regression using <img class="math" src="_images/math/26eeb5258ca5099acf8fe96b2a1049c48c89a5e6.png" alt="x"/>, <img class="math" src="_images/math/4805dddb4e6911989af8be91da334b5ba2054757.png" alt="\sqrt{x}"/>, <img class="math" src="_images/math/158ff9beaae8886323fb0e77e0fc77484b2a0dd2.png" alt="x^{-1}"/>,
+or other functions, we might hit on a functional form which can better
+be mapped to the value of <cite>y</cite>.</li>
+</ol>
+</div></blockquote>
+<p>The best course to take will vary from situation to situation, and from problem
+to problem.  In this situation, number 2 and 3 may be useful, but number 1
+will certainly not help: our model does not intrinsically fit the data very
+well.  In machine learning terms, we say that it has high <cite>bias</cite> and that
+the data is <cite>under-fit</cite>.  The ability to quickly figure out how to tune
+and improve your model is what separates good machine learning practitioners
+from the bad ones.  In this section we&#8217;ll discuss some tools that can help
+determine which course is most likely to lead to good results.</p>
+<div class="section" id="bias-variance-over-fitting-and-under-fitting">
+<h2>3.1. Bias, Variance, Over-fitting, and Under-fitting<a class="headerlink" href="#bias-variance-over-fitting-and-under-fitting" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ll work with a simple example.  Imagine that you would like to build an
+algorithm which will predict the price of a house given its size.  Naively,
+we&#8217;d expect that the cost of a house grows as the size increases, but there
+are many other factors which can contribute.  Imagine we approach this
+problem with the polynomial regression discussed above.  We can tune the
+degree <cite>d</cite> to try to get the best fit.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_bias_variance_examples.html"><img alt="_images/plot_bias_variance_examples_2.png" src="_images/plot_bias_variance_examples_2.png" style="width: 720.0px; height: 280.0px;" /></a>
+<p class="caption">Polynomials of various degrees.  <cite>d</cite> = 1 under-fits the data, while
+<cite>d</cite> = 6 over-fits the data.</p>
+</div>
+<p>In the above figure, we see fits for three different values of <cite>d</cite>.  For
+<cite>d</cite> = 1, the data is <cite>under-fit</cite>.  This means that the model is too
+simplistic: no straight line will ever be a good fit to this data.  In this
+case, we say that the model suffers from high <cite>bias</cite>.  The model itself is
+biased, and this will be reflected in the fact that the data is poorly fit.
+At the other extreme, for <cite>d</cite> = 6 the data is <cite>over-fit</cite>.  This means that
+the model has too many free parameters (6 in this case) which can be adjusted
+to perfectly fit the training data.  If we add a new point to this plot,
+though, chances are it will be very far from the curve representing the
+degree-6 fit.  In this case, we say that the model suffers from high
+<cite>variance</cite>.  The reason for this label is that if any of the input points
+are varied slightly, it could result in an extremely different model.</p>
+<p>In the middle, for <cite>d</cite> = 2, we have found a good mid-point.  It fits the
+data fairly well, and does not suffer from the bias and variance problems
+seen in the figures on either side.
+What we would like is a way to quantitatively identify bias and variance,
+and optimize the <cite>metaparameters</cite> (in this case, the polynomial degree <cite>d</cite>)
+in order to determine the best algorithm. This can be done through a
+process called cross-validation.</p>
+</div>
+<div class="section" id="cross-validation-and-testing">
+<h2>3.2. Cross-Validation and Testing<a class="headerlink" href="#cross-validation-and-testing" title="Permalink to this headline">¶</a></h2>
+<p>In order to quantify the effects of bias and variance and construct the best
+possible estimator, we will split our
+training data into three parts: a <cite>training set</cite>, a <cite>cross-validation set</cite>,
+and a <cite>test set</cite>.  As a general rule, the training set should be about
+60% of the samples, and the cross-validation and test sets should be about
+20% each.</p>
+<p>The general idea is as follows.  The model parameters (in our case, the
+coefficients of the polynomials) are learned using the training set as above.
+The error is evaluated on the cross-validation set, and the meta-parameters
+(in our case, the degree of the polynomial) are adjusted so that this
+cross-validation error is minimized.  Finally, the labels are predicted for
+the test set.  These labels are used to evaluate how well the algorithm
+can be expected to perform on unlabeled data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Why do we need both a cross-validation set and a test set?  Many machine
+learning practitioners use the same set of data as both a cross-validation
+set and a test set.  This is not the best approach, for the same reasons we
+outlined above.  Just as the parameters can be over-fit to the training data,
+the meta-parameters can be over-fit to the cross-validation data.  For this
+reason, the minimal cross-validation error tends to under-estimate the error
+expected on a new set of data.</p>
+</div>
+<p>The cross-validation error of our polynomial classifier can be visualized by
+plotting the error as a function of the polynomial degree <cite>d</cite>.
+This plot is shown in the following figure:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_bias_variance_examples.html"><img alt="_images/plot_bias_variance_examples_3.png" src="_images/plot_bias_variance_examples_3.png" style="width: 640.0px; height: 480.0px;" /></a>
+<p class="caption">The training error and cross-validation error as a function of the
+polynomial degree <cite>d</cite>.</p>
+</div>
+<p>This figure compactly shows the reason that cross-validation is important.
+On the left side of the plot, we have very low-degree polynomial, which
+under-fits the data.  This leads to a very high error for both the training
+set and the cross-validation set.  On the far right side of the plot, we
+have a very high degree polynomial, which over-fits the data.  This can be
+seen in the fact that the training error is very low, while the
+cross-validation error is very high.  Plotted for comparison is the intrinsic
+error (this is the scatter artificially added to the data: click on the above
+image to see the source code).  For this toy dataset, error = 1.0 is the
+best we can hope to attain.  Choosing <cite>d</cite> = 6 in this case gets us very close
+to the optimal error.</p>
+<p>The astute reader will realize that something is amiss here: in the above plot,
+<cite>d</cite> = 6 gives the best results.  But in the previous plot, we found that
+<cite>d</cite> = 6 vastly over-fits the data.  What&#8217;s going on here?  The difference is
+the number of training points used.  In the previous example, there were only
+eight training points.  In this example, we have 100.  As a general rule of
+thumb, the more training points used, the more complicated model can be used.
+But how can you determine for a given model whether more training points will
+be helpful?  A useful diagnostic for this are <cite>learning curves</cite>.</p>
+</div>
+<div class="section" id="learning-curves">
+<h2>3.3. Learning Curves<a class="headerlink" href="#learning-curves" title="Permalink to this headline">¶</a></h2>
+<p>A learning curve is a plot of the training and cross-validation error as a
+function of the number of training points.  Note that when we train on a
+small subset of the training data, the training error is computed using this
+subset, not the full training set.  These plots can give a quantitative view
+into how beneficial it will be to add training samples.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_bias_variance_examples.html"><img alt="_images/plot_bias_variance_examples_4.png" src="_images/plot_bias_variance_examples_4.png" style="width: 800.0px; height: 400.0px;" /></a>
+<p class="caption">Learning Curves for a case of high bias (left, <cite>d</cite> = 2) and high variance
+(right, <cite>d</cite> = 20)</p>
+</div>
+<p>On the left plot, we have the learning curve for <cite>d</cite> = 1.  From the above
+discussion, we know that <cite>d</cite> = 1 is a high-bias estimator which under-fits
+the data.  This is indicated by the fact that both the training and
+cross-validation errors are very high.  If this is the case, adding more
+training data will not help matters: both lines have converged to a relatively
+high error.</p>
+<p>In the right plot, we have the learning curve for <cite>d</cite> = 20.  From the above
+discussion, we know that <cite>d</cite> = 20 is a high-variance estimator which over-fits
+the data.  This is indicated by the fact that the training error is much less
+than the cross-validation error.  As we add more samples to this training set,
+the training error will continue to climb, while the cross-validation error
+will continue to decrease, until they meet in the middle.  In this case,
+our intrinsic error is 1.0 (again, this is artificially set in the code: click
+on the image to browse the source code), and we can see that adding more
+data will allow the estimator to very closely match the best possible
+cross-validation error.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">With a degree-20 polynomial, we&#8217;d expect the training error to be
+identically zero for training set size <img class="math" src="_images/math/a7615090294c289b3fac42d45dc79874db0de97b.png" alt="N&lt;=20"/>.  Why is this?
+It is because when the degrees of freedom are greater than the number of
+constraints, the problem should be perfectly solvable: a curve can be
+found which passes through every point (for example, imagine fitting a line
+to a single point.  You&#8217;d be very surprised if you got anything but a
+perfect fit!)  In the right-hand plot we see that this
+(correct) intuition fails in practice.  The reason is due to floating-point
+precision: to perfectly fit these data points with a polynomial requires a
+fit that oscillates to extreme values in the space
+between the points (compare to the degree-6 polynomial above).  The nature
+of our dataset means that this oscillation is outside machine precision,
+so that the resulting fit has a small residual.</p>
+</div>
+</div>
+<div class="section" id="summary">
+<h2>3.4. Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>We&#8217;ve seen above that an under-performing algorithm can be due to two possible
+situations: high bias (under-fitting) and high variance (over-fitting).  In
+order to evaluate our algorithm, we set aside a portion of our training data
+for cross-validation.  Using the technique of learning curves, we can train
+on progressively larger subsets of the data, evaluating the training error and
+cross-validation error to determine whether our algorithm has high variance
+or high bias.  But what do we do with this information?</p>
+<div class="section" id="high-bias">
+<h3>3.4.1. High Bias<a class="headerlink" href="#high-bias" title="Permalink to this headline">¶</a></h3>
+<p>If our algorithm shows high bias, the following actions might help:</p>
+<ol class="arabic simple">
+<li><strong>Add more features.</strong>  In our example of predicting home prices, it may be
+helpful to make use of information such as the neighborhood the house is
+in, the year the house was built, the size of the lot, etc.  Adding these
+features to the training and test sets can improve a high-bias estimator</li>
+<li><strong>Use a more sophisticated model.</strong>  Adding complexity to the model can help
+improve on bias.  For a polynomial fit, this can be accomplished by
+increasing the degree <cite>d</cite>.  Each learning technique has its own methods
+of adding complexity.</li>
+<li><strong>Use fewer samples.</strong>  Though this will not improve the classification, a
+high-bias algorithm can attain nearly the same error with a smaller training
+sample.  For algorithms which are computationally expensive, reducing the
+training sample size can lead to very large improvements in speed.</li>
+<li><strong>Decrease regularization.</strong>  Regularization is a technique  used to impose
+simplicity in some machine learning models, by adding a penalty term that
+depends on the characteristics of the parameters.  If a model has high
+bias, decreasing the effect of regularization can lead to better results.</li>
+</ol>
+</div>
+<div class="section" id="high-variance">
+<h3>3.4.2. High Variance<a class="headerlink" href="#high-variance" title="Permalink to this headline">¶</a></h3>
+<p>If our algorithm shows high variance, the following actions might help:</p>
+<ol class="arabic simple">
+<li><strong>Use fewer features.</strong>  Using a feature selection technique may be useful,
+and decrease the over-fitting of the estimator.</li>
+<li><strong>Use more training samples.</strong>  Adding training samples can reduce the
+effect of over-fitting, and lead to improvements in a high variance
+estimator.</li>
+<li><strong>Increase Regularization.</strong>  Regularization is designed to prevent
+over-fitting.  In a high-variance model, increasing regularization can
+lead to better results.</li>
+</ol>
+<p>These choices become very important in real-world situations.  For example,
+due to limited telescope time, astronomers must seek a balance
+between observing a large number of objects,
+and observing a large number of features for each object.  Determining which
+is more important for a particular learning task can inform the observing
+strategy that the astronomer employs.  In a later exercise, we will explore
+the use of learning curves for the photometric redshift problem.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="_sources/practical.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel rellarge">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="general_concepts.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="classification.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

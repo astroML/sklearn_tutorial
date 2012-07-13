@@ -1,0 +1,36 @@
+
+
+.. _example_plot_sdss_filters.py:
+
+
+SDSS Filters
+------------
+
+This example downloads and plots the filters from the Sloan Digital Sky
+Survey, along with a reference spectrum.
+
+
+
+.. rst-class:: horizontal
+
+
+    *
+
+      .. image:: images/plot_sdss_filters_1.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_sdss_filters_2.png
+            :scale: 47
+
+
+**Python source code:** :download:`plot_sdss_filters.py <plot_sdss_filters.py>`
+
+.. literalinclude:: plot_sdss_filters.py
+    :lines: 8-
+
+
+
+**Total running time of the example:**    0 seconds
+    

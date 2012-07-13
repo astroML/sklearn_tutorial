@@ -1,0 +1,145 @@
+
+.. raw:: html
+    
+    
+    <style type="text/css">
+    
+    div#sidebarbutton {
+        display: none;
+    }
+
+    .figure {
+        float: left;
+        margin: 10px;
+        width: auto;
+        height: 200px;
+        width: 180px;
+    }
+
+    .figure img {
+        display: inline;
+        }
+
+    .figure .caption {
+        width: 170px;
+        text-align: center !important;
+    }
+    </style>
+
+Code examples
+=================
+
+.. _examples-index:
+
+
+
+General-purpose and introductory examples for Machine Learning for
+Astronomy with scikit-learn
+
+
+
+.. figure:: ./images/thumb/plot_ML_flow_chart.png
+   :target: ./plot_ML_flow_chart.html
+
+   :ref:`example_plot_ML_flow_chart.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_ML_flow_chart
+
+.. figure:: ./images/thumb/plot_bias_variance_examples.png
+   :target: ./plot_bias_variance_examples.html
+
+   :ref:`example_plot_bias_variance_examples.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_bias_variance_examples
+
+.. figure:: ./images/thumb/plot_gui_example.png
+   :target: ./plot_gui_example.html
+
+   :ref:`example_plot_gui_example.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_gui_example
+
+.. figure:: ./images/thumb/plot_iris_projections.png
+   :target: ./plot_iris_projections.html
+
+   :ref:`example_plot_iris_projections.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_iris_projections
+
+.. figure:: ./images/thumb/plot_python_101.png
+   :target: ./plot_python_101.html
+
+   :ref:`example_plot_python_101.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_python_101
+
+.. figure:: ./images/thumb/plot_sdss_filters.png
+   :target: ./plot_sdss_filters.html
+
+   :ref:`example_plot_sdss_filters.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_sdss_filters
+
+.. figure:: ./images/thumb/plot_sdss_images.png
+   :target: ./plot_sdss_images.html
+
+   :ref:`example_plot_sdss_images.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_sdss_images
+
+.. figure:: ./images/thumb/plot_sdss_photoz.png
+   :target: ./plot_sdss_photoz.html
+
+   :ref:`example_plot_sdss_photoz.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_sdss_photoz
+
+.. figure:: ./images/thumb/plot_sdss_specPCA.png
+   :target: ./plot_sdss_specPCA.html
+
+   :ref:`example_plot_sdss_specPCA.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_sdss_specPCA
+
+.. figure:: ./images/thumb/plot_sgd_separating_hyperplane.png
+   :target: ./plot_sgd_separating_hyperplane.html
+
+   :ref:`example_plot_sgd_separating_hyperplane.py`
+
+.. toctree::
+   :hidden:
+
+   ./plot_sgd_separating_hyperplane
+
+
+.. raw:: html
+
+    <div style="clear: both"></div>
+    

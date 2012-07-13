@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.7. SDSS Images &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="../index.html" />
+    <link rel="up" title="8. Code examples" href="index.html" />
+    <link rel="next" title="8.8. SDSS Photometric Redshifts" href="plot_sdss_photoz.html" />
+    <link rel="prev" title="8.6. SDSS Filters" href="plot_sdss_filters.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="../general_concepts.html">Machine learning 101</a></li>
+            <li><a href="../classification.html">Classification</a></li>
+            <li><a href="../regression.html">Regression</a></li>
+            <li><a href="../exercises.html">Exercises</a></li>
+            <li><a href="index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	  <div class="rel">
+	   
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="plot_sdss_filters.html" title="8.6. SDSS Filters"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    8.6. SDSS Filter...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.6. SDSS Filters
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="plot_sdss_photoz.html" title="8.8. SDSS Photometric Redshifts"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    8.8. SDSS Photom...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.8. SDSS Photometric Redshifts
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+	<div class="spacer">
+	&nbsp;
+	</div>
+	<div class="rellink">
+	<a href="index.html" title="8. Code examples" >
+	Up
+	<br>
+	<span class="smallrellink">
+	8. Code examples
+	</span>
+	<span class="hiddenrellink">
+	8. Code examples
+	</span>
+	
+	</a>
+	</div>
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">8.7. SDSS Images</a></li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="../AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sdss-images">
+<span id="example-plot-sdss-images-py"></span><h1>8.7. SDSS Images<a class="headerlink" href="#sdss-images" title="Permalink to this headline">¶</a></h1>
+<p>This script plots an example quasar, star, and galaxy image for use in
+the tutorial.</p>
+<img alt="../_images/plot_sdss_images_1.png" class="align-center" src="../_images/plot_sdss_images_1.png" />
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_sdss_images.py"><tt class="xref download docutils literal"><span class="pre">plot_sdss_images.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">urllib2</span>
+
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">image</span>
+
+<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">get_data_home</span>
+
+
+<span class="k">def</span> <span class="nf">_fetch</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">RA</span><span class="p">,</span> <span class="n">DEC</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fetch the image at the given RA, DEC from the SDSS server&quot;&quot;&quot;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;http://casjobs.sdss.org/ImgCutoutDR7/&quot;</span>
+           <span class="s">&quot;getjpeg.aspx?ra=</span><span class="si">%.8f</span><span class="s">&amp;dec=</span><span class="si">%.8f</span><span class="s">&amp;scale=</span><span class="si">%.2f</span><span class="s">&amp;width=</span><span class="si">%i</span><span class="s">&amp;height=</span><span class="si">%i</span><span class="s">&quot;</span>
+           <span class="o">%</span> <span class="p">(</span><span class="n">RA</span><span class="p">,</span> <span class="n">DEC</span><span class="p">,</span> <span class="n">scale</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">height</span><span class="p">))</span>
+    <span class="k">print</span> <span class="s">&quot;downloading </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">url</span>
+    <span class="k">print</span> <span class="s">&quot; -&gt; </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">outfile</span>
+    <span class="n">fhandle</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="nb">open</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fhandle</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+
+
+<span class="k">def</span> <span class="nf">fetch_image</span><span class="p">(</span><span class="n">object_type</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return the data array for the image of object type&quot;&quot;&quot;</span>
+    <span class="n">data_home</span> <span class="o">=</span> <span class="n">get_data_home</span><span class="p">(</span><span class="n">data_home</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_home</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_home</span><span class="p">)</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_home</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">_image.jpg&#39;</span> <span class="o">%</span> <span class="n">object_type</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+        <span class="n">RA</span> <span class="o">=</span> <span class="n">image_locations</span><span class="p">[</span><span class="n">object_type</span><span class="p">][</span><span class="s">&#39;RA&#39;</span><span class="p">]</span>
+        <span class="n">DEC</span> <span class="o">=</span> <span class="n">image_locations</span><span class="p">[</span><span class="n">object_type</span><span class="p">][</span><span class="s">&#39;DEC&#39;</span><span class="p">]</span>
+        <span class="n">_fetch</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">RA</span><span class="p">,</span> <span class="n">DEC</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">image</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+
+<span class="n">image_locations</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">star</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">RA</span><span class="o">=</span><span class="mf">180.63040108</span><span class="p">,</span>
+                                 <span class="n">DEC</span><span class="o">=</span><span class="mf">64.96767375</span><span class="p">),</span>
+                       <span class="n">galaxy</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">RA</span><span class="o">=</span><span class="mf">197.51943983</span><span class="p">,</span>
+                                   <span class="n">DEC</span><span class="o">=</span><span class="mf">0.94881436</span><span class="p">),</span>
+                       <span class="n">quasar</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">RA</span><span class="o">=</span><span class="mf">226.18451462</span><span class="p">,</span>
+                                   <span class="n">DEC</span><span class="o">=</span><span class="mf">4.07456639</span><span class="p">))</span>
+
+
+<span class="c"># Plot the images</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+
+<span class="c"># Check that PIL is installed for jpg support</span>
+<span class="k">if</span> <span class="s">&#39;jpg&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">fig</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">get_supported_filetypes</span><span class="p">():</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;PIL required to load SDSS jpeg images&quot;</span><span class="p">)</span>
+
+<span class="n">object_types</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;star&#39;</span><span class="p">,</span> <span class="s">&#39;galaxy&#39;</span><span class="p">,</span> <span class="s">&#39;quasar&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">object_type</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">object_types</span><span class="p">):</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">I</span> <span class="o">=</span> <span class="n">fetch_image</span><span class="p">(</span><span class="n">object_type</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">object_type</span> <span class="o">!=</span> <span class="s">&#39;galaxy&#39;</span><span class="p">:</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.65</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span> <span class="n">head_width</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
+                 <span class="n">length_includes_head</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+                 <span class="n">color</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">0.99</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">object_type</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s">&#39;large&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">&#39;w&#39;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span>
+            <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.94</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.04</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>    0 seconds</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="../_sources/auto_examples/plot_sdss_images.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="plot_sdss_filters.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="plot_sdss_photoz.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

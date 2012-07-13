@@ -1,0 +1,397 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>8.2. Bias and Variance &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="../index.html" />
+    <link rel="up" title="8. Code examples" href="index.html" />
+    <link rel="next" title="8.3. Linear Model Example" href="plot_gui_example.html" />
+    <link rel="prev" title="8.1. Tutorial Diagrams" href="plot_ML_flow_chart.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="../index.html">
+            <img src="../_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="../general_concepts.html">Machine learning 101</a></li>
+            <li><a href="../classification.html">Classification</a></li>
+            <li><a href="../regression.html">Regression</a></li>
+            <li><a href="../exercises.html">Exercises</a></li>
+            <li><a href="index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	  <div class="rel">
+	   
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="plot_ML_flow_chart.html" title="8.1. Tutorial Diagrams"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    8.1. Tutorial Di...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.1. Tutorial Diagrams
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="plot_gui_example.html" title="8.3. Linear Model Example"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    8.3. Linear Mode...
+	    </span>
+	    <span class="hiddenrellink">
+	    8.3. Linear Model Example
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+	<div class="spacer">
+	&nbsp;
+	</div>
+	<div class="rellink">
+	<a href="index.html" title="8. Code examples" >
+	Up
+	<br>
+	<span class="smallrellink">
+	8. Code examples
+	</span>
+	<span class="hiddenrellink">
+	8. Code examples
+	</span>
+	
+	</a>
+	</div>
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">8.2. Bias and Variance</a></li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="../AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="bias-and-variance">
+<span id="example-plot-bias-variance-examples-py"></span><h1>8.2. Bias and Variance<a class="headerlink" href="#bias-and-variance" title="Permalink to this headline">¶</a></h1>
+<p>This script plots some simple examples of how model complexity affects
+bias and variance.</p>
+<ul class="horizontal">
+<li><a class="first reference internal image-reference" href="../_images/plot_bias_variance_examples_1.png"><img alt="../_images/plot_bias_variance_examples_1.png" src="../_images/plot_bias_variance_examples_1.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_bias_variance_examples_2.png"><img alt="../_images/plot_bias_variance_examples_2.png" src="../_images/plot_bias_variance_examples_2.png" style="width: 423.0px; height: 164.5px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_bias_variance_examples_3.png"><img alt="../_images/plot_bias_variance_examples_3.png" src="../_images/plot_bias_variance_examples_3.png" style="width: 376.0px; height: 282.0px;" /></a>
+</li>
+<li><a class="first reference internal image-reference" href="../_images/plot_bias_variance_examples_4.png"><img alt="../_images/plot_bias_variance_examples_4.png" src="../_images/plot_bias_variance_examples_4.png" style="width: 470.0px; height: 235.0px;" /></a>
+</li>
+</ul>
+<p><strong>Python source code:</strong> <a class="reference download internal" href="../_downloads/plot_bias_variance_examples.py"><tt class="xref download docutils literal"><span class="pre">plot_bias_variance_examples.py</span></tt></a></p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">ticker</span>
+<span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">FancyArrow</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">),</span> <span class="n">err</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">compute_error</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span><span class="p">):</span>
+    <span class="n">yfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">y</span> <span class="o">-</span> <span class="n">yfit</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+
+
+<span class="c">#------------------------------------------------------------</span>
+<span class="c"># Plot linear regression example</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c"># fit a 1st-degree polynomial to the data</span>
+
+<span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">yfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">xfit</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Linear Regression Example&#39;</span><span class="p">)</span>
+
+<span class="c">#------------------------------------------------------------</span>
+<span class="c"># Plot example of over-fitting and under-fitting</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">xfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="n">titles</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;d = 1 (under-fit)&#39;</span><span class="p">,</span> <span class="s">&#39;d = 2&#39;</span><span class="p">,</span> <span class="s">&#39;d = 6 (over-fit)&#39;</span><span class="p">]</span>
+<span class="n">degrees</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees</span><span class="p">):</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span> <span class="o">+</span> <span class="n">i</span><span class="p">,</span> <span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[])</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s">&#39;x&#39;</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s">&#39;k&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+    <span class="n">yfit</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">xfit</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xfit</span><span class="p">,</span> <span class="n">yfit</span><span class="p">,</span> <span class="s">&#39;-b&#39;</span><span class="p">)</span>
+    
+    <span class="n">pl</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;house size&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;price&#39;</span><span class="p">)</span>
+
+    <span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">titles</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span> <span class="o">=</span> <span class="mf">0.06</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.98</span><span class="p">,</span>
+                   <span class="n">bottom</span><span class="o">=</span><span class="mf">0.15</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">0.85</span><span class="p">,</span>
+                   <span class="n">wspace</span><span class="o">=</span><span class="mf">0.05</span><span class="p">)</span>
+
+<span class="c">#------------------------------------------------------------</span>
+<span class="c"># Plot training error and cross-val error</span>
+<span class="c">#   as a function of polynomial degree</span>
+
+<span class="n">Ntrain</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Ncrossval</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">error</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">Ntrain</span> <span class="o">+</span> <span class="n">Ncrossval</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+<span class="n">xtrain</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">Ntrain</span><span class="p">]</span>
+<span class="n">ytrain</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">Ntrain</span><span class="p">]</span>
+
+<span class="n">xcrossval</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">Ntrain</span><span class="p">:]</span>
+<span class="n">ycrossval</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">Ntrain</span><span class="p">:]</span>
+
+<span class="n">degrees</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span>
+<span class="n">train_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">degrees</span><span class="p">))</span>
+<span class="n">crossval_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">degrees</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">degrees</span><span class="p">):</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+
+    <span class="n">train_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">xtrain</span><span class="p">,</span> <span class="n">ytrain</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+    <span class="n">crossval_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">xcrossval</span><span class="p">,</span> <span class="n">ycrossval</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Error for 100 Training Points&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">crossval_err</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;cross-validation error&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">degrees</span><span class="p">,</span> <span class="n">train_err</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s">&#39;training error&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span> <span class="p">[</span><span class="n">error</span><span class="p">,</span> <span class="n">error</span><span class="p">],</span> <span class="s">&#39;--k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;intrinsic error&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;degree of fit&#39;</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;rms error&#39;</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">FancyArrow</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>
+                              <span class="n">head_width</span><span class="o">=</span><span class="mf">0.04</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span>
+                              <span class="n">length_includes_head</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">5.3</span><span class="p">,</span> <span class="mf">1.35</span><span class="p">,</span> <span class="s">&quot;High Bias&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;center&#39;</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">add_patch</span><span class="p">(</span><span class="n">FancyArrow</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mf">1.22</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">0.25</span><span class="p">,</span>
+                              <span class="n">head_width</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                              <span class="n">length_includes_head</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">19.8</span><span class="p">,</span> <span class="mf">1.23</span><span class="p">,</span> <span class="s">&quot;High Variance&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+<span class="c">#------------------------------------------------------------</span>
+<span class="c"># Plot training error and cross-val error</span>
+<span class="c">#   as a function of training set size</span>
+
+<span class="n">Ntrain</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">Ncrossval</span> <span class="o">=</span> <span class="mi">100</span>
+<span class="n">error</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">(</span><span class="n">Ntrain</span> <span class="o">+</span> <span class="n">Ncrossval</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">test_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">error</span><span class="p">)</span>
+
+<span class="n">xtrain</span> <span class="o">=</span> <span class="n">x</span><span class="p">[:</span><span class="n">Ntrain</span><span class="p">]</span>
+<span class="n">ytrain</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:</span><span class="n">Ntrain</span><span class="p">]</span>
+
+<span class="n">xcrossval</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">Ntrain</span><span class="p">:]</span>
+<span class="n">ycrossval</span> <span class="o">=</span> <span class="n">y</span><span class="p">[</span><span class="n">Ntrain</span><span class="p">:]</span>
+
+<span class="n">sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">Ntrain</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">train_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">sizes</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">crossval_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">sizes</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">d</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">)):</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">size</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">sizes</span><span class="p">):</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">xtrain</span><span class="p">[:</span><span class="n">size</span><span class="p">],</span> <span class="n">ytrain</span><span class="p">[:</span><span class="n">size</span><span class="p">],</span> <span class="n">d</span><span class="p">)</span>
+        <span class="n">crossval_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">xcrossval</span><span class="p">,</span> <span class="n">ycrossval</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+        <span class="n">train_err</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_error</span><span class="p">(</span><span class="n">xtrain</span><span class="p">[:</span><span class="n">size</span><span class="p">],</span> <span class="n">ytrain</span><span class="p">[:</span><span class="n">size</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>
+
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">pl</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">crossval_err</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;cross-val error&#39;</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sizes</span><span class="p">,</span> <span class="n">train_err</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;training error&#39;</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">Ntrain</span><span class="p">],</span> <span class="p">[</span><span class="n">error</span><span class="p">,</span> <span class="n">error</span><span class="p">],</span> <span class="s">&#39;--k&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">&#39;intrinsic error&#39;</span><span class="p">)</span>
+
+    <span class="n">pl</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s">&#39;traning set size&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">pl</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s">&#39;rms error&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">ticker</span><span class="o">.</span><span class="n">NullFormatter</span><span class="p">())</span>
+    
+    <span class="n">pl</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+    
+    <span class="n">pl</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+    <span class="n">pl</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">99</span><span class="p">)</span>
+
+    <span class="n">pl</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">98</span><span class="p">,</span> <span class="mf">2.45</span><span class="p">,</span> <span class="s">&#39;d = </span><span class="si">%i</span><span class="s">&#39;</span> <span class="o">%</span> <span class="n">d</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="s">&#39;large&#39;</span><span class="p">)</span>
+
+<span class="n">pl</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">wspace</span> <span class="o">=</span> <span class="mf">0.02</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="mf">0.07</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">0.95</span><span class="p">)</span>
+<span class="n">pl</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s">&#39;Learning Curves&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+
+
+<span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Total running time of the example:</strong>    0 seconds</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="../_sources/auto_examples/plot_bias_variance_examples.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="plot_ML_flow_chart.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="plot_gui_example.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

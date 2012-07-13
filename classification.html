@@ -1,0 +1,408 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>4. Classification: Learning Labels of Astronomical Sources &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="index.html" />
+    <link rel="next" title="5. Regression: Photometric Redshifts of Galaxies" href="regression.html" />
+    <link rel="prev" title="3. Machine Learning 102: Practical Advice" href="practical.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="index.html">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="general_concepts.html">Machine learning 101</a></li>
+            <li><a href="#">Classification</a></li>
+            <li><a href="regression.html">Regression</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="auto_examples/index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	   <div class="rel rellarge">
+	     
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="practical.html" title="3. Machine Learning 102: Practical Advice"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    3. Machine Learn...
+	    </span>
+	    <span class="hiddenrellink">
+	    3. Machine Learning 102: Practical Advice
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="regression.html" title="5. Regression: Photometric Redshifts of Galaxies"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    5. Regression: P...
+	    </span>
+	    <span class="hiddenrellink">
+	    5. Regression: Photometric Redshifts of Galaxies
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">4. Classification: Learning Labels of Astronomical Sources</a><ul>
+<li><a class="reference internal" href="#motivation-why-is-this-important">4.1. Motivation: Why is this Important?</a></li>
+<li><a class="reference internal" href="#star-quasar-classification-naive-bayes">4.2. Star-Quasar Classification: Naive Bayes</a></li>
+</ul>
+</li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="classification-learning-labels-of-astronomical-sources">
+<span id="astronomy-classification"></span><h1>4. Classification: Learning Labels of Astronomical Sources<a class="headerlink" href="#classification-learning-labels-of-astronomical-sources" title="Permalink to this headline">¶</a></h1>
+<p>Modern astronomy is concerned with the study and characterization of distant
+objects such as
+<a class="reference external" href="http://en.wikipedia.org/wiki/Star">stars</a>,
+<a class="reference external" href="http://en.wikipedia.org/wiki/Galaxy">galaxies</a>,
+or <a class="reference external" href="http://en.wikipedia.org/wiki/Quasar">quasars</a>.
+Objects can often be very quickly characterized through detailed measurements
+of their optical <a class="reference external" href="http://en.wikipedia.org/wiki/Spectrum">spectrum</a>.
+A spectrum is a measure of the photon flux (that is, the number of photons
+per second) as a function of photon frequency or wavelength.</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_sdss_filters.html"><img alt="_images/plot_sdss_filters_1.png" src="_images/plot_sdss_filters_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+<p class="caption">The spectrum of the star Vega (<img class="math" src="_images/math/10f32377ac67d94f764f12a15ea987e88c85d3e1.png" alt="\alpha"/>-Lyr) with the five filters
+from the Sloan Digital Sky Survey (SDSS), which are denoted by the letters
+<cite>u</cite> (ultraviolet), <cite>g</cite> (green), <cite>r</cite> (red), <cite>i</cite> (infrared),
+and <cite>z</cite> (infrared).</p>
+</div>
+<p>The above spectrum is that of the star Vega, the brightest star in the
+northern constellation Lyra.  Its surface is at about 9600 degrees Kelvin,
+and its spectrum is roughly that of a 9600K
+<a class="reference external" href="http://en.wikipedia.org/wiki/Black_body">black-body</a>,
+with absorption due to molecules in its atmosphere.
+Because of the quantum mechanical properties of atoms, different atoms can
+absorb light at only specific, discrete wavelengths.  Because of this fact,
+characteristic patterns in the spectrum of a distant star can be used to
+infer its chemical composition!</p>
+<p>In the spectrum above, the deepest of these absorption spikes
+are due to the energy levels of Hydrogen.  From examination of high-resolution
+spectra like this one, one can learn a lot about the physical processes at work
+in a distant astronomical  source.
+Unfortunately, spectra like these are very time-consuming and expensive to
+obtain, especially for very faint objects.  For this reason, astronomers have
+long observed objects through broad-band filters.
+For the u-band filter shown above, the flux is given by</p>
+<div class="math">
+<p><img src="_images/math/2e0d474184643c24b45d1199382dc62ba0ee073f.png" alt="f_u = \int_0^\infty f_u(\lambda) S_\nu(\lambda) \frac{d\lambda}{\lambda}"/></p>
+</div><p>where <img class="math" src="_images/math/cdc7c6844fa740b52d465ca7b9e03d3f5592b346.png" alt="f_u(\lambda)"/> is the filter transmission, and
+<img class="math" src="_images/math/e2aef17f40dca6e4a701a3043d4ed5f57fce3eda.png" alt="S_\nu(\lambda)"/> is the flux density of the spectrum at
+wavelength <img class="math" src="_images/math/ce4588fd900d02afcbd260bc07f54cce49a7dc4a.png" alt="\lambda"/>.
+For historical reasons, astronomers report the flux using the magnitude
+system, where the magnitude is defined by</p>
+<div class="math">
+<p><img src="_images/math/50e45cb08f13efa7e76814e7daa42b13bbf28ea8.png" alt="u = -2.5 \log_{10}\left[\frac{f_u}{3631 Jy}\right]"/></p>
+</div><p>The denominator is a normalization constant, measured in Janskys.  To reduce
+the uncertainty associated with absolute calibration from telescope
+to telescope or from night to night,
+astronomers generally work in terms of the <cite>color</cite>, defined as the difference
+of magnitudes between two different filter bands.
+Subtracting two magnitudes reduces this uncertainty.
+For example, an observation of the star Vega above will consist of a vector
+four numbers: <tt class="docutils literal"><span class="pre">[u-g,</span> <span class="pre">g-r,</span> <span class="pre">r-i,</span> <span class="pre">i-z]</span></tt>.</p>
+<p>With the difficulty of obtaining informative spectra, and the relative ease
+of obtaining color information,
+machine-learning tasks in Astronomy are often based on a small
+spectroscopic training set, which is applied to a larger
+set of photometric observations with unknown classification.
+We&#8217;ll examine a few of these situations here.</p>
+<div class="section" id="motivation-why-is-this-important">
+<h2>4.1. Motivation: Why is this Important?<a class="headerlink" href="#motivation-why-is-this-important" title="Permalink to this headline">¶</a></h2>
+<p>The study of <cite>quasars</cite>, an amalgamation of the words
+&#8220;quasi-stellar radio source&#8221;,
+has led to many advances in our understanding of fundamental physics.
+Quasars, also commonly referred to as QSOs (Quasi-Stellar Objects) or
+AGNs (Active Galactic Nuclei) are galaxies which contain supermassive black
+holes at their core.  These black holes can weigh-in at over 10 billion
+times the mass of our sun, and can be luminous enough to out-shine their
+entire galaxy.
+Here we show three different objects, chosen from among the millions of
+sources catalogued by the <a class="reference external" href="http://www.sdss.org">Sloan Digital Sky Survey</a>:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_sdss_images.html"><img alt="_images/plot_sdss_images_1.png" src="_images/plot_sdss_images_1.png" style="width: 720.0px; height: 240.0px;" /></a>
+</div>
+<p>The featured object is at the center of each image.  On the left is
+a star, in the center is a galaxy, and on the right is a distant quasar.
+From these images alone, it would be impossible to distinguish
+between the star and the quasar: both are unresolved point-sources
+of similar apparrent brightness.
+If a spectrum were available, distinguishing between them
+could be accomplished rather straightforwardly, but spectra
+are not always available.
+Using multi-color photometric information, rather than just a single image,
+however, this task becomes feasible.  The goal here is to design a
+machine-learning algorithm which can accurately distinguish stars from
+quasars based on multi-color photometric measurements.</p>
+</div>
+<div class="section" id="star-quasar-classification-naive-bayes">
+<h2>4.2. Star-Quasar Classification: Naive Bayes<a class="headerlink" href="#star-quasar-classification-naive-bayes" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/07_classification_example.ipynb"><tt class="xref download docutils literal"><span class="pre">07_classification_example.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.</p>
+</div>
+<p>In the folder <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME/data/sdss_colors</span></tt>, there is a script
+<tt class="docutils literal"><span class="pre">fetch_data.py</span></tt> which will download the colors of over 700,000 stars
+and quasars from the Sloan Digital Sky Survey.  500,000 of them are
+training data, spectroscopically identified as stars or quasars.
+The remaining 200,000 have been classified based on their photometric colors.</p>
+<p>Here we will use a Naive Bayes estimator to classify the objects.  First,
+we will construct our training data and test data arrays:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;data/sdss_colors/sdssdr6_colors_class_train.npy&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">test_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;data/sdss_colors/sdssdr6_colors_class.200000.npy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we must put these into arrays of shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt> in
+order to pass them to routines in scikit-learn.  Training samples with
+zero-redshift are stars, while samples with positive redshift are quasars:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">X_train</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">train_data</span><span class="p">[</span><span class="s">&#39;u-g&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="n">train_data</span><span class="p">[</span><span class="s">&#39;g-r&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="n">train_data</span><span class="p">[</span><span class="s">&#39;r-i&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                     <span class="n">train_data</span><span class="p">[</span><span class="s">&#39;i-z&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_train</span> <span class="o">=</span> <span class="p">(</span><span class="n">train_data</span><span class="p">[</span><span class="s">&#39;redshift&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X_test</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">test_data</span><span class="p">[</span><span class="s">&#39;u-g&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="n">test_data</span><span class="p">[</span><span class="s">&#39;g-r&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="n">test_data</span><span class="p">[</span><span class="s">&#39;r-i&#39;</span><span class="p">],</span>
+<span class="gp">... </span>                    <span class="n">test_data</span><span class="p">[</span><span class="s">&#39;i-z&#39;</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_test</span> <span class="o">=</span> <span class="p">(</span><span class="n">test_data</span><span class="p">[</span><span class="s">&#39;label&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Notice that we&#8217;ve set this up so that quasars have <tt class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">1</span></tt>, and stars
+have <tt class="docutils literal"><span class="pre">y</span> <span class="pre">=</span> <span class="pre">0</span></tt>.  Now we&#8217;ll set up a Naive Bayes classifier.  This will
+fit a four-dimensional uncorrelated gaussian to each distribution,
+and from these gaussians quickly predict the label for a test point:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">naive_bayes</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gnb</span> <span class="o">=</span> <span class="n">naive_bayes</span><span class="o">.</span><span class="n">GaussianNB</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">gnb</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y_pred</span> <span class="o">=</span> <span class="n">gnb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s check our accuracy.  This is the fraction of labels that are correct:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">accuracy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="n">y_pred</span><span class="p">))</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">accuracy</span>
+<span class="go">0.617245</span>
+</pre></div>
+</div>
+<p>We have 61% accuracy.  Not very good.  But we must be careful here: the
+accuracy does not always tell the whole story.  In our data, there are
+many more stars than quasars</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+<span class="go">186721</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">13279</span>
+</pre></div>
+</div>
+<p>Stars outnumber Quasars by a factor of 14 to 1.  In cases like this, it is
+much more useful to evaluate the fit based on <cite>precision</cite> and <cite>recall</cite>.
+Because there are many fewer quasars than stars, we&#8217;ll call a quasar a
+<cite>positive</cite> label and a star a <cite>negative</cite> label.
+The precision asks what fraction of positively labeled points are correctly
+labeled:</p>
+<div class="math">
+<p><img src="_images/math/9b1ed62072f73bbf90a7d578c5e4103ece17b101.png" alt="\mathrm{precision = \frac{True\ Positives}{True\ Positives + False\ Positives}}"/></p>
+</div><p>The recall asks what fraction of positive samples are correctly identified:</p>
+<div class="math">
+<p><img src="_images/math/1af7cb11d27a2a0a607f242652acf34d48504f5d.png" alt="\mathrm{recall = \frac{True\ Positives}{True\ Positives + False\ Negatives}}"/></p>
+</div><p>We can calculate this for our results as follows:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">TP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">0</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">FN</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">y_pred</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y_test</span> <span class="o">==</span> <span class="mi">1</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">TP</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FP</span><span class="p">)</span>  <span class="c"># precision</span>
+<span class="go">0.142337086782</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">TP</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">TP</span> <span class="o">+</span> <span class="n">FN</span><span class="p">)</span>  <span class="c"># recall</span>
+<span class="go">0.948113562768</span>
+</pre></div>
+</div>
+<p>For convenience, these can be computed using the tools in the <tt class="docutils literal"><span class="pre">metrics</span></tt>
+sub-package of scikit-learn:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="go">0.14233708678153123</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="go">0.94811356276828074</span>
+</pre></div>
+</div>
+<p>Another useful metric is the F1 score, which gives a single score based on
+the precision and recall for the class:</p>
+<div class="math">
+<p><img src="_images/math/2979369a69a3c7e43079bc482c1a4d8f548c30c8.png" alt="\mathrm{F1 = 2\frac{precision * recall}{precision + recall}}"/></p>
+</div><p>In a perfect classification, the precision, recall, and F1 score are
+all equal to 1.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">metrics</span><span class="o">.</span><span class="n">f1_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">)</span>
+<span class="go">0.24751550658108151</span>
+</pre></div>
+</div>
+<p>For convenience, <tt class="docutils literal"><span class="pre">sklearn.metrics</span></tt> provides a function that computes all
+of these scores, and returns a nicely formatted string.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">target_names</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;Stars&#39;</span><span class="p">,</span> <span class="s">&#39;QSOs&#39;</span><span class="p">])</span>
+<span class="go">              precision    recall  f1-score   support</span>
+
+<span class="go">       Stars       0.99      0.59      0.74    186721</span>
+<span class="go">        QSOs       0.14      0.95      0.25     13279</span>
+
+<span class="go"> avg / total       0.94      0.62      0.71    200000</span>
+</pre></div>
+</div>
+<p>We see that for Gaussian Naive Bayes, our QSO recall is fairly good:
+we are correctly identifying 95%  of all quasars.
+The precision, on the other hand, is much worse.  Of
+the points we label quasars, only 14% of them are correctly labeled.
+This low precision leads to an F1-score of only 0.25.  This is not an
+optimal classification of our data.  Apparently Naive Bayes is a bit too
+naive for this problem.</p>
+<p>Later, in <a class="reference external" href="exercises.html">Exercise #1</a>, we will apply a more sophisticated
+learning method to this task, which will potentially improve on these
+results.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="_sources/classification.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel rellarge">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="practical.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="regression.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>

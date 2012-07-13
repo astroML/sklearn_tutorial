@@ -1,0 +1,347 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>5. Regression: Photometric Redshifts of Galaxies &mdash; Machine Learning for Astronomical Data Analysis</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     'scipy 2012',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="index.html" />
+    <link rel="next" title="6. Dimensionality Reduction of Astronomical Spectra" href="dimensionality_reduction.html" />
+    <link rel="prev" title="4. Classification: Learning Labels of Astronomical Sources" href="classification.html" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </head>
+  <body>
+
+    <div class="header-wrapper">
+      <div class="header">
+          <p class="logo"><a href="index.html">
+            <img src="_static/scikit-learn-logo-small.png" alt="Logo"/>
+          </a>
+          </p><div class="navbar">
+          <ul>
+          
+	    <li><a href="general_concepts.html">Machine learning 101</a></li>
+            <li><a href="classification.html">Classification</a></li>
+            <li><a href="#">Regression</a></li>
+            <li><a href="exercises.html">Exercises</a></li>
+            <li><a href="auto_examples/index.html">Examples</a></li>
+          
+	  
+       </ul>
+
+<div class="search_form">
+
+<div id="cse" style="width: 100%;"></div>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+  google.load('search', '1', {language : 'en'});
+  google.setOnLoadCallback(function() {
+    var customSearchControl = new google.search.CustomSearchControl('016639176250731907682:tjtqbvtvij0');
+    customSearchControl.setResultSetSize(google.search.Search.FILTERED_CSE_RESULTSET);
+    var options = new google.search.DrawOptions();
+    options.setAutoComplete(true);
+    customSearchControl.draw('cse', options);
+  }, true);
+</script>
+
+</div>
+          </div> <!-- end navbar --></div>
+    </div>
+
+    <div class="content-wrapper">
+
+      <div class="sphinxsidebar">
+	<div class="sphinxsidebarwrapper">
+	   <div class="rel rellarge">
+	     
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	     rellinks[1:]|reverse
+	    -->
+	<div class="rellink">
+	<a href="classification.html" title="4. Classification: Learning Labels of Astronomical Sources"
+	    accesskey="P">Previous
+	    <br>
+	    <span class="smallrellink">
+	    4. Classificatio...
+	    </span>
+	    <span class="hiddenrellink">
+	    4. Classification: Learning Labels of Astronomical Sources
+	    </span>
+	    
+	    </a>
+	</div>
+	    <div class="spacer">
+	    &nbsp;
+	    </div>
+	
+	<div class="rellink">
+	<a href="dimensionality_reduction.html" title="6. Dimensionality Reduction of Astronomical Spectra"
+	    accesskey="N">Next
+	    <br>
+	    <span class="smallrellink">
+	    6. Dimensionalit...
+	    </span>
+	    <span class="hiddenrellink">
+	    6. Dimensionality Reduction of Astronomical Spectra
+	    </span>
+	    
+	    </a>
+	</div>
+	<!-- Ad a link to the 'up' page -->
+    </div>
+    <h3>This page</h3>
+	<ul>
+<li><a class="reference internal" href="#">5. Regression: Photometric Redshifts of Galaxies</a><ul>
+<li><a class="reference internal" href="#motivation-dark-energy-dark-matter-and-the-fate-of-the-universe">5.1. Motivation: Dark Energy, Dark Matter, and the Fate of the Universe</a></li>
+<li><a class="reference internal" href="#a-simple-method-decision-tree-regression">5.2. A Simple Method: Decision Tree Regression</a></li>
+</ul>
+</li>
+</ul>
+
+    
+    <h3>Giving credit</h3>
+    <p>Please consider <a href="AUTHORS.html#citing">citing the 
+    scikit-learn</a> if you use it.</p>
+
+    </div>
+	  </div>
+
+
+      <div class="content">
+            
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="regression-photometric-redshifts-of-galaxies">
+<span id="astronomy-regression"></span><h1>5. Regression: Photometric Redshifts of Galaxies<a class="headerlink" href="#regression-photometric-redshifts-of-galaxies" title="Permalink to this headline">¶</a></h1>
+<p>Another important learning task in astronomy is the problem of determining
+<a class="reference external" href="http://en.wikipedia.org/wiki/Redshift">redshifts</a> of distant galaxies.
+In the current standard cosmological model, the
+universe began nearly 14 billion years ago, in an explosive event commonly
+known as the Big Bang.  Since then, the very fabric of space has been
+<a class="reference external" href="http://en.wikipedia.org/wiki/Expansion_of_space">expanding</a>,
+so that distant galaxies appear to be moving away from us at
+very high speeds.  The uniformity of this expansion means that there is
+a relationship between the distance to a galaxy, and the speed that it
+appears to be receeding from us (this relationship is known as
+<a class="reference external" href="http://en.wikipedia.org/wiki/Hubble_expansion">Hubble&#8217;s Law</a>, named
+after Edwin Hubble).  This recession speed leads to a shift
+in the frequency of photons, very similar to the more familiar
+<a class="reference external" href="http://en.wikipedia.org/wiki/Doppler_shift">doppler shift</a> that
+causes the pitch of a siren to change as an emergency vehicle passes by.
+If a galaxy or star were
+moving toward us, its light would be shifted to higher frequencies, or
+<cite>blue-shifted</cite>.  Because the universe is expanding away from us, distant
+galaxies appear to be <cite>red-shifted</cite>: their photons are shifted to lower
+frequencies.</p>
+<p>In cosmology, the redshift is measured with the parameter <img class="math" src="_images/math/b13f21416d84e13708696f34dea81026cda583c9.png" alt="z"/>, defined
+in terms of the observed wavelength <img class="math" src="_images/math/49cf8aa91819631e600c1a1bbb02cc037469afc0.png" alt="\lambda_{obs}"/> and the emitted
+wavelength <img class="math" src="_images/math/4c0a07bf8e7cf763a19e0415ad63aba69690a267.png" alt="\lambda_{em}"/>:</p>
+<div class="math">
+<p><img src="_images/math/2a89b646fcf73e4ac6717a61487379a514c0f046.png" alt="\lambda_{obs} = (1 + z)\lambda_{em}"/></p>
+</div><p>When a spectrum can be obtained, determining the redshift is rather
+straight-forward: if you can localize the spectral fingerprint of a common
+element, such as hydrogen, then the redshift can be computed using simple
+arithmetic.  But similarly to the case of Star/Quasar classification, the
+task becomes much more difficult when only photometric observations are
+available.</p>
+<p>Because of the spectrum shift, an identical source at different redshifts
+will have a different color through each pair of filters.  See the following
+figure:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_sdss_filters.html"><img alt="_images/plot_sdss_filters_2.png" src="_images/plot_sdss_filters_2.png" style="width: 640.0px; height: 480.0px;" /></a>
+<p class="caption">The spectrum of the star Vega (<img class="math" src="_images/math/10f32377ac67d94f764f12a15ea987e88c85d3e1.png" alt="\alpha"/>-Lyr) at three different
+redshifts.  The SDSS ugriz filters are shown in gray for reference.</p>
+</div>
+<p>At redshift <img class="math" src="_images/math/5510380da19a236624ef45908d2da469f892b03e.png" alt="z=0.0"/>, the spectrum is bright in the <cite>u</cite> and <cite>g</cite> filters,
+but dim in the <cite>i</cite> and <cite>z</cite> filters.  At redshift <img class="math" src="_images/math/cb2e1841b2091948d5db06e418aee102defee6a0.png" alt="z=0.8"/>, the opposite
+is the case.  This suggests the possibility of determining redshift from
+photometry alone.  The situation is complicated by the fact that each
+individual source has unique spectral characteristics, but nevertheless,
+these <cite>photometric redshifts</cite> are often used in astronomical applications.</p>
+<div class="section" id="motivation-dark-energy-dark-matter-and-the-fate-of-the-universe">
+<h2>5.1. Motivation: Dark Energy, Dark Matter, and the Fate of the Universe<a class="headerlink" href="#motivation-dark-energy-dark-matter-and-the-fate-of-the-universe" title="Permalink to this headline">¶</a></h2>
+<p>The photometric redshift problem is very important.  Future astronomical
+surveys hope to image trillions of very faint galaxies, and use this data
+to inform our view of the universe as a whole: its history, its geometry,
+and its fate.  Obtaining an accurate estimate of the redshift to each of these
+galaxies is a pivotal part of this task.  Because these surveys will image
+so many extremely faint galaxies, there is no possibility of obtaining a
+spectrum for each one.  Thus sophisticated photometric redshift codes will
+be required to advance our understanding of the Universe, including more
+precisely understanding the nature of the dark energy that is currently
+accelerating the cosmic expansion.</p>
+</div>
+<div class="section" id="a-simple-method-decision-tree-regression">
+<h2>5.2. A Simple Method: Decision Tree Regression<a class="headerlink" href="#a-simple-method-decision-tree-regression" title="Permalink to this headline">¶</a></h2>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The information in this section is available in an interactive notebook
+<a class="reference download internal" href="_downloads/08_regression_example.ipynb"><tt class="xref download docutils literal"><span class="pre">08_regression_example.ipynb</span></tt></a>,
+which can be viewed using <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">iPython notebook</a>.</p>
+</div>
+<p>Here we&#8217;ll take an extremely simple approach to the photometric redshift
+problem, using a decision tree.
+In the folder <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME/data/sdss_photoz</span></tt>, there is a script
+<tt class="docutils literal"><span class="pre">fetch_data.py</span></tt> which will download the colors of 400,000+ galaxies from
+the Sloan Digital Sky Survey.  This script also includes a python
+implementation of the SQL query used to construct this data.  This template
+can be modified to download more features if desired.
+Before executing the example below, run <tt class="docutils literal"><span class="pre">fetch_data.py</span></tt>
+to download the colors and redshifts.</p>
+<p>First we will load this data, shuffle it in preparation for later, and arrange
+the colors in an array of shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;data/sdss_photoz/sdss_photoz.npy&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;u&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;g&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;g&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;r&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;r&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">X</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;i&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;z&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">z</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s">&#39;redshift&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Next we&#8217;ll split the data into two samples: a training sample and a test
+sample which we&#8217;ll use to evaluate our training:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">Ntrain</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Xtrain</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:</span><span class="n">Ntrain</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ztrain</span> <span class="o">=</span> <span class="n">z</span><span class="p">[:</span><span class="n">Ntrain</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Xtest</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">Ntrain</span><span class="p">:]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ztest</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">Ntrain</span><span class="p">:]</span>
+</pre></div>
+</div>
+<p>Now we&#8217;ll use the scikit-learn <tt class="xref py py-class docutils literal"><span class="pre">DecisionTreeRegressor</span></tt> method to
+train a model and predict redshifts for the test set based on a
+20-level decision tree:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span> <span class="o">=</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">clf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span> <span class="n">ztrain</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">zpred</span> <span class="o">=</span> <span class="n">clf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">Xtest</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To judge the efficacy of prediction, we can compute the root-mean-square
+difference between the true and predicted values:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">rms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">((</span><span class="n">ztest</span> <span class="o">-</span> <span class="n">zpred</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">rms</span>
+<span class="go">0.221409442926</span>
+</pre></div>
+</div>
+<p>Our RMS error is about 0.22.  This is pretty good for such an unsophisticated
+learning algorithm, but better algorithms can improve on this.  The biggest
+issue here are the <cite>catastrophic errors</cite>, where the predicted redshift is
+extremely far from the prediction:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">ztest</span><span class="p">)</span>
+<span class="go">102798</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ztest</span> <span class="o">-</span> <span class="n">zpred</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
+<span class="go">1538</span>
+</pre></div>
+</div>
+<p>About 1.5% of objects have redshift estimates which are off by greater than
+1.  This sort of error in redshift determination is very problematic for
+high-precision cosmological studies.  This can be seen in a scatter plot of
+the predicted redshift versus the true redshift for the test data:</p>
+<div class="figure align-center">
+<a class="reference external image-reference" href="auto_examples/plot_sdss_photoz.html"><img alt="_images/plot_sdss_photoz_1.png" src="_images/plot_sdss_photoz_1.png" style="width: 640.0px; height: 480.0px;" /></a>
+<p class="caption">The true and predicted redshifts of 102,798 SDSS galaxies, using a simple
+decision tree regressor.  Notice the presece of catastrophic outliers:
+those galaxies whose predicted redshifts are extremely far from the true
+value.</p>
+</div>
+<p>Later, in <a class="reference external" href="exercises.html">Exercise #2</a>, we will attempt
+to improve on this by optimizing the parameters of the decision tree.</p>
+<p>In practice, the solutions to the photometric redshift problem can benefit from
+approaches that use physical intuition as well as machine learning tools.
+For example, some solutions involve the use of libraries of synthetic
+galaxy spectra
+which are known to be representative of the true galaxy distribution.  This
+extra information can be used either directly, in a physically motivated
+analysis, or can be used to generate a larger suite of artificial training
+instances for a pure machine learning approach.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+        <div class="clearer"></div>
+      </div>
+    </div>
+  
+
+    <div class="footer">
+        &copy; scikit-learn developers.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3. Design by <a href="http://webylimonada.com">Web y Limonada</a>.
+    <span style="padding-left: 5ex;">
+    <a href="_sources/regression.txt"
+	    rel="nofollow">Show this page source</a>
+    </span>
+    </div>
+     <div class="rel rellarge">
+    
+	<!-- XXX: when we have a 'module index' that appears in the link
+	     bar, we will need to use the following ugly hack to avoid it
+	rellinks[1:]|reverse
+	-->
+    <div class="buttonPrevious">
+      <a href="classification.html">
+        Previous
+      </a>  
+    </div>
+    <div class="buttonNext">
+      <a href="dimensionality_reduction.html">
+        Next
+      </a>  
+    </div>
+    
+     </div>
+     <script type="text/javascript">
+       $("div.buttonNext, div.buttonPrevious").hover(
+           function () {
+               $(this).css('background-color', '#FF9C34');
+           },
+           function () {
+               $(this).css('background-color', '#A7D6E2');
+           }
+       );
+     </script>
+  </body>
+</html>
