@@ -25,12 +25,28 @@
 .. only:: html
 
     .. |banner1| image:: auto_examples/images/plot_sdss_filters_1.png
-       :height: 140
+       :height: 120
        :target: auto_examples/plot_sdss_filters.html
 
     .. |banner2| image:: auto_examples/images/plot_sdss_filters_2.png
-       :height: 90
+       :height: 120
        :target: auto_examples/plot_sdss_filters.html
+
+    .. |banner3| image:: auto_examples/images/plot_sdss_images_1.png
+       :height: 90
+       :target: auto_examples/plot_sdss_images.html
+
+    .. |banner4| image:: auto_examples/images/plot_ML_flow_chart_1.png
+       :height: 120
+       :target: auto_examples/plot_ML_flow_chart.html
+
+    .. |banner5| image:: auto_examples/images/plot_sdss_photoz_1.png
+       :height: 120
+       :target: auto_examples/plot_sdss_photoz.html
+
+    .. |banner6| image:: auto_examples/images/plot_sdss_specPCA_1.png
+       :height: 120
+       :target: auto_examples/plot_sdss_specPCA.html
 
     .. |center-div| raw:: html
 
@@ -61,7 +77,7 @@
         shuffle ($('#banner a.external'));
         </SCRIPT>
 
-    |center-div| |banner1| |banner2| |end-div|
+    |center-div| |banner1| |banner2| |banner3| |banner4| |banner5| |banner6| |end-div|
 
 .. only:: html
 
