@@ -8,7 +8,9 @@ This tutorial is brought to you by the `scikit-learn
 
 .. hlist::
 
-  * Jake Vanderplas
+  * `Jake Vanderplas <http://www.astro.washington.edu/vanderplas>`_
+  * Olivier Grisel
+  * Jaques Grobler
   * `Gael Varoquaux <http://gael-varoquaux.info/blog/>`_
 
 .. _citing:

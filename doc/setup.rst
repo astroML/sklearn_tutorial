@@ -36,7 +36,7 @@ material will make use of the
 Installing scikit-learn and Dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Please refer to the :ref:`install page <installing_scikit_learn>` for
+Please refer to the `install page <http://www.scikit-learn.org/stable/install.html#installing-an-official-release>`_ for
 per-system instructions on installing scikit-learn.  In addition to
 ``numpy``, ``scipy``, and ``scikit-learn``, this tutorial will assume that
 you have ``matplotlib`` and ``ipython`` installed as well.

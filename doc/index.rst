@@ -84,12 +84,8 @@
 .. only:: html
 
  .. sidebar:: Download 
-       
-    * `PDF, 2 pages per side <./_downloads/nisl.pdf>`_
-
-    * `HTML and example files <https://github.com/nisl/nisl.github.com/zipball/master>`_
     
-    * `Source code (github) <https://github.com/nisl/tutorial>`_
+    * `Source code (github) <https://github.com/astroML/astro_tutorial>`_
 
 
 .. sectionauthor:: Jake Vanderplas <vanderplas@astro.washington.edu>
@@ -127,6 +123,11 @@
    exercises
    auto_examples/index
 
+.. toctree::
+   :hidden:
+
+   AUTHORS
+
 ..  
  FIXME: I need the link below to make sure the banner gets copied to the
  target directory.
@@ -137,8 +138,6 @@
  .. raw:: html
  
    <div style='visibility: hidden ; height=0'>
-
- :download:`nisl.pdf`
 
  .. raw:: html
  

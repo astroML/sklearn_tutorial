@@ -211,9 +211,9 @@ htmlhelp_basename = 'PythonScientic'
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-  ('index', 'astroML.tex', u'NeuroImaging with scikit-learn',
+  ('index', 'astroML.tex', u'Astronomy with scikit-learn',
    ur"""Jacob VanderPlas"""
-   + r"\\\relax ~\\\relax http://nisl.github.com",
+   + r"\\\relax ~\\\relax http://astroML.github.com",
    'manual'),
 
 ]
