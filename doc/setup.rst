@@ -62,6 +62,7 @@ Python Distribution) which is a (non-open source) packaging of the
 scientific python stack.
 
 .. note::
+
    that to use `ipython notebook`_, you must install ``ipython`` version
    0.12 and several other dependencies.  Refer to the ipython documentation
    for details.

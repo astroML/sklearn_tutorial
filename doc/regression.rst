@@ -77,6 +77,7 @@ A Simple Method: Decision Tree Regression
 .. currentmodule:: sklearn.tree
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`08_regression_example.ipynb <notebooks/08_regression_example.ipynb>`,
    which can be viewed using `iPython notebook`_.

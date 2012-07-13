@@ -40,6 +40,7 @@ SDSS Spectral Data
 ==================
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`09_dimensionality_example.ipynb <notebooks/09_dimensionality_example.ipynb>`,
    which can be viewed using `iPython notebook`_.

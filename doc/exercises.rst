@@ -46,6 +46,7 @@ Exercise 1: Photometric Classification with GMM
 -----------------------------------------------
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`10_exercise01.ipynb <notebooks/10_exercise01.ipynb>`,
    which can be viewed using `iPython notebook`_.  This requires the
@@ -93,6 +94,7 @@ Exercise 2: Photometric redshifts with Decision Trees
 -----------------------------------------------------
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`11_exercise02.ipynb <notebooks/11_exercise02.ipynb>`,
    which can be viewed using `iPython notebook`_.  This requires the

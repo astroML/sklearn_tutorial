@@ -5,6 +5,7 @@ Machine Learning 102: Practical Advice
 ======================================
 
 .. note::
+
    The information in this section is available in an interactive notebook
    :download:`06_learning_curves.ipynb <notebooks/06_learning_curves.ipynb>`,
    which can be viewed using `iPython notebook`_.
@@ -18,6 +19,7 @@ always lead to better results.  But this is not the case!  Below, we'll
 explore the reasons for this.
 
 .. note::
+
    much of the material in this section was adapted from Andrew Ng's
    excellent set of machine learning video lectures.
    See `<http://www.ml-class.org>`_.
@@ -144,6 +146,7 @@ the test set.  These labels are used to evaluate how well the algorithm
 can be expected to perform on unlabeled data.
 
 .. note::
+
    Why do we need both a cross-validation set and a test set?  Many machine
    learning practitioners use the same set of data as both a cross-validation
    set and a test set.  This is not the best approach, for the same reasons we
@@ -173,7 +176,7 @@ seen in the fact that the training error is very low, while the
 cross-validation error is very high.  Plotted for comparison is the intrinsic
 error (this is the scatter artificially added to the data: click on the above
 image to see the source code).  For this toy dataset, error = 1.0 is the
-best we can hope to attain.  Choosing `d`=6 in this case gets us very close
+best we can hope to attain.  Choosing `d` = 6 in this case gets us very close
 to the optimal error.
 
 The astute reader will realize that something is amiss here: in the above plot,
@@ -220,6 +223,7 @@ data will allow the estimator to very closely match the best possible
 cross-validation error.
 
 .. note::
+
    With a degree-20 polynomial, we'd expect the training error to be
    identically zero for training set size :math:`N<=20`.  Why is this?
    It is because when the degrees of freedom are greater than the number of
