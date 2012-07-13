@@ -119,7 +119,7 @@ install: html
 	cp -r _build/html ../gh-pages
 	cd .. && \
 	git checkout gh-pages && \
-	mv gh-pages/* . && /
+	mv gh-pages/* . && \
 	git add * && \
 	git commit -a -m 'Make install' && \
 	git push
