@@ -115,12 +115,11 @@ download-data:
 	#cd _build/latex ; make all-pdf ; pdfnup nisl.pdf
 
 install: html 
-	rm -rf ../gh-pages
-	cp -r _build/html ../gh-pages
-	cd .. && \
-	git checkout gh-pages && \
-	mv gh-pages/* . && \
+	rm -rf _build/gh-pages
+	cd _build/ && \
+        git clone git@github.com:astroML/astro_tutorial && \
+	cd astro_tutorial && git checkout gh-pages && \
+	cp -r ../html/* . && \
 	git add * && \
 	git commit -a -m 'Make install' && \
 	git push
-	git checkout master
