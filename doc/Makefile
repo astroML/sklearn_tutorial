@@ -117,8 +117,8 @@ download-data:
 install: html 
 	rm -rf _build/gh-pages
 	cd _build/ && \
-        git clone git@github.com:astroML/astro_tutorial && \
-	cd astro_tutorial && git checkout gh-pages && \
+        git clone git@github.com:astroML/sklearn_tutorial && \
+	cd sklearn_tutorial && git checkout gh-pages && \
 	cp -r ../html/* . && \
 	git add * && \
 	git commit -a -m 'Make install' && \
