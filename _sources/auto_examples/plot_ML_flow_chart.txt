@@ -15,17 +15,17 @@ This script plots the flow-charts used in the scikit-learn tutorials.
 
     *
 
+      .. image:: images/plot_ML_flow_chart_3.png
+            :scale: 47
+
+    *
+
       .. image:: images/plot_ML_flow_chart_1.png
             :scale: 47
 
     *
 
       .. image:: images/plot_ML_flow_chart_2.png
-            :scale: 47
-
-    *
-
-      .. image:: images/plot_ML_flow_chart_3.png
             :scale: 47
 
 

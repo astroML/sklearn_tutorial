@@ -120,8 +120,13 @@ having read them first).  This will download a dataset to the current
 directory.  This tutorial has three such datasets; they will be used
 in the examples and exercises later on.
 
-For example::
+To get all three datasets, run the following::
 
     % cd $TUTORIAL_HOME/data/sdss_colors
-    % less fetch_data.py
+    % python fetch_data.py
+
+    % cd $TUTORIAL_HOME/data/sdss_photoz
+    % python fetch_data.py
+
+    % cd $TUTORIAL_HOME/data/sdss_spectra
     % python fetch_data.py

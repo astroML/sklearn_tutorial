@@ -16,22 +16,22 @@ bias and variance.
 
     *
 
-      .. image:: images/plot_bias_variance_examples_1.png
-            :scale: 47
-
-    *
-
       .. image:: images/plot_bias_variance_examples_2.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_bias_variance_examples_3.png
+      .. image:: images/plot_bias_variance_examples_4.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_bias_variance_examples_4.png
+      .. image:: images/plot_bias_variance_examples_1.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_bias_variance_examples_3.png
             :scale: 47
 
 

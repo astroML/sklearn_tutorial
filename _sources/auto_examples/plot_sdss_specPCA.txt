@@ -20,12 +20,7 @@ This plots some of the SDSS spectra examples for the astronomy tutorial
 
     *
 
-      .. image:: images/plot_sdss_specPCA_2.png
-            :scale: 47
-
-    *
-
-      .. image:: images/plot_sdss_specPCA_3.png
+      .. image:: images/plot_sdss_specPCA_5.png
             :scale: 47
 
     *
@@ -35,7 +30,12 @@ This plots some of the SDSS spectra examples for the astronomy tutorial
 
     *
 
-      .. image:: images/plot_sdss_specPCA_5.png
+      .. image:: images/plot_sdss_specPCA_2.png
+            :scale: 47
+
+    *
+
+      .. image:: images/plot_sdss_specPCA_3.png
             :scale: 47
 
 
