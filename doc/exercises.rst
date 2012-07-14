@@ -145,6 +145,14 @@ Althernatively, the ipython notebook file is found in
 Exercise 3: Dimensionality Reduction of Spectra
 -----------------------------------------------
 
+.. note::
+
+   The information in this section is available in an interactive notebook
+   :download:`12_exercise03.ipynb <notebooks/12_exercise03.ipynb>`,
+   which can be viewed using `iPython notebook`_.  This requires the
+   sdss spectra data, which can be downloaded as described in
+   :ref:`astro_tutorial_setup`.
+
 In this exercise, you will use several dimensionality reduction techniques
 to view low-dimensional projections of galaxy & quasar spectra from the
 Sloan Digital Sky Survey.  This exercise is much less quantitative than the

@@ -28,6 +28,7 @@ opener = urllib2.build_opener(handler)
 destination = TRAIN_FILE.rstrip('.dat') + '.npy'
 if not os.path.exists(destination):
     url = SDSS_COLORS_URL + TRAIN_FILE
+    print "downloading data from", url
     fhandle = opener.open(url)
     np.save(destination, np.loadtxt(opener.open(url), dtype=DTYPE_TRAIN))
 
