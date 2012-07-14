@@ -1,4 +1,4 @@
-.. _astro_tutorial_setup:
+.. _sklearn_tutorial_setup:
 
 ===============================
 Tutorial Setup and Installation
@@ -81,30 +81,30 @@ accessed through cloning the scikit-learn repository using
 `git <http://git-scm.com/>`_.  Once ``git`` is installed the
 command to accomplish this is::
 
-    % git clone https://github.com/jakevdp/scikit-learn/
-    % cd scikit-learn
-    % git checkout -b sklearn-tutorial origin/sklearn-tutorial
+    % git clone https://github.com/astroML/sklearn_tutorial
 
-The last line switches to the branch of the repository which contains
-the source of this tutorial.  In what follows, the path to the
-``scikit-learn`` source folder will be named ``$SKL_HOME``.
-Within this directory can be found the tutorial source::
-
-    % cd doc/tutorial/astronomy
-
+This creates a directory called ``sklearn_tutorial`` and copies all
+the source files of this tutorial.  Most of the relevant files are
+in the ``sklearn_tutorial/doc`` sub-directory.
 In what follows, this directory will be named ``$TUTORIAL_HOME``. It
 should contain the following folders:
 
   * ``data`` - folder to put the datasets used during the tutorial
 
   * ``skeletons`` - sample incomplete scripts for the exercices
+                    (these should be used only if ``ipython notebook``
+		     is unavailable)
 
   * ``solutions`` - solutions of the exercices
+                    (these should be used only if ``ipython notebook``
+		     is unavailable)
 
   * ``notebooks`` - ipython notebooks which provide an interactive interface
-    to parts of this tutorial.
+                    to parts of this tutorial.  These are more up-to-date
+		    than the skeletons and solutions
 
-You can aleardy copy the skeletons into a new folder named ``workspace``
+If you are not going to use ipython notebook to run the examples, you
+can copy the skeletons into a new folder named ``workspace``
 where you will edit your own files for the exercices while keeping
 the original skeletons intact::
 

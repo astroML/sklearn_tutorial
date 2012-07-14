@@ -85,7 +85,7 @@
 
  .. sidebar:: Download 
     
-    * `Source code (github) <https://github.com/astroML/astro_tutorial>`_
+    * `Source code (github) <https://github.com/astroML/sklearn_tutorial>`_
 
 
 .. sectionauthor:: Jake Vanderplas <vanderplas@astro.washington.edu>

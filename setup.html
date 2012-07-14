@@ -154,7 +154,7 @@
           <div class="body">
             
   <div class="section" id="tutorial-setup-and-installation">
-<span id="astro-tutorial-setup"></span><h1>1. Tutorial Setup and Installation<a class="headerlink" href="#tutorial-setup-and-installation" title="Permalink to this headline">¶</a></h1>
+<span id="sklearn-tutorial-setup"></span><h1>1. Tutorial Setup and Installation<a class="headerlink" href="#tutorial-setup-and-installation" title="Permalink to this headline">¶</a></h1>
 <div class="topic">
 <p class="topic-title first">Objectives</p>
 <p>At the end of this section, you will</p>
@@ -224,28 +224,48 @@ for details.</p>
 accessed through cloning the scikit-learn repository using
 <a class="reference external" href="http://git-scm.com/">git</a>.  Once <tt class="docutils literal"><span class="pre">git</span></tt> is installed the
 command to accomplish this is:</p>
-<div class="highlight-python"><pre>% git clone https://github.com/jakevdp/scikit-learn/
-% cd scikit-learn
-% git checkout -b sklearn-tutorial origin/sklearn-tutorial</pre>
+<div class="highlight-python"><pre>% git clone https://github.com/astroML/sklearn_tutorial</pre>
 </div>
-<p>The last line switches to the branch of the repository which contains
-the source of this tutorial.  In what follows, the path to the
-<tt class="docutils literal"><span class="pre">scikit-learn</span></tt> source folder will be named <tt class="docutils literal"><span class="pre">$SKL_HOME</span></tt>.
-Within this directory can be found the tutorial source:</p>
-<div class="highlight-python"><pre>% cd doc/tutorial/astronomy</pre>
-</div>
-<p>In what follows, this directory will be named <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME</span></tt>. It
+<p>This creates a directory called <tt class="docutils literal"><span class="pre">sklearn_tutorial</span></tt> and copies all
+the source files of this tutorial.  Most of the relevant files are
+in the <tt class="docutils literal"><span class="pre">sklearn_tutorial/doc</span></tt> sub-directory.
+In what follows, this directory will be named <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME</span></tt>. It
 should contain the following folders:</p>
 <blockquote>
-<div><ul class="simple">
-<li><tt class="docutils literal"><span class="pre">data</span></tt> - folder to put the datasets used during the tutorial</li>
-<li><tt class="docutils literal"><span class="pre">skeletons</span></tt> - sample incomplete scripts for the exercices</li>
-<li><tt class="docutils literal"><span class="pre">solutions</span></tt> - solutions of the exercices</li>
-<li><tt class="docutils literal"><span class="pre">notebooks</span></tt> - ipython notebooks which provide an interactive interface
-to parts of this tutorial.</li>
+<div><ul>
+<li><p class="first"><tt class="docutils literal"><span class="pre">data</span></tt> - folder to put the datasets used during the tutorial</p>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">skeletons</span></tt> - sample incomplete scripts for the exercices</dt>
+<dd><dl class="first last docutils">
+<dt>(these should be used only if <tt class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span></tt></dt>
+<dd><p class="first last">is unavailable)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">solutions</span></tt> - solutions of the exercices</dt>
+<dd><dl class="first last docutils">
+<dt>(these should be used only if <tt class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span></tt></dt>
+<dd><p class="first last">is unavailable)</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">notebooks</span></tt> - ipython notebooks which provide an interactive interface</dt>
+<dd><p class="first last">to parts of this tutorial.  These are more up-to-date
+than the skeletons and solutions</p>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
-<p>You can aleardy copy the skeletons into a new folder named <tt class="docutils literal"><span class="pre">workspace</span></tt>
+<p>If you are not going to use ipython notebook to run the examples, you
+can copy the skeletons into a new folder named <tt class="docutils literal"><span class="pre">workspace</span></tt>
 where you will edit your own files for the exercices while keeping
 the original skeletons intact:</p>
 <div class="highlight-python"><pre>% cp -r skeletons workspace</pre>
