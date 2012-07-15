@@ -33,8 +33,7 @@ Code examples
 
 
 
-General-purpose and introductory examples for Machine Learning for
-Astronomy with scikit-learn
+Applications to experiment with scikit-learn tools.
 
 
 
@@ -137,6 +136,16 @@ Astronomy with scikit-learn
    :hidden:
 
    ./plot_sgd_separating_hyperplane
+
+.. figure:: ./images/thumb/svm_gui.png
+   :target: ./svm_gui.html
+
+   :ref:`example_svm_gui.py`
+
+.. toctree::
+   :hidden:
+
+   ./svm_gui
 
 
 .. raw:: html

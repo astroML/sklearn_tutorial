@@ -301,7 +301,8 @@ Nevertheless, there are some weaknesses here.  First of all, PCA does not
 do a good job of separating out galaxies with different emission
 characteristics.  We'd hope for a projection which reflects the fact that
 narrow spectral features are very important in the classification.  PCA
-does not do this.  In a later exercise, we'll explore some alternative
+does not do this.  Later, in :ref:`Exercise 3 <astro_exercise_3>`,
+we'll explore some alternative
 nonlinear dimensionality reduction techniques which will address this
 deficiency of PCA.
 

@@ -10,17 +10,17 @@ import urllib2
 import numpy as np
 import pylab as pl
 
-from sklearn.datasets import get_data_home
 from sklearn import preprocessing
 from sklearn.decomposition import RandomizedPCA
 
 DATA_URL = ('http://www.astro.washington.edu/users/'
             'vanderplas/pydata/spec4000_corrected.npz')
 
-def fetch_sdss_spec_data(data_home=None):
-    data_home = get_data_home(data_home)
+def fetch_sdss_spec_data():
+    if not os.path.exists('downloads'):
+        os.makedirs('downloads')
 
-    local_file = os.path.join(data_home, os.path.basename(DATA_URL))
+    local_file = os.path.join('downloads', os.path.basename(DATA_URL))
 
     # data directory is password protected so the public can't access it    
     password_mgr = urllib2.HTTPPasswordMgrWithDefaultRealm()
@@ -82,7 +82,7 @@ pl.xlim(wavelengths[0], wavelengths[-1])
 pl.ylim(0, 0.06)
 pl.xlabel('wavelength (Angstroms)')
 pl.ylabel('scaled flux')
-pl.title('Mean Spectrum')
+pl.title('Mean Spectrum + Variance')
 
 #----------------------------------------------------------------------
 #

@@ -28,5 +28,5 @@ of galaxies in the Sloan Digital Sky Survey.
 
 
 
-**Total running time of the example:**    9 seconds
+**Total running time of the example:**   10 seconds
     

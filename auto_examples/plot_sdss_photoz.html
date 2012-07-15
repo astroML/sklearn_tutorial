@@ -180,10 +180,11 @@ of galaxies in the Sloan Digital Sky Survey.</p>
             <span class="s">&#39;vanderplas/pydata/sdss_photoz.npy&#39;</span><span class="p">)</span>
 <span class="n">LOCAL_FILE</span> <span class="o">=</span> <span class="s">&#39;sdss_photoz.npy&#39;</span>
 
-<span class="k">def</span> <span class="nf">fetch_photoz_data</span><span class="p">(</span><span class="n">data_home</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="n">data_home</span> <span class="o">=</span> <span class="n">get_data_home</span><span class="p">(</span><span class="n">data_home</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fetch_photoz_data</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">)</span>
 
-    <span class="n">local_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_home</span><span class="p">,</span> <span class="n">LOCAL_FILE</span><span class="p">)</span>
+    <span class="n">local_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">,</span> <span class="n">LOCAL_FILE</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">local_file</span><span class="p">):</span>
         <span class="c"># data directory is password protected so the public can&#39;t access it    </span>
@@ -252,7 +253,7 @@ of galaxies in the Sloan Digital Sky Survey.</p>
 <span class="mi">1538</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>    9 seconds</p>
+<p><strong>Total running time of the example:</strong>   10 seconds</p>
 </div>
 
 

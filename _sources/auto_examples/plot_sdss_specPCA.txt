@@ -46,5 +46,5 @@ This plots some of the SDSS spectra examples for the astronomy tutorial
 
 
 
-**Total running time of the example:**    2 seconds
+**Total running time of the example:**    1 seconds
     

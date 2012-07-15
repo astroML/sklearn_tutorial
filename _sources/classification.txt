@@ -231,7 +231,7 @@ This low precision leads to an F1-score of only 0.25.  This is not an
 optimal classification of our data.  Apparently Naive Bayes is a bit too
 naive for this problem. 
 
-Later, in `Exercise #1 <exercises.html>`_, we will apply a more sophisticated
+Later, in :ref:`Exercise #1 <astro_exercise_1>`, we will apply a more sophisticated
 learning method to this task, which will potentially improve on these
 results.
 

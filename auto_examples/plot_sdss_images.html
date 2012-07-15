@@ -174,9 +174,6 @@ the tutorial.</p>
 <span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">image</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">get_data_home</span>
-
-
 <span class="k">def</span> <span class="nf">_fetch</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">RA</span><span class="p">,</span> <span class="n">DEC</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Fetch the image at the given RA, DEC from the SDSS server&quot;&quot;&quot;</span>
     <span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="s">&quot;http://casjobs.sdss.org/ImgCutoutDR7/&quot;</span>
@@ -188,13 +185,12 @@ the tutorial.</p>
     <span class="nb">open</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">fhandle</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
 
-<span class="k">def</span> <span class="nf">fetch_image</span><span class="p">(</span><span class="n">object_type</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">fetch_image</span><span class="p">(</span><span class="n">object_type</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the data array for the image of object type&quot;&quot;&quot;</span>
-    <span class="n">data_home</span> <span class="o">=</span> <span class="n">get_data_home</span><span class="p">(</span><span class="n">data_home</span><span class="p">)</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">data_home</span><span class="p">):</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">data_home</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">)</span>
 
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_home</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">_image.jpg&#39;</span> <span class="o">%</span> <span class="n">object_type</span><span class="p">)</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">_image.jpg&#39;</span> <span class="o">%</span> <span class="n">object_type</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
         <span class="n">RA</span> <span class="o">=</span> <span class="n">image_locations</span><span class="p">[</span><span class="n">object_type</span><span class="p">][</span><span class="s">&#39;RA&#39;</span><span class="p">]</span>
         <span class="n">DEC</span> <span class="o">=</span> <span class="n">image_locations</span><span class="p">[</span><span class="n">object_type</span><span class="p">][</span><span class="s">&#39;DEC&#39;</span><span class="p">]</span>
@@ -235,6 +231,14 @@ the tutorial.</p>
 
 <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
+</div>
+<p><strong>Script output</strong>:</p>
+<div class="highlight-python"><pre>downloading http://casjobs.sdss.org/ImgCutoutDR7/getjpeg.aspx?ra=180.63040108&amp;dec=64.96767375&amp;scale=0.20&amp;width=400&amp;height=400
+ -&gt; star_image.jpg
+downloading http://casjobs.sdss.org/ImgCutoutDR7/getjpeg.aspx?ra=197.51943983&amp;dec=0.94881436&amp;scale=0.20&amp;width=400&amp;height=400
+ -&gt; galaxy_image.jpg
+downloading http://casjobs.sdss.org/ImgCutoutDR7/getjpeg.aspx?ra=226.18451462&amp;dec=4.07456639&amp;scale=0.20&amp;width=400&amp;height=400
+ -&gt; quasar_image.jpg</pre>
 </div>
 <p><strong>Total running time of the example:</strong>    0 seconds</p>
 </div>

@@ -180,16 +180,17 @@ Survey, along with a reference spectrum.</p>
 <span class="kn">import</span> <span class="nn">pylab</span> <span class="kn">as</span> <span class="nn">pl</span>
 <span class="kn">from</span> <span class="nn">matplotlib.patches</span> <span class="kn">import</span> <span class="n">Arrow</span>
 
-<span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">get_data_home</span>
-
 <span class="n">REFSPEC_URL</span> <span class="o">=</span> <span class="s">&#39;ftp://ftp.stsci.edu/cdbs/current_calspec/1732526_nic_002.ascii&#39;</span>
 <span class="n">URL</span> <span class="o">=</span> <span class="s">&#39;http://www.sdss.org/dr7/instruments/imager/filters/</span><span class="si">%s</span><span class="s">.dat&#39;</span>
 
-<span class="k">def</span> <span class="nf">fetch_filter</span><span class="p">(</span><span class="nb">filter</span><span class="p">,</span> <span class="n">data_home</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="n">data_home</span> <span class="o">=</span> <span class="n">get_data_home</span><span class="p">(</span><span class="n">data_home</span><span class="p">)</span>
-    <span class="k">assert</span> <span class="nb">filter</span> <span class="ow">in</span> <span class="s">&#39;ugriz&#39;</span>
-    <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span> <span class="o">%</span> <span class="nb">filter</span>
-    <span class="n">loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_home</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.dat&#39;</span> <span class="o">%</span> <span class="nb">filter</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">fetch_filter</span><span class="p">(</span><span class="n">filt</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">filt</span> <span class="ow">in</span> <span class="s">&#39;ugriz&#39;</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="n">URL</span> <span class="o">%</span> <span class="n">filt</span>
+    
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">)</span>
+
+    <span class="n">loc</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">,</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">.dat&#39;</span> <span class="o">%</span> <span class="n">filt</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">loc</span><span class="p">):</span>
         <span class="k">print</span> <span class="s">&quot;downloading from </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">url</span>
         <span class="n">F</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
@@ -200,11 +201,14 @@ Survey, along with a reference spectrum.</p>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">F</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">data</span>
 
-<span class="k">def</span> <span class="nf">fetch_vega_spectrum</span><span class="p">(</span><span class="n">data_home</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-    <span class="n">data_home</span> <span class="o">=</span> <span class="n">get_data_home</span><span class="p">(</span><span class="n">data_home</span><span class="p">)</span>
-    <span class="n">refspec_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_home</span><span class="p">,</span> <span class="n">REFSPEC_URL</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="k">def</span> <span class="nf">fetch_vega_spectrum</span><span class="p">():</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">)</span>
+
+    <span class="n">refspec_file</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&#39;downloads&#39;</span><span class="p">,</span> <span class="n">REFSPEC_URL</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
     <span class="k">if</span>  <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">refspec_file</span><span class="p">):</span>
-        <span class="k">print</span> <span class="s">&quot;downnloading from </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">REFSPEC_URL</span>
+        <span class="k">print</span> <span class="s">&quot;downloading from </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">REFSPEC_URL</span>
         <span class="n">F</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">REFSPEC_URL</span><span class="p">)</span>
         <span class="nb">open</span><span class="p">(</span><span class="n">refspec_file</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">F</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 
@@ -277,7 +281,10 @@ Survey, along with a reference spectrum.</p>
 <span class="n">pl</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
-<p><strong>Total running time of the example:</strong>    0 seconds</p>
+<p><strong>Script output</strong>:</p>
+<div class="highlight-python"><pre>downloading from ftp://ftp.stsci.edu/cdbs/current_calspec/1732526_nic_002.ascii</pre>
+</div>
+<p><strong>Total running time of the example:</strong>    5 seconds</p>
 </div>
 
 

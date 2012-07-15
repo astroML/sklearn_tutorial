@@ -155,7 +155,7 @@ the predicted redshift versus the true redshift for the test data:
    those galaxies whose predicted redshifts are extremely far from the true
    value.
 
-Later, in `Exercise #2 <exercises.html>`_, we will attempt
+Later, in :ref:`Exercise #2 <astro_exercise_2>`, we will attempt
 to improve on this by optimizing the parameters of the decision tree.
 
 In practice, the solutions to the photometric redshift problem can benefit from
