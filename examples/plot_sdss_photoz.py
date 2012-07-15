@@ -18,10 +18,11 @@ DATA_URL = ('http://www.astro.washington.edu/users/'
             'vanderplas/pydata/sdss_photoz.npy')
 LOCAL_FILE = 'sdss_photoz.npy'
 
-def fetch_photoz_data(data_home=None):
-    data_home = get_data_home(data_home)
+def fetch_photoz_data():
+    if not os.path.exists('downloads'):
+        os.makedirs('downloads')
 
-    local_file = os.path.join(data_home, LOCAL_FILE)
+    local_file = os.path.join('downloads', LOCAL_FILE)
 
     if not os.path.exists(local_file):
         # data directory is password protected so the public can't access it    

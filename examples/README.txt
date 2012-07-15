@@ -1,2 +1,1 @@
-General-purpose and introductory examples for Machine Learning for
-Astronomy with scikit-learn
+Applications to experiment with scikit-learn tools.

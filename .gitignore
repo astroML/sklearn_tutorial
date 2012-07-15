@@ -18,6 +18,8 @@ pip-log.txt
 coverage
 tags
 
+examples/downloads/
+
 *.zip
 *.nt.bz2
 *.tar.gz

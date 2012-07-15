@@ -12,16 +12,17 @@ import numpy as np
 import pylab as pl
 from matplotlib.patches import Arrow
 
-from sklearn.datasets import get_data_home
-
 REFSPEC_URL = 'ftp://ftp.stsci.edu/cdbs/current_calspec/1732526_nic_002.ascii'
 URL = 'http://www.sdss.org/dr7/instruments/imager/filters/%s.dat'
 
-def fetch_filter(filter, data_home=None):
-    data_home = get_data_home(data_home)
-    assert filter in 'ugriz'
-    url = URL % filter
-    loc = os.path.join(data_home, '%s.dat' % filter)
+def fetch_filter(filt):
+    assert filt in 'ugriz'
+    url = URL % filt
+    
+    if not os.path.exists('downloads'):
+        os.makedirs('downloads')
+
+    loc = os.path.join('downloads', '%s.dat' % filt)
     if not os.path.exists(loc):
         print "downloading from %s" % url
         F = urllib2.urlopen(url)
@@ -32,11 +33,14 @@ def fetch_filter(filter, data_home=None):
     data = np.loadtxt(F)
     return data
 
-def fetch_vega_spectrum(data_home=None):
-    data_home = get_data_home(data_home)
-    refspec_file = os.path.join(data_home, REFSPEC_URL.split('/')[-1])
+def fetch_vega_spectrum():
+    if not os.path.exists('downloads'):
+        os.makedirs('downloads')
+
+    refspec_file = os.path.join('downloads', REFSPEC_URL.split('/')[-1])
+
     if  not os.path.exists(refspec_file):
-        print "downnloading from %s" % REFSPEC_URL
+        print "downloading from %s" % REFSPEC_URL
         F = urllib2.urlopen(REFSPEC_URL)
         open(refspec_file, 'w').write(F.read())
 

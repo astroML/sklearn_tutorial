@@ -11,6 +11,10 @@ import pylab as pl
 from matplotlib import ticker
 from matplotlib.patches import FancyArrow
 
+# Suppress warnings from Polyfit (ill-conditioned fit)
+import warnings
+warnings.filterwarnings('ignore', message='Polyfit*')
+
 np.random.seed(42)
 
 def test_func(x, err=0.5):
@@ -167,8 +171,6 @@ for j,d in enumerate((1, 20)):
 
     pl.text(98, 2.45, 'd = %i' % d, ha='right', va='top', fontsize='large')
 
-pl.subplots_adjust(wspace = 0.02, left=0.07, right=0.95)
-pl.suptitle('Learning Curves', fontsize=18)
-
-
+pl.subplots_adjust(wspace = 0.02, left=0.07, right=0.95,
+                   bottom=0.1, top=0.9)
 pl.show()

@@ -324,8 +324,8 @@ object named ``model``, the following methods are available:
 
 .. _astro_supervised_learning:
 
-Supervised Learning
--------------------
+Supervised Learning: ``model.fit(X, y)``
+----------------------------------------
 
 .. figure:: auto_examples/images/plot_ML_flow_chart_1.png
    :target: auto_examples/plot_ML_flow_chart.html
@@ -856,9 +856,9 @@ Others simply don't.
 To grasp the difference between the two cases, run the interactive
 example from the ``examples`` folder of the ``scikit-learn`` source
 distribution.  (if you don't have the scikit-learn source code locally
-installed, you can find the script `here <auto_examples/applications/svm_gui.html>`_)::
+installed, you can find the script `here <auto_examples/svm_gui.html>`_)::
 
-    % python $SKL_HOME/examples/applications/svm_gui.py
+    % python $SKL_HOME/examples/svm_gui.py
 
 1. Put some data points belonging to one of the two target classes
    ('white' or 'black') using left click and right click.

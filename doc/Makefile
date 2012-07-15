@@ -114,12 +114,24 @@ download-data:
 #	cp _build/latex/nisl-nup.pdf nisl.pdf
 	#cd _build/latex ; make all-pdf ; pdfnup nisl.pdf
 
-install: html 
-	rm -rf _build/gh-pages
+install-reclone: html 
+	rm -rf _build/sklearn_tutorial
 	cd _build/ && \
         git clone git@github.com:astroML/sklearn_tutorial && \
 	cd sklearn_tutorial && git checkout gh-pages && \
 	cp -r ../html/* . && \
 	git add * && \
 	git commit -a -m 'Make install' && \
-	git push
+	git push origin gh-pages
+
+install: html
+	if test -d _build/sklearn_tutorial; \
+	then echo "using existing sklearn_tutorial directory"; \
+	else cd _build/ && \
+	git clone git@github.com:astroML/sklearn_tutorial; \
+	fi && \
+	cd _build/sklearn_tutorial && git checkout gh-pages && \
+	rsync -r ../html/* ./ && \
+	git add * && \
+	git commit -a -m 'Make install' && \
+	git push origin gh-pages

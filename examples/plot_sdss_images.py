@@ -11,9 +11,6 @@ import urllib2
 import pylab as pl
 from matplotlib import image
 
-from sklearn.datasets import get_data_home
-
-
 def _fetch(outfile, RA, DEC, scale=0.2, width=400, height=400):
     """Fetch the image at the given RA, DEC from the SDSS server"""
     url = ("http://casjobs.sdss.org/ImgCutoutDR7/"
@@ -25,13 +22,12 @@ def _fetch(outfile, RA, DEC, scale=0.2, width=400, height=400):
     open(outfile, 'w').write(fhandle.read())
 
 
-def fetch_image(object_type, data_home=None):
+def fetch_image(object_type):
     """Return the data array for the image of object type"""
-    data_home = get_data_home(data_home)
-    if not os.path.exists(data_home):
-        os.makedirs(data_home)
+    if not os.path.exists('downloads'):
+        os.makedirs('downloads')
 
-    filename = os.path.join(data_home, '%s_image.jpg' % object_type)
+    filename = os.path.join('downloads', '%s_image.jpg' % object_type)
     if not os.path.exists(filename):
         RA = image_locations[object_type]['RA']
         DEC = image_locations[object_type]['DEC']
