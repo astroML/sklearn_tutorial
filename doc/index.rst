@@ -86,6 +86,8 @@
  .. sidebar:: Download 
     
     * `Source code (github) <https://github.com/astroML/sklearn_tutorial>`_
+
+    * :download:`PDF of tutorial <sklearn_tutorial.pdf>`
         
     * :download:`tarball of exercises <exercises.tgz>`
 

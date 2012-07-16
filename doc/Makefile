@@ -112,7 +112,7 @@ download-data:
 	cd data/sdss_colors && python fetch_data.py
 
 pdf: latexpdf
-	cp $(BUILDDIR)/latex/AstroSklearn.pdf ./
+	cp $(BUILDDIR)/latex/sklearn_tutorial.pdf ./
 
 nbconvert:
 	cd notebooks && rm -f *.v2.ipynb && python nbconvert.py *.ipynb
