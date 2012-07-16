@@ -30,7 +30,11 @@ Survey, along with a reference spectrum.
 .. literalinclude:: plot_sdss_filters.py
     :lines: 8-
 
+**Script output**::
+
+  downloading from ftp://ftp.stsci.edu/cdbs/current_calspec/1732526_nic_002.ascii
 
 
-**Total running time of the example:**    1 seconds
+
+**Total running time of the example:**    5 seconds
     

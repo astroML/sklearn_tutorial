@@ -15,12 +15,12 @@ This code generates the Iris projection example plots found in the tutorial
 
     *
 
-      .. image:: images/plot_iris_projections_2.png
+      .. image:: images/plot_iris_projections_1.png
             :scale: 47
 
     *
 
-      .. image:: images/plot_iris_projections_1.png
+      .. image:: images/plot_iris_projections_2.png
             :scale: 47
 
 
@@ -31,5 +31,5 @@ This code generates the Iris projection example plots found in the tutorial
 
 
 
-**Total running time of the example:**    1 seconds
+**Total running time of the example:**    0 seconds
     
