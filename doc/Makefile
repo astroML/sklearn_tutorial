@@ -136,7 +136,7 @@ install-reclone: tar html #pdf
 install: tar html #pdf
 	if test -d _build/sklearn_tutorial; \
 	then echo "using existing sklearn_tutorial directory"; \
-	else cd _build/ && \
+	else cd _build && \
 	git clone git@github.com:astroML/sklearn_tutorial; \
 	fi && \
 	cd _build/sklearn_tutorial && git checkout gh-pages && \
