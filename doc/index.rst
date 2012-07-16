@@ -85,11 +85,11 @@
 
  .. sidebar:: Download 
     
-    * `Source code (github) <https://github.com/astroML/sklearn_tutorial>`_
+    * Source code: `github <https://github.com/astroML/sklearn_tutorial>`_
 
-    * :download:`PDF of tutorial <sklearn_tutorial.pdf>`
+    * PDF of tutorial: :download:`sklearn_tutorial.pdf`
         
-    * :download:`tarball of exercises <exercises.tgz>`
+    * Tarball of exercises and notebooks: :download:`exercises.tgz`
 
 
 .. sectionauthor:: Jake Vanderplas <vanderplas@astro.washington.edu>

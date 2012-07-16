@@ -47,6 +47,12 @@ you have ``matplotlib`` and ``ipython`` installed as well.
         python-numpy-dev python-scipy libatlas-dev g++ python-matplotlib \
         ipython
 
+    If you are under Ubuntu 12.04+, then you can use
+      
+      % sudo apt-get install ipython-notebook
+
+    to install ipython notebook with all dependencies.
+
   * Under **MacOSX** you should probably use a scientific python distribution
     such as `Scipy Superpack`_
 
