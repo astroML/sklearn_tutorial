@@ -12,7 +12,7 @@ PAPEROPT_a4     = -D latex_paper_size=a4
 PAPEROPT_letter = -D latex_paper_size=letter
 ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
-.PHONY: help clean html dirhtml pickle json htmlhelp qthelp latex latexpdf changes linkcheck doctest
+.PHONY: help clean html dirhtml pickle json htmlhelp qthelp latex latexpdf chan
 
 all: html-noplot
 
@@ -99,8 +99,6 @@ doctest:
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
-download-data:
-
 #zip: html pdf
 #	mkdir -p _build/nisl ;
 #	cp -r _build/html _build/nisl ;
@@ -108,23 +106,34 @@ download-data:
 #	cp nisl.pdf _build/nisl;
 #	zip -r _build/nisl.zip _build/nisl
 
-#pdf: latex
-#	cd _build/latex ; make all-pdf ; pdfnup nisl.pdf
-#	cp _build/latex/nisl.pdf nisl-simple.pdf
-#	cp _build/latex/nisl-nup.pdf nisl.pdf
-	#cd _build/latex ; make all-pdf ; pdfnup nisl.pdf
+download-data:
+	cd data/sdss_colors && python fetch_data.py
+	cd data/sdss_colors && python fetch_data.py
+	cd data/sdss_colors && python fetch_data.py
 
-install-reclone: html 
+pdf: latexpdf
+	cp $(BUILDDIR)/latex/AstroSklearn.pdf ./
+
+nbconvert:
+	cd notebooks && rm -f *.v2.ipynb && python nbconvert.py *.ipynb
+
+tar: nbconvert
+	tar -czvf exercises.tgz notebooks/soln/*.py notebooks/*.ipynb data/*/*.py skeletons solutions
+
+tar-data: nbconvert download-data
+	tar -czvf exercises_data.tgz notebooks/soln/*.py notebooks/*.ipynb data skeletons solutions
+
+install-reclone: tar html #pdf
 	rm -rf _build/sklearn_tutorial
 	cd _build/ && \
         git clone git@github.com:astroML/sklearn_tutorial && \
 	cd sklearn_tutorial && git checkout gh-pages && \
-	cp -r ../html/* . && \
+	rsync -r ../html/* . && \
 	git add * && \
 	git commit -a -m 'Make install' && \
 	git push origin gh-pages
 
-install: html
+install: tar html #pdf
 	if test -d _build/sklearn_tutorial; \
 	then echo "using existing sklearn_tutorial directory"; \
 	else cd _build/ && \

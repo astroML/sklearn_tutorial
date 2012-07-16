@@ -4,6 +4,17 @@
 Machine Learning 102: Practical Advice
 ======================================
 
+.. topic:: Objectives
+
+   By the end of this section you will
+
+   1. Be able to describe the *hyperparameters* of a model, and how
+      *cross-validation* can be used to estimate them.
+   2. Be able to describe the concepts of *bias* & *variance*, and
+      *overfitting* & *underfitting*
+   3. Be able to use *learning curves* to recognize when a model has
+      high bias or high variance, and choose the corect course of action.
+
 .. note::
 
    The information in this section is available in an interactive notebook

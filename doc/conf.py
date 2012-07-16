@@ -211,11 +211,10 @@ htmlhelp_basename = 'PythonScientic'
 # (source start file, target name, title, author, documentclass
 # [howto/manual]).
 latex_documents = [
-  ('index', 'astroML.tex', u'Astronomy with scikit-learn',
+  ('index', 'sklearn_tutorial.tex', u'Astronomy with scikit-learn',
    ur"""Jacob VanderPlas"""
-   + r"\\\relax ~\\\relax http://astroML.github.com",
+   + r"\\\relax ~\\\relax http://astroML.github.com/sklearn_tutorial",
    'manual'),
-
 ]
 
 # The name of an image file (relative to this directory) to place at the top of
