@@ -30,8 +30,8 @@ This tutorial is based on scikit-learn, which has the following dependencies:
 
 We will also make extensive use of `iPython <http://ipython.org>`_, an
 interactive python interpreter.  In particular, much of the interactive
-material will make use of the 
-`ipython notebook`_ functionality, which was introduced in ipython version 0.12.
+material requires `ipython notebook`_ functionality,
+which was introduced in ipython version 0.12.
 
 Installing scikit-learn and Dependencies
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -55,7 +55,7 @@ you have ``matplotlib`` and ``ipython`` installed as well.
 
   * Power-users may wish to install bleeding edge versions of these
     packages from the source.  The source can be downloaded using
-    ``git`` from their respective `GitHub`_ repositories.
+    ``git`` from the packages' respective `GitHub`_ repositories.
 
 Alternatively under Windows and MaxOSX you can use the EPD_ (Enthought
 Python Distribution) which is a (non-open source) packaging of the
@@ -92,16 +92,14 @@ should contain the following folders:
   * ``data`` - folder to put the datasets used during the tutorial
 
   * ``skeletons`` - sample incomplete scripts for the exercices
-                    (these should be used only if ``ipython notebook``
-		     is unavailable)
+    (these should be used only if ``ipython notebook`` is unavailable)
 
   * ``solutions`` - solutions of the exercices
-                    (these should be used only if ``ipython notebook``
-		     is unavailable)
+    (these should be used only if ``ipython notebook`` is unavailable)
 
   * ``notebooks`` - ipython notebooks which provide an interactive interface
-                    to parts of this tutorial.  These are more up-to-date
-		    than the skeletons and solutions
+    to parts of this tutorial.  These contain material which is not in the
+    skeletons and solutions.
 
 If you are not going to use ipython notebook to run the examples, you
 can copy the skeletons into a new folder named ``workspace``

@@ -20,16 +20,7 @@ the tutorial.
 .. literalinclude:: plot_sdss_images.py
     :lines: 8-
 
-**Script output**::
-
-  downloading http://casjobs.sdss.org/ImgCutoutDR7/getjpeg.aspx?ra=180.63040108&dec=64.96767375&scale=0.20&width=400&height=400
-   -> star_image.jpg
-  downloading http://casjobs.sdss.org/ImgCutoutDR7/getjpeg.aspx?ra=197.51943983&dec=0.94881436&scale=0.20&width=400&height=400
-   -> galaxy_image.jpg
-  downloading http://casjobs.sdss.org/ImgCutoutDR7/getjpeg.aspx?ra=226.18451462&dec=4.07456639&scale=0.20&width=400&height=400
-   -> quasar_image.jpg
 
 
-
-**Total running time of the example:**    0 seconds
+**Total running time of the example:**    1 seconds
     

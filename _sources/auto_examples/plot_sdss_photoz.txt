@@ -22,11 +22,11 @@ of galaxies in the Sloan Digital Sky Survey.
 
 **Script output**::
 
-  0.221389887915
+  0.221409443127
   102798
   1538
 
 
 
-**Total running time of the example:**   10 seconds
+**Total running time of the example:**   46 seconds
     

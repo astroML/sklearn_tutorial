@@ -66,6 +66,7 @@
 
 <div class="search_form">
 
+<!--
 <div id="cse" style="width: 100%;"></div>
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
 <script type="text/javascript">
@@ -80,6 +81,7 @@
 </script>
 
 </div>
+-->
           </div> <!-- end navbar --></div>
     </div>
 
@@ -179,8 +181,8 @@ visual interaction with data and results depends on matplotlib.</li>
 </ul>
 <p>We will also make extensive use of <a class="reference external" href="http://ipython.org">iPython</a>, an
 interactive python interpreter.  In particular, much of the interactive
-material will make use of the
-<a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">ipython notebook</a> functionality, which was introduced in ipython version 0.12.</p>
+material requires <a class="reference external" href="http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html">ipython notebook</a> functionality,
+which was introduced in ipython version 0.12.</p>
 <div class="section" id="installing-scikit-learn-and-dependencies">
 <h3>1.1.1. Installing scikit-learn and Dependencies<a class="headerlink" href="#installing-scikit-learn-and-dependencies" title="Permalink to this headline">¶</a></h3>
 <p>Please refer to the <a class="reference external" href="http://www.scikit-learn.org/stable/install.html#installing-an-official-release">install page</a> for
@@ -203,7 +205,7 @@ working numpy / scipy environment up and running.</p>
 </li>
 <li><p class="first">Power-users may wish to install bleeding edge versions of these
 packages from the source.  The source can be downloaded using
-<tt class="docutils literal"><span class="pre">git</span></tt> from their respective <a class="reference external" href="http://www.github.com">GitHub</a> repositories.</p>
+<tt class="docutils literal"><span class="pre">git</span></tt> from the packages&#8217; respective <a class="reference external" href="http://www.github.com">GitHub</a> repositories.</p>
 </li>
 </ul>
 </div></blockquote>
@@ -232,36 +234,15 @@ in the <tt class="docutils literal"><span class="pre">sklearn_tutorial/doc</span
 In what follows, this directory will be named <tt class="docutils literal"><span class="pre">$TUTORIAL_HOME</span></tt>. It
 should contain the following folders:</p>
 <blockquote>
-<div><ul>
-<li><p class="first"><tt class="docutils literal"><span class="pre">data</span></tt> - folder to put the datasets used during the tutorial</p>
-</li>
-<li><dl class="first docutils">
-<dt><tt class="docutils literal"><span class="pre">skeletons</span></tt> - sample incomplete scripts for the exercices</dt>
-<dd><dl class="first last docutils">
-<dt>(these should be used only if <tt class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span></tt></dt>
-<dd><p class="first last">is unavailable)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><tt class="docutils literal"><span class="pre">solutions</span></tt> - solutions of the exercices</dt>
-<dd><dl class="first last docutils">
-<dt>(these should be used only if <tt class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span></tt></dt>
-<dd><p class="first last">is unavailable)</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</li>
-<li><dl class="first docutils">
-<dt><tt class="docutils literal"><span class="pre">notebooks</span></tt> - ipython notebooks which provide an interactive interface</dt>
-<dd><p class="first last">to parts of this tutorial.  These are more up-to-date
-than the skeletons and solutions</p>
-</dd>
-</dl>
-</li>
+<div><ul class="simple">
+<li><tt class="docutils literal"><span class="pre">data</span></tt> - folder to put the datasets used during the tutorial</li>
+<li><tt class="docutils literal"><span class="pre">skeletons</span></tt> - sample incomplete scripts for the exercices
+(these should be used only if <tt class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span></tt> is unavailable)</li>
+<li><tt class="docutils literal"><span class="pre">solutions</span></tt> - solutions of the exercices
+(these should be used only if <tt class="docutils literal"><span class="pre">ipython</span> <span class="pre">notebook</span></tt> is unavailable)</li>
+<li><tt class="docutils literal"><span class="pre">notebooks</span></tt> - ipython notebooks which provide an interactive interface
+to parts of this tutorial.  These contain material which is not in the
+skeletons and solutions.</li>
 </ul>
 </div></blockquote>
 <p>If you are not going to use ipython notebook to run the examples, you

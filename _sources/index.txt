@@ -86,40 +86,44 @@
  .. sidebar:: Download 
     
     * `Source code (github) <https://github.com/astroML/sklearn_tutorial>`_
+        
+    * :download:`tarball of exercises <exercises.tgz>`
 
 
 .. sectionauthor:: Jake Vanderplas <vanderplas@astro.washington.edu>
 
 .. topic:: Machine Learning for Astronomy with scikit-learn
 
-    `scikit-learn <http://www.scikit-learn.org>`_
-    is a Python module integrating classic machine
-    learning algorithms in the tightly-knit world of scientific Python
-    packages (`numpy <http://numpy.scipy.org>`_, `scipy
-    <http://www.scipy.org>`_, `matplotlib
-    <http://matplotlib.sourceforge.net/>`_).
+   This tutorial offers a brief introduction to the fields of machine
+   learning and statistical data analysis, and their application to
+   several problems in the field of astronomy.  These learning tasks
+   are enabled by the tools available in the open-source package
+   `scikit-learn`_.
 
-    It aims to provide simple and efficient solutions to learning
-    problems that are accessible to everybody and reusable in various
-    contexts: **machine-learning as a versatile tool for science and
-    engineering**.
-    This tutorial offers a brief introduction to the fields of machine
-    learning and statistical data analysis, as well as the scikit-learn
-    interface for several machine learning tasks.  It explores several
-    practical examples from the field of Astronomy.
+   `scikit-learn`_ is a Python module integrating classic machine
+   learning algorithms in the tightly-knit world of scientific Python
+   packages (`numpy`_, `scipy`_, `matplotlib`_).  It aims to provide
+   simple and efficient solutions to learning problems that are accessible
+   to everybody and reusable in various contexts:
+   **machine-learning as a versatile tool for science and engineering**.
 
-    The tutorial is best used with the `ipython notebook`_.  Many of the
-    interactive exercises and examples require this, and not all of the
-    material can be duplicated in the more restrictive html format.  For
-    information on how to download the associated notebooks, see the
-    :ref:`sklearn_tutorial_setup` page.
+   Many of the examples and exercises in this tutorial require the
+   `ipython notebook`_, a tool which provides an intuitive web-based
+   interactive environment for scientific python.  Some of the material
+   in the notebooks is duplicated in the following pages, but ipython
+   notebook is required for some parts. For information on how to download
+   the associated notebooks, see the :ref:`sklearn_tutorial_setup` page.
 
+.. _`scikit-learn`: http://www.scikit-learn.org
+.. _`numpy`: http://numpy.scipy.org
+.. _`scipy`: http://www.scipy.org
+.. _`matplotlib`: http://matplotlib.sourceforge.net
 .. _`ipython notebook`: http://ipython.org/ipython-doc/stable/interactive/htmlnotebook.html
 
 .. include:: includes/big_toc_css.rst
 
 .. note:: This document is meant to be used with **scikit-learn version
-   0.11+**
+   0.11+**.  Find the latest version `here <scikit-learn>`_.
 
 .. toctree::
    :numbered:
