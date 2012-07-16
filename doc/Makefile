@@ -123,7 +123,7 @@ tar: nbconvert
 tar-data: nbconvert download-data
 	tar -czvf exercises_data.tgz notebooks/soln/*.py notebooks/*.ipynb data skeletons solutions
 
-install-reclone: tar html #pdf
+install-reclone: pdf tar html
 	rm -rf _build/sklearn_tutorial
 	cd _build/ && \
         git clone git@github.com:astroML/sklearn_tutorial && \
@@ -133,7 +133,7 @@ install-reclone: tar html #pdf
 	git commit -a -m 'Make install' && \
 	git push origin gh-pages
 
-install: tar html #pdf
+install: pdf tar html
 	if test -d _build/sklearn_tutorial; \
 	then echo "using existing sklearn_tutorial directory"; \
 	else cd _build && \
