@@ -110,7 +110,8 @@ Star-Quasar Classification: Naive Bayes
 
    The information in this section is available in an interactive notebook
    :download:`07_classification_example.ipynb <notebooks/07_classification_example.ipynb>`,
-   which can be viewed using `iPython notebook`_.
+   which can be viewed using `iPython notebook`_.  An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/07_classification_example.ipynb>`_.
 
 In the folder ``$TUTORIAL_HOME/data/sdss_colors``, there is a script
 ``fetch_data.py`` which will download the colors of over 700,000 stars

@@ -43,7 +43,8 @@ SDSS Spectral Data
 
    The information in this section is available in an interactive notebook
    :download:`09_dimensionality_example.ipynb <notebooks/09_dimensionality_example.ipynb>`,
-   which can be viewed using `iPython notebook`_.
+   which can be viewed using `iPython notebook`_.    An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/09_dimensionality_example.ipynb>`_.
 
 In the directory ``$TUTORIAL_HOME/data/sdss_spectra/``, you'll find the script
 which fetches a set of spectra from the Sloan Digital Sky Survey.  Each
@@ -206,6 +207,7 @@ for this dataset::
 
     >>> from sklearn.decomposition import PCA
     >>> pca = PCA(n_components=4)
+    >>> X = normalize(data['X'])
     >>> X_projected = pca.fit_transform(X)  # warning: this takes a long time!
 
 Fortunately, scikit-learn has an alternative method that is much faster.  

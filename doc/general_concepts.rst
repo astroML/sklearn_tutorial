@@ -84,7 +84,8 @@ A simple example: the iris dataset
 
    The information in this section is available in an interactive notebook
    :download:`01_datasets.ipynb <notebooks/01_datasets.ipynb>`,
-   which can be viewed using `iPython notebook`_.
+   which can be viewed using `iPython notebook`_.    An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/01_datasets.ipynb>`_.
 
 The machine learning community often uses a simple flowers database
 where each row in the database (or CSV file) is a set of measurements
@@ -376,7 +377,8 @@ A first classifier example with ``scikit-learn``
 
    The information in this section is available in an interactive notebook
    :download:`02_iris_classification.ipynb <notebooks/02_iris_classification.ipynb>`,
-   which can be viewed using `iPython notebook`_.
+   which can be viewed using `iPython notebook`_.    An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/02_iris_classification.ipynb>`_
 
 In the iris dataset example, suppose we are assigned the task to
 guess the class of an individual flower given the measurements of
@@ -605,7 +607,8 @@ Normalization and visualization with PCA
 
    The information in this section is available in an interactive notebook
    :download:`03_iris_dimensionality.ipynb <notebooks/03_iris_dimensionality.ipynb>`,
-   which can be viewed using `iPython notebook`_.
+   which can be viewed using `iPython notebook`_.    An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/03_iris_dimensionality.ipynb>`_
 
 The most common technique for dimensionality reduction is called
 **Principal Component Analysis**.
@@ -1005,7 +1008,8 @@ Measuring classification performance on a test set
 
    The information in this section is available in an interactive notebook
    :download:`05_iris_crossval.ipynb <notebooks/05_iris_crossval.ipynb>`,
-   which can be viewed using `iPython notebook`_.
+   which can be viewed using `iPython notebook`_.    An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/05_iris_crossval.ipynb>`_
 
 Here is an example on you to split the data on the iris dataset.
 

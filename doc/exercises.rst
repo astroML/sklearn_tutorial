@@ -49,7 +49,9 @@ Exercise 1: Photometric Classification with GMM
 
    The information in this section is available in an interactive notebook
    :download:`10_exercise01.ipynb <notebooks/10_exercise01.ipynb>`,
-   which can be viewed using `iPython notebook`_.  This requires the
+   which can be viewed and modified using `iPython notebook`_.  An
+   online static
+   view can be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/10_exercise01.ipynb>`_.   This requires the
    sdss colors data, which can be downloaded as described in
    :ref:`sklearn_tutorial_setup`.
 
@@ -84,9 +86,9 @@ the ipython command is::
 
     In [1]: %run workspace/exercise_01.py data/sdss_colors
 
-Althernatively, the ipython notebook file is found in
+Alternatively, the ipython notebook file is found in
 
-    :download:`notebooks/10_exercise01.ipynb`
+    :download:`notebooks/10_exercise01.ipynb` (`static view <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/10_exercise01.ipynb>`_)
 
 .. _astro_exercise_2:
 
@@ -97,7 +99,9 @@ Exercise 2: Photometric redshifts with Decision Trees
 
    The information in this section is available in an interactive notebook
    :download:`11_exercise02.ipynb <notebooks/11_exercise02.ipynb>`,
-   which can be viewed using `iPython notebook`_.  This requires the
+   which can be viewed and modified using `iPython notebook`_.  An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/10_exercise02.ipynb>`_.
+   This requires the
    sdss photoz data, which can be downloaded as described in
    :ref:`sklearn_tutorial_setup`.
 
@@ -138,7 +142,7 @@ the ipython command is::
 
 Althernatively, the ipython notebook file is found in
 
-    :download:`notebooks/11_exercise02.ipynb`
+    :download:`notebooks/11_exercise02.ipynb` (`static view <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/10_exercise02.ipynb>`_)
 
 .. _astro_exercise_3:
 
@@ -149,7 +153,9 @@ Exercise 3: Dimensionality Reduction of Spectra
 
    The information in this section is available in an interactive notebook
    :download:`12_exercise03.ipynb <notebooks/12_exercise03.ipynb>`,
-   which can be viewed using `iPython notebook`_.  This requires the
+   which can be viewed using `iPython notebook`_.  An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/10_exercise03.ipynb>`_.
+   This requires the
    sdss spectra data, which can be downloaded as described in
    :ref:`sklearn_tutorial_setup`.
 
