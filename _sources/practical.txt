@@ -19,7 +19,8 @@ Machine Learning 102: Practical Advice
 
    The information in this section is available in an interactive notebook
    :download:`06_learning_curves.ipynb <notebooks/06_learning_curves.ipynb>`,
-   which can be viewed using `iPython notebook`_.
+   which can be viewed using `iPython notebook`_.    An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/06_learning_curves.ipynb>`_.
 
 In practice, much of the task of machine learning involves selecting algorithms,
 parameters, and sets of data to optimize the results of the method.  All of

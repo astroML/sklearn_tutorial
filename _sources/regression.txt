@@ -80,7 +80,8 @@ A Simple Method: Decision Tree Regression
 
    The information in this section is available in an interactive notebook
    :download:`08_regression_example.ipynb <notebooks/08_regression_example.ipynb>`,
-   which can be viewed using `iPython notebook`_.
+   which can be viewed using `iPython notebook`_.    An online static view can
+   be seen `here <http://nbviewer.ipython.org/url/astroml.github.com/sklearn_tutorial/_downloads/08_regression_example.ipynb>`_.
 
 Here we'll take an extremely simple approach to the photometric redshift
 problem, using a decision tree.
