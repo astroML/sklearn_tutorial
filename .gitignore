@@ -24,3 +24,5 @@ examples/downloads/
 *.nt.bz2
 *.tar.gz
 *.tgz
+*.npz
+*.npy
