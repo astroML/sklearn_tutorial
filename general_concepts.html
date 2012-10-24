@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>2. Machine Learning 101: General Concepts &mdash; Machine Learning for Astronomical Data Analysis</title>
+    <title>2. Machine Learning 101: General Concepts &mdash; Machine Learning for Astronomy with Scikit-learn</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,13 +27,15 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="index.html" />
+    <link rel="top" title="Machine Learning for Astronomy with Scikit-learn" href="index.html" />
     <link rel="next" title="3. Machine Learning 102: Practical Advice" href="practical.html" />
     <link rel="prev" title="1. Tutorial Setup and Installation" href="setup.html" />
+
+<!-- Following code is for Google Analytics -->
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_setAccount', 'UA-35748160-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -627,16 +629,16 @@ most likely outcome is also available:</p>
 </div>
 <div class="section" id="notable-implementations-of-classifiers">
 <h4>2.3.1.2. Notable implementations of classifiers<a class="headerlink" href="#notable-implementations-of-classifiers" title="Permalink to this headline">¶</a></h4>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegression</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html#sklearn.linear_model.LogisticRegression" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.LogisticRegression</span></tt></a></p>
 <blockquote>
 <div>Regularized Logistic Regression based on <tt class="docutils literal"><span class="pre">liblinear</span></tt></div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.LinearSVC</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.LinearSVC.html#sklearn.svm.LinearSVC" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.LinearSVC</span></tt></a></p>
 <blockquote>
 <div>Support Vector Machines without kernels based on <tt class="docutils literal"><span class="pre">liblinear</span></tt></div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVC</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVC.html#sklearn.svm.SVC" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVC</span></tt></a></p>
 <blockquote>
 <div>Support Vector Machines with kernels based on <tt class="docutils literal"><span class="pre">libsvm</span></tt></div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDClassifier</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDClassifier</span></tt></a></p>
 <blockquote>
 <div>Regularized linear models (SVM or logistic regression) using a Stochastic
 Gradient Descent algorithm written in <tt class="docutils literal"><span class="pre">Cython</span></tt></div></blockquote>
@@ -644,7 +646,7 @@ Gradient Descent algorithm written in <tt class="docutils literal"><span class="
 <blockquote>
 <div>k-Nearest Neighbors classifier based on the ball tree datastructure for low
 dimensional data and brute force search for high dimensional data</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.GaussianNB</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.naive_bayes.GaussianNB.html#sklearn.naive_bayes.GaussianNB" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.naive_bayes.GaussianNB</span></tt></a></p>
 <blockquote>
 <div>Gaussian Naive Bayes model.  This is an unsophisticated model which can
 be trained very quickly.  It is often used to obtain baseline results
@@ -698,10 +700,10 @@ some input variables (a.k.a. the features, &#8220;predictors&#8221; or
 &#8220;regressors&#8221;).  We&#8217;ll explore a detailed example of regression with
 astronomical data in <a class="reference internal" href="regression.html#astronomy-regression"><em>Regression: Photometric Redshifts of Galaxies</em></a>.</p>
 <p>Some notable implementations of regression models in <tt class="docutils literal"><span class="pre">scikit-learn</span></tt> include:</p>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Ridge</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html#sklearn.linear_model.Ridge" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.Ridge</span></tt></a></p>
 <blockquote>
 <div>L2-regularized least squares linear model</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.ElasticNet</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ElasticNet.html#sklearn.linear_model.ElasticNet" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.ElasticNet</span></tt></a></p>
 <blockquote>
 <div>L1+L2-regularized least squares linear model trained using
 Coordinate Descent</div></blockquote>
@@ -709,18 +711,18 @@ Coordinate Descent</div></blockquote>
 <blockquote>
 <div>L1-regularized least squares linear model trained with Least Angle
 Regression</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDRegressor</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDRegressor.html#sklearn.linear_model.SGDRegressor" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.SGDRegressor</span></tt></a></p>
 <blockquote>
 <div>L1+L2-regularized least squares linear model trained using
 Stochastic Gradient Descent</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.ARDRegression</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.ARDRegression.html#sklearn.linear_model.ARDRegression" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.linear_model.ARDRegression</span></tt></a></p>
 <blockquote>
 <div>Bayesian Automated Relevance Determination regression</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVR</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.svm.SVR.html#sklearn.svm.SVR" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.svm.SVR</span></tt></a></p>
 <blockquote>
 <div>Non-linear regression using Support Vector Machines (wrapper for
 <tt class="docutils literal"><span class="pre">libsvm</span></tt>)</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.RandomForestRegressor</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.ensemble.RandomForestRegressor</span></tt></a></p>
 <blockquote>
 <div>An ensemble method which constructs multiple decision trees from subsets
 of the data.</div></blockquote>
@@ -834,7 +836,7 @@ data matrix, which is not scalable when both <tt class="docutils literal"><span 
 <tt class="docutils literal"><span class="pre">n_features</span></tt> are big (more that a few thousands).</p>
 <p class="last">If you are interested in a number of components that is much
 smaller than both <tt class="docutils literal"><span class="pre">n_samples</span></tt> and <tt class="docutils literal"><span class="pre">n_features</span></tt>, consider using
-<a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.RandomizedPCA</span></tt></a> instead.</p>
+<a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.RandomizedPCA</span></tt></a> instead.</p>
 </div>
 </div>
 <div class="section" id="other-applications-of-dimensionality-reduction">
@@ -899,43 +901,43 @@ labels computed this way better match the true labels?</p>
 <p>The following are two well-known clustering algorithms. Like most
 unsupervised learning models in the scikit, they expect the data
 to be clustered to have the shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt>:</p>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.KMeans</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html#sklearn.cluster.KMeans" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.KMeans</span></tt></a></p>
 <blockquote>
 <div>The simplest, yet effective clustering algorithm. Needs to be
 provided with the number of clusters in advance, and assumes that the
 data is normalized as input (but use a PCA model as preprocessor).</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.MeanShift.html#sklearn.cluster.MeanShift" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.MeanShift</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.MeanShift.html#sklearn.cluster.MeanShift" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.MeanShift</span></tt></a></p>
 <blockquote>
 <div>Can find better looking clusters than KMeans but is not scalable
 to high number of samples.</div></blockquote>
 <dl class="docutils">
-<dt><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.DBSCAN</span></tt></a></dt>
+<dt><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.DBSCAN.html#sklearn.cluster.DBSCAN" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.DBSCAN</span></tt></a></dt>
 <dd>Can detect irregularly shaped clusters based on density, i.e. sparse regions
 in the input space are likely to become inter-cluster boundaries. Can also
 detect outliers (samples that are not part of a cluster).</dd>
 </dl>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a></p>
 <blockquote>
 <div>Locally Linear Embedding is a nonlinear neighbors-based
 manifold learning technique.
 The scikit-learn implementation makes available several variants to
 the basic algorithm.</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.Isomap.html#sklearn.manifold.Isomap" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.Isomap</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.Isomap.html#sklearn.manifold.Isomap" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.Isomap</span></tt></a></p>
 <blockquote>
 <div>Isomap is another neighbors-based manifold learning method that can find
 nonlinear projections of data.</div></blockquote>
 <p>Other clustering algorithms do not work with a data array of shape
 <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_features)</span></tt> but directly with a precomputed affinity matrix
 of shape <tt class="docutils literal"><span class="pre">(n_samples,</span> <span class="pre">n_samples)</span></tt>:</p>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.AffinityPropagation.html#sklearn.cluster.AffinityPropagation" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.AffinityPropagation</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.AffinityPropagation.html#sklearn.cluster.AffinityPropagation" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.AffinityPropagation</span></tt></a></p>
 <blockquote>
 <div>Clustering algorithm based on message passing between data points.</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html#sklearn.cluster.SpectralClustering" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.SpectralClustering</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.SpectralClustering.html#sklearn.cluster.SpectralClustering" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.SpectralClustering</span></tt></a></p>
 <blockquote>
 <div>KMeans applied to a projection of the normalized graph Laplacian:
 finds normalized graph cuts if the affinity matrix is interpreted
 as an adjacency matrix of a graph.</div></blockquote>
-<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Ward.html#sklearn.cluster.Ward" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.Ward</span></tt></a></p>
+<p><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.Ward.html#sklearn.cluster.Ward" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.cluster.Ward</span></tt></a></p>
 <blockquote>
 <div><dl class="docutils">
 <dt><tt class="docutils literal"><span class="pre">Ward</span></tt> implements hierarchical clustering based on the Ward algorithm,</dt>

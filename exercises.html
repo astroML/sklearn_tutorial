@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>7. Exercises: Taking it a step further &mdash; Machine Learning for Astronomical Data Analysis</title>
+    <title>7. Exercises: Taking it a step further &mdash; Machine Learning for Astronomy with Scikit-learn</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -27,13 +27,15 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/sidebar.js"></script>
     <link rel="shortcut icon" href="_static/favicon.ico"/>
-    <link rel="top" title="Machine Learning for Astronomical Data Analysis" href="index.html" />
+    <link rel="top" title="Machine Learning for Astronomy with Scikit-learn" href="index.html" />
     <link rel="next" title="8. Code examples" href="auto_examples/index.html" />
     <link rel="prev" title="6. Dimensionality Reduction of Astronomical Spectra" href="dimensionality_reduction.html" />
+
+<!-- Following code is for Google Analytics -->
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_setAccount', 'UA-35748160-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -307,25 +309,25 @@ specified unsupervised method to project the data <tt class="docutils literal"><
 lower-dimensional <tt class="docutils literal"><span class="pre">X_proj</span></tt>.</p>
 <blockquote>
 <div><ol class="arabic">
-<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.RandomizedPCA</span></tt></a> to project the data</p>
+<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.decomposition.RandomizedPCA.html#sklearn.decomposition.RandomizedPCA" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.decomposition.RandomizedPCA</span></tt></a> to project the data</p>
 <p>the ipython command is:</p>
 <div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra/ -m pca</pre>
 </div>
 <p>Note the argument <tt class="docutils literal"><span class="pre">-m</span></tt> which specifies the method  to use.</p>
 </li>
-<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a> with
+<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a> with
 <tt class="docutils literal"><span class="pre">method='standard'</span></tt> to project the data.</p>
 <p>the ipython command is:</p>
 <div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra/ -m lle</pre>
 </div>
 </li>
-<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a> with
+<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.LocallyLinearEmbedding.html#sklearn.manifold.LocallyLinearEmbedding" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.LocallyLinearEmbedding</span></tt></a> with
 <tt class="docutils literal"><span class="pre">method='standard'</span></tt> to project the data.</p>
 <p>the ipython command is:</p>
 <div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra/ -m mlle</pre>
 </div>
 </li>
-<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.Isomap.html#sklearn.manifold.Isomap" title="(in scikit-learn v0.12)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.Isomap</span></tt></a> to project the data.</p>
+<li><p class="first">Use <a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.manifold.Isomap.html#sklearn.manifold.Isomap" title="(in scikit-learn v0.12.1)"><tt class="xref py py-class docutils literal"><span class="pre">sklearn.manifold.Isomap</span></tt></a> to project the data.</p>
 <p>the ipython command is:</p>
 <div class="highlight-python"><pre>In [1]: %run workspace/exercise_03.py data/sdss_spectra/ -m isomap</pre>
 </div>
