@@ -5,7 +5,7 @@
     
 .. raw:: html
 
-    <h1>Machine Learning for Astronomical Data Analysis</h1>
+    <h1>Tutorial: Machine Learning for Astronomy with Scikit-learn</h1>
     <style type="text/css">
     p {
         margin: 7px 0 7px 0 ;
@@ -93,6 +93,12 @@
 
 
 .. sectionauthor:: Jake Vanderplas <vanderplas@astro.washington.edu>
+
+
+.. topic:: AstroML
+   
+   For more information on machine learning for Astronomy, see the
+   `astroML <http://astroML.github.com>`_ code and examples.
 
 .. topic:: Machine Learning for Astronomy with scikit-learn
 

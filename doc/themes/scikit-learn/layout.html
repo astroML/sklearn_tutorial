@@ -19,10 +19,12 @@
 {% endif %}
 
 {% block extrahead %}
+
+<!-- Following code is for Google Analytics -->
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-22606712-2']);
+  _gaq.push(['_setAccount', 'UA-35748160-1']);
   _gaq.push(['_trackPageview']);
 
   (function() {
@@ -35,7 +37,7 @@
 {% endblock %}
 
 {%- if pagename == 'index' %}
-    {% set title = 'AstroML: Machine Learning for Astronomical Data Analysis with scikit-learn' %}
+    {% set title = 'Machine Learning for Astronomy with Scikit-learn' %}
 {%- endif %}
 
 {% block header %}
