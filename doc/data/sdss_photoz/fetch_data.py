@@ -69,4 +69,4 @@ opener = urllib2.build_opener(handler)
 if not os.path.exists(LOCAL_FILE):
     print "downloading data from", DATA_URL
     fhandle = opener.open(DATA_URL)
-    open(LOCAL_FILE, 'w').write(fhandle.read())
+    open(LOCAL_FILE, 'wb').write(fhandle.read())
